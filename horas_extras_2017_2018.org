@@ -1,0 +1,8 @@
+# -*- org-time-stamp-custom-formats: ("%d/%m/%Y" . "<%Y-%m-%d %H:%M>") -*-
+#+OPTIONS: num:nil ^:nil
+* Dezembro
+
+* Janeiro
+
+** 1h
+- [2018-01-18 Thu]: início.
