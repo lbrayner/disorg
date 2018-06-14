@@ -1,19 +1,32 @@
 # -*- org-time-stamp-custom-formats: ("%d/%m/%Y" . "<%Y-%m-%d %H:%M>") -*-
 #+OPTIONS: num:nil ^:nil
-* Horas extras
 
-** 1h extra diária
-- [2018-01-18 Thu]: início.
-- [2018-03-05 Mon]: fim.
-  
-* Fins de semana
+* Dezembro
 
-** Fevereiro
+* Janeiro
 
-** Maio
+** [2018-01-18 Thu]: início de 1h extra por dia
 
-** Junho
+* Fevereiro
 
-*** Meio expediente
+* Março
 
-2 sábaos.
+** [2018-03-05 Mon]: fim de 1h extra por dia
+
+* Abril
+
+** [2018-04-28 Sat] e [2018-04-29 Sun]
+
+Mais de 10h por dia.
+
+* Maio
+
+* Junho
+
+** [2018-06-02 Sat]
+
+Meio expediente.
+
+** [2018-06-09 Sat]
+
+Meio expediente.
