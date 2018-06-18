@@ -1,6 +1,6 @@
 # -*- org-time-stamp-custom-formats: ("%d/%m/%Y" . "<%Y-%m-%d %H:%M>") -*-
+#+LANGUAGE: pt_BR
 #+OPTIONS: num:nil ^:nil
-
 * Dezembro
 
 * Janeiro
@@ -15,9 +15,9 @@
 
 * Abril
 
-** [2018-04-28 Sat] e [2018-04-29 Sun]
+** [2018-04-28 Sat]--[2018-04-29 Sun]
 
-Mais de 10h por dia.
+Mais de 12h por dia, totalizando 24h.
 
 * Maio
 

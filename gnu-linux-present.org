@@ -1,0 +1,1720 @@
+#+LANGUAGE: pt_BR
+
+#+Title: Sistema Operacional GNU/Linux
+#+Author: Leonardo Brayner e Silva
+#+Email: brayner.l@gmail.com
+
+#+OPTIONS: reveal_single_file:t
+#+OPTIONS: reveal_width:1600 reveal_height:800
+
+# #+REVEAL_EXTRA_CSS: file:///home/leo/Documents/custom-org-reveal.css
+#+REVEAL_EXTRA_CSS: file:///home/heleno/Documentos/custom-org-reveal.css
+# #+REVEAL_EXTRA_CSS: file:///home/desenvolvedor/Documents/custom-org-reveal.css
+
+* Unix vs. *UNIX®*
+
+- Unix se refere:
+  - à abstração da essência desse SO
+  - ao seu público-alvo
+  - à sua filosofia
+- UNIX® remete:
+  - ao padrão SUS (/Single UNIX Specification/)
+  - às suas implementações — majoritariamente — comerciais
+  - ao fato de que SOs não comerciais prescindem dela
+
+** TODO COMMENT Lucubrações
+*** TODO Qual essência?
+*** DONE Em que consiste essa filosofia?
+    CLOSED: [2016-11-26 Sáb 02:27]
+*** TODO Por que Richard Stallman deu início a GNU? O que houve?
+*** DONE Unix e C foram inventados por AT&T (/American telephone and telegraph/)
+    CLOSED: [2016-11-21 Mon 16:54]
+*** TODO Reescrito em C em 1972 (versão iniciada em 1969)
+
+** Unix e seu Público-Alvo
+
+Um SO conveniente para programadores, que fosse ambiente de desenvolvimento cruzado, portátil
+— isto é, escrito em liguagem de programação mais abstrata do que /assembly/: eis Unix.
+
+Em meados dos anos 70, AT&T licenciou o código-fonte em C, linguagem desenvolvida e promovida pela
+própira Bell, para instituições acadêmicas e governamentais.
+
+Ambos C e Unix foram portados para inúmeras arquiteturas, tornando-o o SO mais difuso na época.
+Devido a seu grande prestígio na academia, era o preferido entre as /startups/ do começo da década
+de 80, que viu o lançamento das duas implementações referenciais:
+
+- /Berkley Software Distribution/ (BSD), da Universidade de Berkley
+- /System V/, da AT&T
+
+** A filosofia Unix
+
+Consiste em combinar ferramentas com propósitos específicos, limitados e bem definidos para
+que se realizem tarefas mais complexas. Pode-se dizer que Unix possui /design/ modular.
+
+Outros pontos importantes:
+
+- interfaces simples e em formato de texto
+- claridade em vez de habilidade
+- /design/ simples —  complexidade apenas quando estritamente necessário
+- composição
+- conhecimento deve ser expressado em dados — algoritmos devem ser simples e robustos
+- prototipar e disponibilizar: otimização vem depois
+- programadores são caros — cômputos são baratos
+- se possível, criar programas que criem programas
+
+* Projeto GNU
+
+- Desde 1983 [Richard Stallman, MIT]
+- Software livre
+- Projeto de colaboração em massa
+- GNU's Not Unix: ausência de código *UNIX®*
+
+** Frutos do projeto GNU
+
+- Ferramentas (GNU =coreutils=, GNU Bash, GNU Emacs...)
+- Kernel: Hurd
+- Sistema operacional: GNU
+  - GNU/Linux
+  - Debian GNU/Hurd
+  - Debian GNU/kFreeBSD
+- Licenças:
+  - GNU GPL: GNU General Public License
+  - GNU LGPL: GNU Lesser General Public License
+  - GNU AGPL: GNU Affero General Public License
+
+
+#+BEGIN_COMMENT
+Já foi prática das empresas nos anos 70 fornecer o código-fonte de seus produtos caso
+o cliente o solicitasse.
+#+END_COMMENT
+
+#+BEGIN_COMMENT
+Em 1992, já estavam prontas todas as ferramentas e utilitários do sistema operacional GNU —
+o mesmo, porém, não se podia dizer sobre Hurd, ainda em desenvolvimento.
+
+Naquele ano, Linux foi lançado com licença GPL (a licença da versão anterior não era compatível),
+o que possibilitou o surgimento do primeiro sistema operacional composto exclusivamente por software
+livre.
+#+END_COMMENT
+
+#+BEGIN_COMMENT
+A licença /Lesser/ permite vinculação (/linking/) do código-objeto com programas privados.
+Já /Affero/ exige que o código-fonte de software GPL derivado seja disponibilizado para usuários que
+porventura interajam com ele via rede.
+#+END_COMMENT
+
+* POSIX
+
+- Portable Operating System Interface (desde 1988)
+- IEEE Computer Society
+- Conjunto de padrões que visa a compatibilidade entre SOs
+- Unix foi tomado como base
+- Define (entre outros):
+  - APIs (e.g. C)
+  - utilitários (e.g. =grep=, =sed=, =awk=, =echo=, =ls=, =cp= etc.)
+  - interpretador de comandos (/shell/)
+  - expressões regulares (/regexes/)
+  - hierarquia de arquivos
+
+** GNU e POSIX
+
+- Richard Stallman sugeriu o termo POSIX
+- GNU segue o padrão à risca
+  - No entanto, nenhuma distribuição é certificada
+  - macOS é POSIX
+- GNU Bash implementa e estende amplamente POSIX (/shell/)
+  - Onipresente nas distribuições GNU/Linux
+  - É o padrão do macOS
+- =glibc= implementa a API de C
+- =grep=, =sed=, =awk= etc. compõem GNU =coreutils=
+  - GNU implementa-os — e estende-os — à sua maneira
+  - É comum em /unix.stackexchange.com/ comparações entre GNU =sed=, Mac =sed= e FreeBSD =sed=
+
+#+BEGIN_COMMENT
+O uso desses comandos e utilitários é matéria de aula exclusiva.
+#+END_COMMENT
+
+# http://stackoverflow.com/questions/1780599/i-never-really-understood-what-is-posix
+
+* Linux
+
+Características de Linux:
+
+- monolítico
+- preemptivo (tanto em modo de usuário quanto em modo de /kernel/)
+- com memória virtual
+- paginação sob demanda
+- páginas compartilhadas entre processos (/copy-on-write/)
+- bibliotecas compartilhadas
+- gerenciamento de memória
+- /stack/ de protocolos da internet (até a camada de transporte)
+- /threading/
+
+** /Kernel/ Monolítico
+
+Arquitetura em que os serviços típicos de um SO são todos são todos implementados pelo /kernel/.
+Isto é, todo o código que provê:
+
+- gerenciamento de processos
+- concorrência
+- gerenciamento de memória etc.
+
+está em modo supervisor, que, no Sistema Operacional em Camadas, é a camada que tem maiores
+privilégios e pode executar todas as instruções do processador, o que inclui modificar diversas
+tabelas de controle e acesso à MMU (/Memory Management Unit/).
+
+** LKMs (/Loadable Kernel Modules/)
+
+Código-objeto capaz de estender a funcionalidade do /kernel/:
+
+- dando suporte a hardware
+- a sistemas de arquivo
+- acrescentando chamadas de sistema (/syscalls/)
+
+Sem módulos externos, toda a funcionalidade teria de estar incluída no /kernel/ base —
+além de ser um desperdício de memória, qualquer funcionalidade nova exigiria que ele
+fosse recompilado e o SO reiniciado.
+
+** FUSE (/File system in USErspace/)
+
+FUSE é um LKM. Com FUSE é possível haver sistemas de arquivo rodando em modo de usuário,
+o que faz muito sentido, já que:
+
+- um /bug/ no /kernel/ pode derrubar o sistema
+- o processo para se adicionar um módulo a Linux é altamente rigoroso e extenuador
+- o código pode ser distribuído e testado com mais facilidade
+- proporciona portabilidade
+
+Um exemplo de um FUSE é =ntfs-3g=, que implementa, para NTFS, todas as operações de escrita,
+modificação de ACLs, /hard links/ e /symbolic links/.
+
+* Shell
+
+É o meio de interação com o SO. Apesar de ser um termo abstrato, /shell/ é usado para se referir à
+interface por linha de comando, já que, no passado, esse era o único meio de interação.
+
+A linha de comando tinha de ser, então, parte essencial do sistema. Mesmo com o advento das GUIs,
+a /shell/ ainda se mostrava indispensável, pois permite rodar comandos em lote.
+
+/shell/ é o meio preferido de interação em Unix, devido ao seu público-alvo.
+
+** Console/Terminal Virtual
+
+Em computação, console/virtual é a combinação teclado-monitor. Os dois termos diferem apenas no ponto
+de vista: o primeiro vem da perspectiva mobiliária (mobília); o segundo, da perspectiva da
+eletrônica.
+
+Terminal virtual (ou console virtual) é uma abstração presente nos Unixes modernos. Permite ao
+usuário acessar vários terminais independentes através do mesmo dispositivo físico.
+
+Terminais físicos eram conhecidos como /teletypes/, daí a o termo tty.
+
+** Bash
+
+Após login em um terminal virtual, um programa interativo (configurável para cada usuário) —
+geralmente e por padrão uma implementação da /shell/ de POSIX — é executado.
+
+- GNU Bash (/Bourne Again Shell/)
+- Alternativa livre à /shell/ Bourne
+- Desde 1989
+- Possui várias extensões
+
+* Permissões tradicionais de acesso Unix
+
+Elas são descritas por um octal:
+
+| octal | binário | letra | mnemônico | permissão   |
+|-------+---------+-------+-----------+-------------|
+|     0 |     000 | -     | -         | nenhuma     |
+|     1 |     001 | x     | /eXecute/ | execução    |
+|     2 |     010 | w     | /Write/   | modificação |
+|     4 |     100 | r     | /Read/    | leitura     |
+
+Podem ser cumulativas e representam conceitos diferentes quando aplicadas ou a arquivos ou a
+diretórios.
+
+** Diretórios
+
+| octal | letra | permissão            |
+|-------+-------+----------------------|
+|     1 | x     | acessar (fazer =cd=) |
+|     2 | w     | criar arquivos       |
+|     4 | r     | listar arquivos      |
+
+** Permissões cumulativas
+
+| octal | binário | letras | permissão              |
+|-------+---------+--------+------------------------|
+|     0 |     000 | ---    | nenhuma                |
+|     1 |     001 | --x    | execução               |
+|     2 |     010 | --w    | modificação            |
+|     3 |     011 | -wx    | modificação + execução |
+|     4 |     100 | r--    | leitura                |
+|     5 |     101 | r-x    | leitura + execução     |
+|     6 |     110 | rw-    | leitura + modificação  |
+|     7 |     111 | rwx    | todas                  |
+
+* Usuários e grupos
+
+Grupos são parte das permissões tradicionais Unix — por eles é possível:
+
+- restringir acesso a componentes (e.g. discos, impressoras) de maneira organizada
+- delegar tarefas administrativas a usuários normais (como, por exemplo, montar dispositivos)
+
+Um usuário possui um ou mais grupos, sendo um deles o seu grupo primário.
+
+Portanto, as permissões são distribuídas em *três* escopos:
+
+- proprietário
+- grupo
+- outros
+
+Todo arquivo possui, além de um proprietário, um (e apenas um) grupo.
+
+** Grupo
+
+As permissões de proprietário para arquivo/diretório não conflitam com as de grupo. De fato, os
+três escopos são ortogonais.
+
+Por exemplo:
+
+~-rw-r--r-- 1 leo wheel 3.3K Oct 31 10:35 dbus~
+
+Caso o usuário proprietário ~leo~ não pertença ao grupo ~wheel~, isso nada interfere com suas
+permissões de proprietário.
+
+Ao passo que um usuário distinto de ~leo~ e membro de ~wheel~  teria apenas permissão para ler o
+arquivo ~dbus~.
+
+* Além das permissões tradicionais
+
+As permissões tradicionais se mostram inadequadas em casos de uso mais complexos, como servidores
+que guardam informações sensíveis e expostos a milhares de pessoas.
+
+Em densenvolvimento contínuo, várias aplicações (antigas e novas) estão sujeitas a falhas que podem
+causar, entre outros, _escalada de privilégios_. Como o superusuário, no esquema Unix, tem poderes
+irrestritos, isso seria catastrófico.
+
+Extensões às permissões Unix:
+
+- POSIX ACLs (/access control lists/)
+- =apparmor= (presente em Ubuntu por padrão)
+- SELinux (/Security Enhanced Linux/, desenvolvido pela NSA)
+
+* /setuid/, /setgid/ e /sticky bit/
+
+As permissões Unix podem ser descritas sumariamente por _quatro octais_:
+
+- *um que funciona como modificador*
+- um para proprietário
+- um para o grupo
+- o último para outros usuários
+
+As três /flags/ do primeiro octal se chamam, respectivamente, /setuid/, /setgid/ e /sticky bit/.
+
+** /setuid/ e /setgid/
+
+São modificadores que permitem a execução de programas com as permissões do proprietário (/setuid/)
+e/ou grupo (/setgid/). O que acontence é que o processo será criado como que pelo proprietário e/ou
+membro do grupo e terá, portanto, acesso a locais outrora restritos.
+
+Isso é também uma maneira de delegar responsabilidades, como por exemplo, o poder de cada usuário
+mudar a própria senha. Normalmente apenas o superusuário tem permissão para alterar =/etc/shadow=.
+No entanto, =/bin/passwd= tem as seguintes permissões:
+
+#+BEGIN_SRC shell
+-rwsr-xr-x 1 root root 50K Sep 18 11:42 /usr/bin/passwd
+#+END_SRC
+
+Note o *s* ao invés de *x*: isso significa que /setuid/ é verdadeira.
+
+=sudo= também utiliza dessa recurso.
+
+Linux ignora essas /flags/ quando aplicadas a scripts executáveis, devido ao risco implicado.
+
+** /setuid/ e /setgid/ em diretórios
+
+/setgid/ num diretório faz com que arquivos e pastas criados dentro dele herdem o seu grupo.
+
+GNU/Linux ignora /setuid/ em diretórios.
+
+FreeBSD pode ser configurado para interpretá-la de forma similar a /setgid/, isto é, todos os
+arquivos pertenceriam ao proprietário do diretório onde foram criados. Ademais, em BSD e derivados,
+todo diretório se comporta como se /setgid/ fosse verdadeiro, independente do estado real da /flag/.
+
+** /sticky bit/
+
+Afeta apenas diretórios. Caso seja verdadeira, as permissões de grupo e outros do diretório se
+restringem, para cada item:
+
+- aos seus proprietários
+- ao proprietário do diretório 
+- ao superusuário
+
+Normalmente, as permissões de diretório são suficientes para renomear ou deletar um item, mesmo
+se acesso àquele item seja restrito.
+
+O uso dessa /flag/ impede que usuários removam ou renomeiem arquivos de outros. O exemplo mais
+comum é a pasta =/tmp=:
+
+~drwxrwxrwt  10 root root  16K Nov 23 16:17 tmp~
+
+Note o *t* no lugar do *x*.
+
+** Tabela do octal de maior ordem
+
+| octal | binário | letra           | modificador  |
+|-------+---------+-----------------+--------------|
+|     1 |     001 | =- --- --- --t= | /sticky bit/ |
+|     2 |     010 | =- --- --s ---= | /setgid/     |
+|     4 |     100 | =- --s --- ---= | /setuid/     |
+
+* ~umask~
+
+É a máscara de criação de arquivos do processo atual. Com ela é possível prever o modo de acesso
+de arquivos novos. Os processos a herdam dos seus respectivos processos-pai e ela é obedecida pelas
+chamadas (/syscalls/) de sistema responsáveis, como *open* e *mkdir*.
+
+Para se obter o modo de acesso, deve se fazer ~AND~ com a negação do valor da máscara e:
+
+- 0777 para diretórios;
+- 0666 para arquivos
+
+Se ~umask~ é 0022, então:
+
+- o modo de acesso de um arquivo será 0644
+- de um diretório, 0755
+
+* =sudo=
+
+É um pacote que provê meio de repassar responsabilidades: do superusuário /root/, direta ou
+indiretamente; ou, menos comum, de outros usuários normais.
+
+Beneficia até sistemas com apenas um usuário, dado que realizar tarefas como /root/
+pode ser perigoso: um programa ou script malicioso executado como /root/ pode causar danos
+e perda de arquivos essenciais.
+
+Software não é GNU: mantido pela equipe OpenBSD.
+
+Mnemônico: /substitute user do/.
+
+** =sudo= e Ubuntu
+
+A conta de /root/ é criada com senha de /hash/ ~0x0~ em Ubuntu (e suas derivadas), por padrão:
+isto é, é desabilitada.
+
+O instalador configura pelo menos um usuário como /sudoer/ (=sudo= também vem instalado por padrão)
+com todos os poderes do superusuário.
+
+Em outras distribuições isso tem de ser feito manualmente.
+
+* UPG (/User Private Group/)
+
+A maioria das distribuições GNU/Linux estende POSIX com esse conceito:
+
+- um grupo criado com os mesmos identificador e nome do usuário
+- em teoria, esse grupo deve possuir apenas um membro
+- ele torna-se o grupo padrão daquele usuário
+
+Isso, aliado a /setgid/ e ~umask~ 0002 facilita o compartilhamento de documentos entre usuários
+membros de um grupo, sem comprometer a segurança dos arquivos pessoais.
+
+* PAM (/Pluggable Authentication Modules/)
+
+Software cujo propósito é _separar o desenvolvimento de programas que concedem privilégios dos
+métodos de autenticação_, o que é possível com uma biblioteca com funções que uma aplicação
+possa usar para garantir que um usuário esteja autenticado.
+
+Desse modo, substituir métodos de autenticação é tão simples quanto instalar módulos PAM e editar
+alguns arquivos de configuração.
+
+PAM é responsável, nas versões mais modernas de GNU/Linux, por definir ~umask~ quando um usuário
+faz /login/: o módulo responsável é ~pam_umask~.
+
+* Hierarquia de arquivos
+
+A [[https://www.linuxfoundation.org/][fundação Linux]] mantém dois padrões que servem de referência para toda distribuição GNU/Linux:
+
+- LSB (/Linux Standard Base/)
+- FHS (/Filesystem Hierarchy Standard/)
+
+*FHS* é seguido até por outros Unixes além de GNU/Linux. Padrões como esses ajudam na manutenção do
+código-fonte por desenvolvedores de aplicações, para que sejam compatíveis com o maior número de
+distribuições possível.
+
+** Hierarquia de arquivos em Linux
+
+De acordo obedece POSIX, Linux possui apenas uma estrutura de diretórios organizados como uma árvore
+inversa cuja raiz (/root/) é representada por */* .
+
+Seguindo FHS e tal qual Unix:
+
+- a hierarquia é regida pela _importância dos arquivos_ no processo de /boot/
+- os arquivos são _repartidos por função_
+- o separador de diretórios utilizado é */* (/forward slash/)
+
+Quando um pacote é instalado, por exemplo:
+
+- sua documentação fica em ~/usr/share/doc~
+- seus manuais, em ~/usr/share/man~
+
+** Sistema de arquivos unificado
+
+Unix expõe os arquivos em uma única estrutura (árvore inversa). Detalhes como sistemas de arquivo e
+partições são lidados pelo /kernel/ e irrelevantes para os processos no espaço do usuário.
+
+Um dispositivo de armazenamento /USB/ geralmente é montado em subpastas de /media ou /mnt, a partir
+de cujo momento está integrado na estrutura una de árvore inversa.
+
+Informações do /kernel/ também são dispostas em diretórios como:
+
+- ~/proc~: processos
+- ~/sys~: dispositivos e /drivers/
+
+Esses diretórios possuem sistemas de arquivo especiais, mas podem ser acessados como quaisquer
+outros.
+
+** UTF8
+
+Codificação para caracteres Unicode especificada em POSIX, UTF8 é o padrão em distribuições
+GNU/Linux (não o é, por exemplo, em BSD e derivados).
+
+Unicode tem a vantagem de, independete do /locale/ (parâmetros que identificam um país ou região),
+caracteres de todas as línguas podem ser representados.
+
+POSIX não impõe sérias restrições em nomes de arquivos exceto por dois caracteres:
+
+- */* (/forward slash/)
+- *\0* (/null/ ou delimitador de /strings/)
+
+* Modo de usuário único
+
+SOs modernos são multiusuário. O mode de usuário único (/root/) serve para manutenção do sistema e de
+dispositivos, como discos e partições não essenciais.
+
+Nesse modo, apenas a partição que contém */*, isto é, os arquivos de sistema, é montada em modo
+somente-leitura.
+
+* /File systems table/
+
+Arquivo de configuração conhecido com ~fstab~ e localizado em ~/etc/fstab~.
+
+Esse arquivo lista todos as partições de todos os discos — juntamente com os respectivos sistemas de
+arquivos — e fontes de dados (sistemas de arquivo em rede, por exemplo) que devem ser montadas em
+modo multiusuário durante o processo de /boot/.
+
+* /Links/ (vínculos ou ligações)
+
+Sistemas de arquivo Unix possuem o conceito de /inode/, que descreve um arquivo ou diretório —
+enfim, tudo sobre aquele arquivo, exceto o nome. Nomes de arquivos estão presentes nas listagens
+dos diretórios, que ligam um nome a um /inode/.
+
+Um /link/ pode ser:
+
+- /soft/ ou /symbolic/
+- /hard/
+
+** /Symbolic links/
+
+Seu conteúdo é apenas uma string que representa um caminho, relativo ou absoluto, para um arquivo
+ou diretório.
+
+Como todo arquivo, possui ele também nome próprio e qualquer alteração que sofra (remoção,
+renomeiação) não afetará o arquivo-objeto.
+
+Um /link/ simbólico com caminho relativo:
+
+#+BEGIN_SRC shell
+lrwxrwxrwx   1 root root    26 Oct 24 04:58 vmlinuz -> boot/vmlinuz-4.7.0-1-amd64
+#+END_SRC
+
+** /Hard links/
+
+Ao passo que /links/ simbólicos contém uma /string/, um /hard link/ contém um /inode/.
+
+Possui nome próprio também, mas toda alteração é refletida no arquivo-objeto.
+
+#+BEGIN_SRC shell
+17301995 -rw------- 2 leo  leo     6 Nov 25 18:43 tmp.HgN8p1FZcT
+17301995 -rw------- 2 leo  leo     6 Nov 25 18:43 my-hard-link
+#+END_SRC
+
+A primeira coluna acima contém os /inodes/ dos arquivos: é a única maneira de identificar
+/hard links/.
+
+* FHS — Diretório raiz
+
+Esses caminhos têm de existir (mesmo que sejam apenas /links/) para que haja concordância com FHS:
+
+| =/bin= | =/boot= | =/dev= | =/etc= | =/lib= | =/media= | =/mnt= |
+| =/opt= | =/sbin= | =/srv= | =/tmp= | =/usr= | =/var=   | -      |
+
+** Modo de usuário único (diretórios necessários)
+
+| =/bin=  | Binários essenciais                                                       |
+| =/boot= | Arquivos estáticos do /bootloader/                                        |
+| =/dev=  | Arquivos de dispositivos                                                  |
+| =/etc=  | Configuração do sistema                                                   |
+| =/lib=  | Bibliotecas e módulos essenciais                                          |
+| =/sbin= | Binários essenciais para administração do sistema                         |
+| =/srv=  | Dados a serem servidos pelo sistema via ~ftp~, ~rsync~, ~www~, ~cvs~ etc. |
+
+#+BEGIN_COMMENT
+The Concurrent Versions System (CVS), also known as the Concurrent Versioning System, is a
+client-server free software revision control system in the field of software development.
+#+END_COMMENT
+
+** Pontos de montagem
+
+Os seguintes não são necessários, mas não faz sentido movê-los:
+
+| =/media= | Ponto de montagem para dispositivos removíveis         |
+| =/mnt=   | Ponto de montagem para sistemas de arquivo temporários |
+
+** Modo multiusuário (diretórios)
+
+| =/opt= | Software não essencial adicionado pós-instalação |
+| =/tmp= | Arquivos temporários                             |
+| =/usr= | Hierarquia secundária                            |
+| =/var= | Dados variáveis                                  |
+
+
+** FHS — Diretório raiz (opcionais)
+
+| =/home=      | Pastas pessoais dos usuários                           |
+| =/lib<arch>= | Bibliotecas e módulos essenciais (outras arquiteturas) |
+| =/root=      | Diretório pessoal do superusuário                      |
+
+* Sistema de arquivos especiais
+
+GNU/Linux possui alguns diretórios adicionais que não fazem parte de FHS. Eles são ponto de montagem
+de sistemas de arquivo especiais: não contêm arquivos reais, mas virtuais.
+
+Serão brevemente descritos:
+
+- /proc/ em ~/proc~
+- /sysfs/ em ~/sys~
+
+** /proc/
+
+É um pseudossistema de arquivos (não abriga arquivos reais), uma janela para o /kernel/ que contém
+informações sobre os processos. Vários utilitários apenas consultam-no e apresentam as informações
+de maneira mais conveniente.
+
+Por exemplo =top=:
+
+#+BEGIN_SRC shell
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND        
+ 2408 leo        9 -11  698908  15180  11956 S   6.2  0.2   9:07.55 pulseaudio     
+17647 leo       20   0 1892344 141940  86328 S   6.2  1.7   4:35.95 Google Play Mus
+17736 leo       20   0 1538352 439764 218140 S   6.2  5.4   4:26.46 Google Play Mus
+28805 leo       20   0   42904   3668   2992 R   6.2  0.0   0:00.02 top            
+    1 root      20   0   15820   1900   1736 S   0.0  0.0   0:00.74 init           
+#+END_SRC
+
+** /sysfs/
+
+Também um pseudossistema de arquivos que exporta informações sobre:
+
+- subsistemas do /kernel/ (/scheduler/, gerenciamento de memória, sistemas de arquivo etc.)
+- dispositivos de hardware
+- drivers
+
+Os arquivos virtuais de ~/sys~ podem ser modificados, o que resulta em alterações em parâmetros do
+/kernel/ e de dispositivos.
+
+O comando abaixo mostra a MTU (/Maximum Transmission Unit/) de uma placa de rede sem fio:
+
+#+BEGIN_SRC shell
+leo@debian:~$ cat /sys/class/net/wlx6466b308242c/mtu                                                                                                                                                   -- INSERT --
+1500
+#+END_SRC
+
+* /Named pipes/ (FIFOs)
+
+É um meio de IPC (/inter-process communication/), similar ao /pipe/ convencional. Esse é anônimo
+e só existe durante o tempo de vida dos processos que o utilizam, enquanto que aquele possui uma
+referência no sistema de arquivos. A troca de dados em ambos os casos acontece na memória, no
+entanto.
+
+Um FIFO pode ser criado com o comando ~mkfifo~. Um processo pode abri-lo como alimentador e outro,
+como consumidor.
+
+Um exemplo de /pipe/ convencional:
+
+#+BEGIN_SRC shell
+ls -1 / | sed 's/o/0/g'
+#+END_SRC
+
+Um FIFO:
+
+#+BEGIN_SRC shell
+prw-r--r-- 1 leo  leo     0 Nov 25 20:36 myfifo
+#+END_SRC
+
+Note o *p*.
+
+* ELF (formato de binário)
+
+ELF (/Executable and Linkable Format/) é o formato padrão para arquivos executáveis, código-objeto,
+bibliotecas e /dumps/ em SOs Unix para arquiteturas ~x86~.
+
+O formato é bem flexível e possui apenas um cabeçalho fixo.
+
+Por convenção, arquivos binários têm os seguintes sufixos:
+
+- ~.o~ para código-objeto
+- ~.ko~ para código-objeto que é módulo do /kernel/ (LKMs)
+- ~.so~ para bibliotecas
+- executáveis não têm sufixo
+
+** LKMs (/Loadable Kernel Modules/)
+
+O programa ~modprobe~ é capaz tanto de carregá-los quanto descarregá-los. Tomando o módulo ~ath9k~
+(interface de rede sem fio) em:
+
+#+BEGIN_SRC shell
+/lib/modules/4.4.0-47-generic/kernel/drivers/net/wireless/ath/ath9k/ath9k.ko
+#+END_SRC
+
+É possível removê-lo do /kernel/ assim:
+
+#+BEGIN_SRC shell
+modprobe -r ath9k
+#+END_SRC
+
+* Sistemas de arquivo
+
+Uma lista de sistemas de arquivo mais comuns de Linux que:
+
+- são nativos (totalmente suportados pelo /kernel/ para leitura e modificação)
+- podem ser /root/
+
+| *ext2*   | /Second Extended Filesystem/                            |
+| *ext3*   | /Second Extended Filesystem with journaling extensions/ |
+| *ext4*   | /Fourth Extended Filesystem with extents/               |
+| jfs      | /The Journaled Filesystem/                              |
+| xfs      | /SGI XFS Filesystem/                                    |
+| reiserfs | /ReiserFS journaled filesystem/                         |
+| btrfs    | /B-Tree filesystem/                                     |
+
+* Boot
+
+De forma simplificada, as etapas do processo são:  
+
+- BIOS
+- Bootloader
+- =initramfs= (=initrd=)
+- =init=
+
+** BIOS
+
+- /Basic Input/Output System/
+- Firmware de inicialização de hardware
+- MBR (/Master Boot Record/)
+- Sucessor:
+  - EFI + GPT
+    - /Extensible Firmware Interface/
+    - /GUID Partition Table/
+
+** Bootloader
+
+- GRUB (/GNU GRand Unified Bootloader/)
+  - Padrão na maioria das distrubuições
+  - Permite ao usuário escolher um dentre SOs presentes no disco
+  - Conhece vários sistemas de arquivo e é capaz de achar diversos /kernels/ e /initrds/
+- LILO (/LInux LOader/) — *descontinuado*
+  - Era a norma antes de GRUB
+  - Suporta apenas =linux= e /chainloading/
+  - Não depende de um sistema de arquivo específico (é posicional)
+- =syslinux=
+  - Conjunto de bootloaders de curto propósito
+  - =syslinux= para VFAT e NTFS
+  - =isolinux= para CD-ROMs (ISO 9660)
+
+** initramfs
+
+- Resolve o problema d'o ovo ou a galinha?'
+- Gerado dinamicamente a cada atualização do kernel
+- O kernel geralmente possui apenas módulos essenciais
+- Arquivos que o compõem:
+  - scripts de inicialização (/shell/)
+  - ferramentas essenciais (e.g =find=, =ls=, =grep=, =sed=)
+  - módulos externos ao kernel (=.ko=)
+- Esses módulos são os necessários para — por exemplo:
+  - montar o sistema de arquivo /root/ em disco
+  - inicializar demais dispositivos complexos
+
+# Como sistemas de arquivo criptografados
+
+** init
+
+- Abreviação de /initializer/
+- Responsável por inicializá-lo, é o primeiro processo em espaço de usuário e possui PID 1
+- Subsiste até o desligamento
+- É, na hierarquia de processos, o ancestral direto ou indireto de todo processo (/fork/)
+- Dois principais estilos:
+  - BSD (/Berkley Software Distribution/)
+  - *UNIX System V da AT&T (SysV)*
+
+# udev
+
+
+* Serviço
+
+É um programa que provê utilidades (ou acesso a recursos) a outros programas, denominados "clientes".
+As requisições acontecem de maneira assíncrona — portanto, um serviço pode atender vários
+clientes.
+
+
+* /daemon/
+
+/daemons/ são processos:
+
+- que não estão ligados a um =tty=
+- cujo pai é =init=
+
+De fato, todo processo que vira órfão (cujo pai encerrou) é assumido por =init=.
+
+Não interagem diretamente com o usuário: por não estarem ligados a um =tty=, não podem
+ser interrompidos por SIGHUP (/hang up signal/). Comunicação acontece por por FIFOs, /inet sockets/,
+IPC (/inter-process communication/) ou UDSs. Os erros — e demais mensagens — são relatados em
+arquivos (/logs/).
+
+* SysV init
+
+Essa é (foi?) a vertente preferida pelas distribuições GNU/Linux: os substitutos modernos tendem a
+ser retrocompatíveis.
+
+O SO que usa desse esquema está em um dentre possíveis estados, que determinam quais processos
+(/daemons/ ou serviços) devem estar ativos através de scripts. /Runlevels/, como são chamados
+esses estados, representam as fases em que pode se encontrar a sessão atual.
+
+** Runlevels
+
+Numerados de 0 a 6, os /runlevels/ convencionais são:
+
+- 0: /halt/ (encerrar o sistema)
+- 1 ou S: modo de usuário único (/single user mode/)
+- 6: reinicialização (/reboot/)
+
+Aos demais (2 a 5) cabe aos mantenedores da distribuição dar significado. São modos multiusuário e
+Debian, por exemplo, não distingue entre eles. Outras distribuições podem oferecer modo
+multiusuário com ou sem interface gráfica, com ou sem rede etc. O usuário é livre para fazer 
+modificações.
+
+** =inittab=
+
+=init= é governado por =/etc/inittab,= que define o /runlevel/ padrão, carrega /keymaps/, especifica
+a quantidade de e que programa deve rodar em cada console virtual (tty) e os /runlevels/ em que
+estarão disponíveis, entre outros.
+
+O script =/etc/init.d/rcS= é então executado e deixa o sistema em modo de usuário único, para que:
+
+- seja finalizada a detecção de hardware
+- demais discos sejam montados de acordo com =/etc/fstab=
+- a rede seja inicializada
+
+O próximo passo é passar para o /runlevel/ padrão.
+
+** Runlevels e scripts
+
+Os scripts que devem ser executados em cada /runlevel/ estão em =/etc/rcN.d=, em que N é o número.
+Na verdade, essas pastas contêm links para os scripts em =/etc/init.d=. Os nomes são prefixados
+com S para iniciar (/start/) e K para encerrar (/kill/).
+
+** /Start & Kill?/
+
+O que acontece é que eles são invocados com argumentos =start= ou =stop=.
+
+Por exemplo, se =mysql= deve ser executado no /runlevel/ 2, então existe um link para
+=/etc/init.d/mysql= em =/etc/rc2.d= com nome =/etc/rc2.d/S05mysql=. Note os dois dígitos após S:
+eles servem simplesmente para ordenar.
+
+Da mesma maneira existe um link =/etc/rc6.d/K05mysql=, que indica que =init= deve executar
+=/etc/init.d/mysql stop= quando o sistema for reiniciado.
+
+** Como administrar?
+
+O usuário não deve lidar diretamente com esses links — há várias ferramentas dedicadas a isso.
+
+As distribuições provêem meios de ordenar os scripts de maneira abstrata. Por exemplo, se =mysql=
+precisa de um serviço que provê /logging/, não precisa se atrelar a uma implementação específica.
+
+Essas informações podem estar presentes no próprio script em metacomentários.
+
+A partir delas, são gerados links de modo que o serviço que provê /logging/ seja iniciado antes
+de =mysql=. Por exemplo:
+
+- =S02rsyslog=
+- =S05mysql=
+
+* =systemd=
+
+Software adotado pela maioria das distribuições GNU/Linux — entre elas Ubuntu e Debian.
+Passou a realizar várias funções antes exercidas por componentes independentes:
+
+- =sysvinit= (/initializer/)
+- =sysvinit-utils= (gerenciador de serviços)
+- =udev= (gerenciador de dispositivos)
+- =consolekit= (gerenciador de sessão)
+
+** Natureza controversial
+
+=systemd= não obedece à filosofia Unix e não foi testado o suficiente para substituir software em
+desenvolvimento há mais de 30 anos (*SysV init*). Software monolítico e imaturo é intrinsecamente
+vulnerável.
+
+Ademais, muitos componentes das respectivas distribuições passaram a tê-lo como
+dependência específica, o que obriga sua presença para que o sistema funcione de maneira aceitável.
+Algumas chegaram ao extremo de torná-lo componente imprescindível, tal qual o kernel: não é possível
+desinstalá-lo, pois não há alternativa.
+
+** Retrocompatibilidade
+
+Um dos objetivos de =systemd= é manter compatibilidade com *SysV init*, sendo possível:
+
+- a criação automática de serviços no formato =systemd= a partir de scripts *SysV init*
+- utilizar os comandos consagrados de *SysV init* e suas ferramentas
+
+** Benefícios de =systemd=
+
+- Paralelização: /daemons/ são inicializados em paralelo durante /boot/
+- Monitoramento dos serviços, sendo possível reiniciá-los em caso de /crash/
+- Serviços inicizalizados sob demanda (ativados por eventos, como detecção de hardware)
+- Sintaxe declarativa para serviços
+- Controle de =cgroups=, novo recurso de Linux, para gerenciar grupos de processos
+
+** /Cheatsheet/ (tabela de referência) 
+
+Tabela da relação entre comandos antigos e novos:
+
+| sysvinit                | systemd               |
+|-------------------------+-----------------------|
+| service foo restart     | systemctl restart foo |
+| service foo start       | systemctl start foo   |
+| service foo stop        | systemctl stop foo    |
+| service foo status      | systemctl status foo  |
+
+** /Cheatsheet/ (particular às distribuições)
+
+Debian 7 (Wheezy)
+
+| sysvinit                | systemd               |
+|-------------------------+-----------------------|
+| update-rc.d foo enable  | systemctl enable foo  |
+| update-rc.d foo disable | systemctl disable foo |
+
+CentOS 6
+
+| sysvinit          | systemd               |
+|-------------------+-----------------------|
+| chkconfig foo on  | systemctl enable foo  |
+| chkconfig foo off | systemctl disable foo |
+
+* /Unix Domain Sockets/
+
+Também chamadas de IPC (/inter-process communication/) /sockets/ é meio de troca de dados entre
+processos num mesmo SO /host/. São análogas às /inet sockets/, só que mais seguras.
+Suportam, tais quais as /inet sockets/, dois métodos de câmbio de pacotes:
+
+- =SOCK_SEQPACKET=, como TCP (/Stream Socket/), provê confiabilidade e envia os pacotes em ordem
+- =SOCK_DGRAM=, que não oferece garantia nenhuma, como UDP (/Datagram Socket/)
+
+Para se utilizar uma UDS, o procedimento é quase idêntico ao de se abrir uma /inet socket/. No caso
+de =SOCK_SEQPACKET=, há uma conexão e /handshake/ à maneira de TCP.
+
+Similar ao uso das FIFOs, os processos referenciam UDSs como /inodes/ no sistema de arquivos — então
+dois processos se comunicam abrindo a mesma /socket/.
+
+* =dpkg=
+
+A manipulação de pacotes é feita, em distribuições derivadas de Debian (e.g. Ubuntu), com
+=apt= diretamente ou através de /frontends/ — ferramentas com maior nível de abstração e interfaces
+mais amigáveis, tais qual =aptitude= (=ncurses=) e =synaptic= (GTK+).
+
+No entanto, =apt=, por sua vez, também é uma ferramenta de alto nível que utiliza uma outra, de
+baixo nível, chamada =dpkg= (/Debian Package/).
+
+=dpkg= é capaz de inspecionar pacotes ~.deb~ (o formato dos pacotes Debian) e listar os pacotes
+instalados e seus estados. Seu /log/ fica em ~/var/log/dpkg.log~.
+
+As ações que =dpkg= realiza, ao se instalar um pacote, podem ser resumidas em dois passos:
+
+- desempacotamento dos arquivos-base
+- configuração
+
+** Pacotes no formato ~deb~
+
+É o formato dos pacotes de Debian e suas derivadas, e é também a extensão daqueles (~.deb~).
+
+Esses pacotes contêm dois arquivos =tar=:
+
+- um com informações de controle e scripts de controle
+- outro com os dados
+
+As informações de controle são:
+
+- nome do pacote
+- versão do pacote
+- dependências
+- mantenedor do pacote
+
+Um arquivo =tar=, similar a um =zip=, contém metadados, como o caminho (absoluto ou relativo) onde
+os arquivos devem ser extraídos. =tar= é um formato concebido para Unix, então guarda também as
+permissões Unix.
+
+** Limitações de =dpkg=
+
+É uma ferramenta simples: ela mantém um banco de dados, em formato de texto, a partir do qual é
+possível saber quais pacotes estão instalados; com isso, verifica as dependências do pacote que se
+deseja instalar e, caso elas não estiverem satisfeitas, ocorre um erro e a instalação é apenas
+parcial.
+
+Numa instalação parcial, é realizado apenas o primeiro passo, que é _desempacotamento_. Pacotes
+nesse estado são qualificados como com *configuração pendente*.
+
+O segundo passo consiste em desempacotar os arquivos de configuração e rodar os scripts de controle.
+Esses são quatro:
+
+- ~preinst~
+- ~postinst~
+- ~prerm~
+- ~postrm~
+
+** Suporte a múltiplas arquiteturas
+
+Debian é, inconteste, a distribuição que suporta o maior número de arquiteturas. Um pacote ~.deb~
+possui um campo nas suas informações de controle com a arquitetura, que pode ser /all/ ou uma
+arquitetura específica: ~arm64~, ~amd64~, ~i386~, ~powerpc~, ~mips~ etc.
+
+Considerando-se:
+
+#+BEGIN_SRC shell
+dpkg --print-architecture
+dpkg --add-architecture <arch>
+#+END_SRC
+
+O primeiro imprime a arquitetura nativa; já o segundo adiciona uma arquitetura (se compatível).
+A partir de cujo momento os pacotes serão identificados com o sufixo ~:<arch>~, como em =dpkg:amd64=
+e =dpkg:i386=.
+
+* TODO COMMENT VIM
+** DONE buffers
+** TODO modo inserção CTRL-R
+** DONE j e J
+   CLOSED: [2016-12-31 Sáb 18:10]
+*** comandos q w x wa xa
+** DONE scrolling
+   CLOSED: [2016-12-30 Sex 11:25]
+** DONE movimento f t
+   CLOSED: [2016-12-28 Qua 03:45]
+** DONE completion
+   CLOSED: [2016-12-28 Qua 02:32]
+** DONE registradores
+   CLOSED: [2016-12-28 Qua 03:45]
+** TODO mnemônicos
+** DONE operadores c d i
+   CLOSED: [2016-12-30 Sex 15:01]
+** DONE yy dd >>
+   CLOSED: [2016-12-31 Sáb 15:30]
+** DONE undo
+   CLOSED: [2016-12-30 Sex 16:50]
+** DONE modo visual
+   CLOSED: [2016-12-30 Sex 18:52]
+*** yank and put
+*** upper lower case
+** DONE text object selections
+   CLOSED: [2016-12-31 Sáb 18:01]
+** TODO find and replace
+*** star hash
+** TODO menções honrosas
+*** macros
+
+* VIM
+
+*VIM* (/Vi IMproved/), também conhecido por *Vim*, é um clone de Vi desenvolvido por
+*Bram Moolenaar*.
+
+Sua primeira versão saiu em 1991 e sua licença — que o torna, em parte, /charityware/ — é compatível
+com a GPL.
+
+Vim é um tipicamente um programa de linha de comando (=ncurses=), mas possui uma versão gráfica.
+Possui documentação embutida exaustiva e indexada por palavras-chave acessível através do
+comando:
+
+#+BEGIN_SRC vimrc
+:h[elp] <tópico>
+#+END_SRC
+
+** Suporte
+
+A lista dos SOs que Vim suporta:
+
+| *AmigaOS*            | *Atari MiNT* | *BeOS*   | *DOS*            |
+| *Windows (desde 95)* | *OS/2*       | *OS/390* | *MorphOS*        |
+| *OpenVMS*            | *QNX*        | *BSD*    | *Classic Mac OS* |
+| *RISC OS*            | *GNU/Linux*  |          |                  |
+
+#+BEGIN_SRC vimrc
+:h sys-file-list
+#+END_SRC
+
+** VIM como IDE
+
+É extensível com *VimL* (ou Vimscript).
+
+Com ela é possível criar novos:
+
+- comandos
+- mapeamentos
+- sintaxe
+
+A versão atual (/[[http://www.drchip.org/astronaut/vim/vimfeat.html][huge]]/) suporta mais de 580 tipos de arquivo ou sintaxes diferentes:
+
+#+BEGIN_SRC vimrc
+:redir =  m | silent echo glob($VIMRUNTIME . '/syntax/*.vim') | redir END | put=m
+#+END_SRC
+
+Com centenas de plugins à disposição, que são capazes de transformar Vim numa IDE (/Integrated
+Development Environment/), é o [[http://stackoverflow.com/research/developer-survey-2016#technology-development-environments][quarto ambiente de desenvolvimento]] preferido entre membros de
+*stackoverflow*, à frente de Eclipse e atrás de Notepad++, Visual Studio e Sublime Text.
+
+** Editor Modal
+
+Em Vim, o usuário está em um dentre diversos modos, entre os quais ~NORMAL~, ~INSERÇÃO~, ~LINHA-DE-COMANDO~
+e ~VISUAL~ (e derivados) são os mais comuns — e úteis.
+
+A implicação é que as funções das teclas são atreladas aos modos, o que permite o seu uso sem a
+necessidade de modificadores complexos.
+
+O modo principal é ~NORMAL~ e é partir dele que se adentram os demais e a ele que se retorna quando
+*ESC* ou *CTRL-C* é pressionada. Independente de modo, é garantido o retorno ao modo ~NORMAL~ depois de
+pressionada duas vezes *ESC* ou *CTRL-C*.
+
+#+BEGIN_SRC vimrc
+:h vim-modes-intro
+#+END_SRC
+
+* VIM: janelas e /buffers/
+
+Para todo arquivo aberto por uma instância de Vim existe um /buffer/, que é a sua representação em
+memória.
+
+Uma *janela* é uma visualização — total, se couber, ou parcial — de um buffer.
+
+O mesmo /buffer/ pode ser visualizado em diversas janelas, cada uma independente da outra.
+
+** Manipulando /buffers/
+
+| =:e[dit]=               | reedita este /buffer/ (sincroniza-o com mudanças externas) |
+| =:e[dit]= ={file}=      | edita o arquivo na janela atual                            |
+| =:ene[w]=               | edita um novo /buffer/ na janela atual                     |
+| =:new=                  | edita um novo /buffer/ numa nova janela                    |
+| =:sav[eas]= ={file}=    | salva o arquivo e redefine o nome deste /buffer/           |
+| =:w[rite]=              | salva este arquivo (sincroniza-o com o /buffer/)           |
+| =:w[rite]= ={file}=     | salva o arquivo (sincroniza-o com o /buffer/)              |
+| =:wq= ou =:x[it]=       | salva o arquivo e fecha a janela                           |
+| =:wa[ll]=               | salva todos os arquivos                                    |
+| =:wqa[ll]= ou =:xa[ll]= | salva todos os arquivos e encerra Vim                      |
+
+#+BEGIN_SRC vimrc
+:h edit-files
+:h opening-window
+#+END_SRC
+
+** Navegando entre /buffers/
+
+| =:ls=             | mostra os /buffers/                                          |
+| =:ls!=            | mostra todos os /buffers/, inclusive os não listados         |
+| =:b[uffer] [N]=   | edita o /buffer/ [N] na janela atual                         |
+| =:bd[elete] [N]=  | remove o /buffer/ [N] da lista e fecha todas as suas janelas |
+| =:bw[ipeout] [N]= | destrói o /buffer/ [N] completamente                         |
+
+#+BEGIN_SRC vimrc
+:h buffer-hidden
+#+END_SRC
+
+** Manipulando janelas
+
+| =:vs[plit]= | cria uma janela na vertical   |
+| =:sp[lit]=  | cria uma janela na horizontal |
+| =:q=        | fecha a janela                |
+
+#+BEGIN_SRC vimrc
+:h opening-window
+#+END_SRC
+
+** Navegando entre janelas
+
+| =CTRL-W h= | ir para a janela à esquerda |
+| =CTRL-W j= | ir para a janela abaixo     |
+| =CTRL-W k= | ir para a janela acima      |
+| =CTRL-W l= | ir para a janela à direita  |
+
+#+BEGIN_SRC vimrc
+:h window-move-cursor
+#+END_SRC
+
+** /buffers/ modificados
+
+Os comandos desta seção não funcionarão se o /buffer/ possuir modificações não salvas.
+Para descartar as alterações e executar o comando mesmo assim é necessário acrescentar o sufixo
+=!=, como em:
+
+| =:w!= | =:sav!= | =:bw!= | =:q!= | =:e!= |
+
+O status do /buffer/ pode ser verificado com *CTRL-G*.
+
+* VIM: modo ~NORMAL~
+
+Usado para navegar — ou mover-se em — o texto. Esse é o modo em que se deve estar na maior parte do
+tempo.
+
+O movimento pode ser classificado em:
+
+- horizontal
+- vertical
+- através de palavras
+- através de objetos textuais
+- marcações
+- saltos
+
+#+BEGIN_SRC vimrc
+:h motion.txt
+#+END_SRC
+
+* VIM: rolagem
+
+|                        | abaixo      |                      | acima       |
+|------------------------+-------------+----------------------+-------------|
+| =CTRL-F= ou =PageDown= | uma janela  | =CTRL-B= ou =PageUp= | uma janela  |
+| =CTRL-D=               | meia janela | =CTRL-U=             | meia janela |
+| =CTRL-E=               | uma linha   | =CTRL-Y=             | uma linha   |
+
+#+BEGIN_SRC vimrc
+:h scrolling
+#+END_SRC
+
+** Relativa ao cursor
+
+Rolagem vertical:
+
+|      | ação                                           | mnemônico |
+|------+------------------------------------------------+-----------|
+| =zt= | posiciona a linha do cursor no topo da janela  | /top/     |
+| =zz= | centraliza a linha do cursor                   |           |
+| =zb= | posiciona a linha do cursor no fundo da janela | /bottom/  |
+
+Caso a /flag/ ='wrap'= esteja desativada, é possível rolar horizontalmente:
+
+| =zh= | visão desloca-se um caractere à esquerda    | =zH= | desloca-se uma janela à esquerda    |
+| =zl= | visão desloca-se um caractere à direita     | =zL= | desloca-se uma janela à direita     |
+| =zs= | cursor passa a ser a coluna mais à esquerda | =ze= | passa a ser a coluna mais à direita |
+
+#+BEGIN_SRC vimrc
+:h scrolling
+:h 'wrap'
+#+END_SRC
+
+
+* VIM: movimento
+
+O movimento em Vim pode ser precedido de um argumento numérico opcional, que representa a quantidade
+de repetições ou iterações.
+
+A maioria dos comandos abaixo tem essa propriedade, portanto o prefixo
+={count}= será omitido.
+
+Para mais informações:
+
+#+BEGIN_SRC vimrc
+:h motion.txt
+#+END_SRC
+
+** Horizontal
+
+|      | linha real                    |      | linha virtual                 |
+|------+-------------------------------+------+-------------------------------|
+| =0=  | à primeira coluna da linha    | =g0= | à primeira coluna             |
+| =^=  | ao primeiro caractere visível | =g^= | ao primeiro caractere visível |
+| =$=  | à última coluna da linha      | =g$= | à última coluna da linha      |
+| =g_= | ao último caractere visível   |      |                               |
+|      |                               | =gm= | à metade da linha             |
+| =h=  | à esquerda                    |      |                               |
+| =l=  | à direita                     |      |                               |
+
+#+BEGIN_SRC vimrc
+:h left-right-motions
+#+END_SRC
+
+*** /forward/ & /till/
+
+Os comandos =f= e =t= são seguidos de um caractere e posicionam o cursor naquele ou imediatamente
+antes daquele, respectivamente. A operação pode ser repetida com =,= e =;=.
+
+|           | ação                               | mnemônico |
+|-----------+------------------------------------+-----------|
+| =f{char}= | ao próximo caractere               | /forward/ |
+| =F{char}= | ao caractere anterior              |           |
+| =t{char}= | até o próximo caractere            | /till/    |
+| =T{char}= | até caractere anterior             |           |
+| =;=       | repete operação                    |           |
+| =,=       | repete operação no sentido inverso |           |
+
+** Vertical
+
+|            | linha real                           |      | linha virtual |
+|------------+--------------------------------------+------+---------------|
+| =gg=       | à primeira linha                     |      |               |
+| =G=        | à última linha                       |      |               |
+| =-=        | ao primeiro caractere visível acima  |      |               |
+| =+=        | ao primeiro caractere visível abaixo |      |               |
+| ={count}%= | à porcentagem no arquivo             |      |               |
+| =j=        | acima                                | =gj= | acima         |
+| =k=        | abaixo                               | =gk= | abaixo        |
+
+#+BEGIN_SRC vimrc
+:h up-down-motions
+#+END_SRC
+
+** Através De Palavras
+
+Por padrão, uma *palavra* é uma seqüência de caracteres visíveis (letras, dígitos e /underscores/)
+separada por espaços em branco (espaços, tabulações e fins-de-linha). Já uma *PALAVRA* é seqüência
+de _quaisquer_ caracteres visíveis separada por espaços em branco.
+
+| =w=  | à próxima palavra          | =W=  | à próxima PALAVRA          |
+| =e=  | ao fim da próxima palavra  | =E=  | ao fim da próxima PALAVRA  |
+| =b=  | à palavra anterior         | =B=  | à palavra ANTERIOR         |
+| =ge= | ao fim da palavra anterior | =gE= | ao fim da PALAVRA anterior |
+
+#+BEGIN_SRC vimrc
+:h word-motions
+#+END_SRC
+
+** Através De Objetos Textuais
+
+Uma *sentença* termina num ponto final =('.')=, numa exclamação =('!')= ou numa interrogação =('?')=
+seguida de espaços em branco (espaços, tabulações e fins-de-linha).
+
+Um *parágrafo* começa após uma linha vazia.
+
+| =(= | à sentença anterior   |
+| =)= | à próxima sentença    |
+| ={= | ao parágrafo anterior |
+| =}= | ao próximo parágrafo  |
+
+#+BEGIN_SRC vimrc
+:h object-motions
+#+END_SRC
+
+** Marcações
+
+Uma marcação é uma posição num arquivo a que pode ser visitada a qualquer momento. Marcações podem
+ser _relativas_ ao arquivo ou _interarquivo_.
+
+Para se criar uma marcação relativa:
+
+#+BEGIN_SRC vimrc
+m{a-z}
+#+END_SRC
+
+Para se criar uma marcação absoluta:
+
+#+BEGIN_SRC vimrc
+m{A-Z}
+#+END_SRC
+
+Para se visitar uma marcação:
+
+#+BEGIN_SRC vimrc
+'{a-zA-Z}
+#+END_SRC
+
+#+BEGIN_SRC vimrc
+:h mark-motions
+#+END_SRC
+
+** Saltos
+
+São comandos que movem o cursor para uma posição específica (geralmente numa linha diferente).
+As posições do cursor antes de saltos são mantidas numa fila e podem ser revisitadas.
+
+Entre os comandos considerados saltos:
+
+| ='= | =G= | =/= | =?=  | =n= | =N= | =%= | =(= |
+| =)= | ={= | =}= | =:s= | =L= | =M= | =H= |     |
+
+*CTRL-I* e *CTRL-O* navegam a lista de posições e =:jumps= a mostra.
+
+#+BEGIN_SRC vimrc
+:h jump-motions
+#+END_SRC
+
+** Movimentos diversos
+
+| =%=  | ao próximo par dos itens =([{}])= |
+| =H=  | ao topo da janela                 |
+| =M=  | ao meio da janela                 |
+| =L=  | ao fundo da janela                |
+| =[(= | ao próximo =(= desemparelhado     |
+| =[{= | ao próximo ={= desemparelhado     |
+| =])= | ao próximo =)= desemparelhado     |
+| =]}= | ao próximo =}= desemparelhado     |
+
+#+BEGIN_SRC vimrc
+:h various-motions
+#+END_SRC
+
+* VIM: modo ~INSERÇÃO~
+
+Nesse modo, o texto digitado é inserido no /buffer/.
+
+Suporta a inserção de caracteres em notação numérica decimal, octal, hexadecimal e /unicode/.
+
+Suporta também a inserção de vários tipos de caracteres literais.
+
+#+BEGIN_SRC vimrc
+:h i_CTRL-V_digit
+:h insert.txt
+#+END_SRC
+
+** Transição
+
+A maioria dos comandos a seguir pode ser precedida de argumento numérico, portanto o prefixo ={count}=
+será omitido.
+
+#+BEGIN_SRC vimrc
+:h mode-switching
+:h inserting
+:h delete-insert
+#+END_SRC
+
+** Transição a partir de ~NORMAL~
+
+É possível entrar no modo ~INSERÇÃO~ a partir de ~NORMAL~ assim:
+
+| =i=         | inserir antes do cursor                              |
+| =I=         | inserir antes do primeiro caractere visível da linha |
+| =a=         | inserir após o cursor                                |
+| =A=         | inserir ao fim da linha                              |
+| =o=         | inserir numa linha nova abaixo do cursor             |
+| =O=         | inserir numa linha nova acima do cursor              |
+| =c{motion}= | remover com movimento e entrar em ~INSERÇÃO~         |
+| =C=         | remover até o fim da linha e entrar em ~INSERÇÃO~    |
+| =s=         | remover ={count}= caracteres e entrar em ~INSERÇÃO~  |
+| =S=         | remover ={count}= linhas e entrar em ~INSERÇÃO~      |
+
+** Transição a partir de ~VISUAL~
+
+É possível entrar no modo ~INSERÇÃO~ a partir de ~VISUAL~ assim:
+
+| =c= | remover o texto selecionado e entrar em ~INSERÇÃO~    |
+| =C= | remover as linhas selecionadas e entrar em ~INSERÇÃO~ |
+
+#+BEGIN_SRC vimrc
+:h replacing
+#+END_SRC
+
+* VIM: completação
+
+No modo ~INSERÇÃO~, é possível obter sugestões para completar uma *palavra*. Dentre as mais úteis
+estão:
+
+- palavras-chave
+- nomes de arquivo
+- soletração
+- dicionário
+
+O menu de completação é navegado assim:
+
+|                   | ação           | mnemônico  |
+|-------------------+----------------+------------|
+| =CTRL-N=          | próxima opção  | /next/     |
+| =CTRL-P=          | opção anterior | /previous/ |
+| =ESC= ou =CTRL-C= | sair           |            |
+
+#+BEGIN_SRC vimrc
+:h compl-generic
+:h ins-completion
+#+END_SRC
+
+** Palavras-chave 
+
+No modo ~INSERÇÃO~, as seguintes combinações acessam o menu de completação de palavras-chave:
+
+| =CTRL-N= | sugere palavras à frente do cursor |
+| =CTRL-P= | sugere palavras atrás do cursor    |
+
+Além do /buffer/ em questão, outros locais são vasculhados, de acordo com a opção ='complete'=.
+O padrão é buscar nos /buffers/ ativos nas outras janelas, nos /buffers/ listados e depois nos
+não listados.
+
+#+BEGIN_SRC vimrc
+:h 'complete'
+#+END_SRC
+
+** Nomes De Arquivo
+
+A completação de nomes de arquivo não gera menu de completação. Para que funcione é necessário que
+o caminho cercado de caracteres invisíveis.
+
+A combinação de teclas é =CTRL-X CTRL-F=.
+
+#+BEGIN_SRC vimrc
+:h i_CTRL-X_CTRL-F
+#+END_SRC
+
+* VIM: registradores
+
+Quando texto é copiado ou removido, Vim o guarda em seus registradores. Eles são referenciados
+por ='"'=.
+
+O registrador =""=, conhecido por sem-nome, guarda o texto selecionado ou removido na última
+operação.
+
+Já ="0= contém o texto da última operação de /yank/.
+
+Os registradores de ="1= a ="9= contêm texto removido num regime de fila, caso seja mais comprido do
+que uma linha. Se for menor do que uma linha, estará no registrador ="-=.
+
+#+BEGIN_SRC vimrc
+:h registers
+#+END_SRC
+
+** Mais registradores
+
+Qualquer comando de cópia ou remoção pode ser precedido por uma referência para um registrador.
+Todos os registradores acima podem ser manualmente sobrescritos.
+
+Registradores de ="a= a ="z= e de ="A= a ="Z= são de livre uso.
+
+O comando =:reg[isters]= lista o conteúdo de todos os registradores.
+
+#+BEGIN_SRC vimrc
+:h :registers
+#+END_SRC
+
+
+* VIM: operadores
+
+Operadores podem ser usados em conjunto com movimentos. As ações são aplicados no texto compreendido.
+
+Os mais comuns são:
+
+|     | ação                              | mnemônico |
+|-----+-----------------------------------+-----------|
+| =c= | remove e entra no modo ~INSERÇÃO~ | /change/  |
+| =d= | remove apenas                     | /delete/  |
+| =y= | copia para registrador            | /yank/    |
+
+#+BEGIN_SRC vimrc
+:h operator
+#+END_SRC
+
+** Outros operadores
+
+|      | ação                    |
+|------+-------------------------|
+| =~=  | inverte a caixa         |
+| =>=  | indenta texto           |
+| =<=  | remove indentação       |
+| =zf= | cria uma dobra          |
+
+| =gu= | altera para caixa baixa |
+| =gU= | altera para caixa alta  |
+
+#+BEGIN_SRC vimrc
+:h operator
+:h folding
+#+END_SRC
+
+** Repetições
+
+Operadores — também — podem ser precedidos de um argumento numérico opcional (que representa a quantidade
+de repetições ou iterações).
+
+Caso ambos o movimento e o operador sejam precedidos de ={count}=, eles são multiplicados.
+
+** Registradores
+
+Entre outros, os operadores =c=, =d= e =i= podem ser precedidos de uma referência a um registrador.
+Por exemplo ="ay$= em:
+
+#+BEGIN_SRC txt
+Quidem ipsum et voluptatum voluptatem accusantium sit repudiandae atque.
+#+END_SRC
+
+guarda no registrador ="a= do cursor até o fim da linha.
+
+** Operações simples
+
+Algumas operações simples, que são combinações rápidas com os oepradores:
+
+| cc | remove linha e entra no modo ~INSERÇÃO~ |
+| dd | remove linha                            |
+| yy | copia linha para registrador            |
+| >> | indenta linha                           |
+| << | remove indentação da linha              |
+
+#+BEGIN_SRC vimrc
+:h simple-change
+:h delete-insert
+#+END_SRC
+
+* VIM: desfazer e refazer
+
+Vim lembra todas as alterações feitas num /buffer/ e suas ramificações.
+
+- Alterações são atomizadas por *comandos*
+- Um *comando* começa e termina no modo ~NORMAL~
+- Comandos podem ou não modificar o /buffer/
+- Apenas comandos que o modificam podem ser desfeitos
+
+#+BEGIN_SRC vimrc
+:h undo-redo
+#+END_SRC
+
+** Des(re)fazer: comandos
+
+|                       | ação                                  | mnemônico |
+|-----------------------+---------------------------------------+-----------|
+| =u= ou =:u[ndo]=      | desfazer último comando               | /undo/    |
+| =CTRL-R= ou =:red[o]= | refazer último comando                | /redo/    |
+| =U=                   | desfazer todas as alterações na linha |           |
+
+** Ramificações
+
+Quando se desfaz um comando e esse é seguido de um novo comando, é criada uma ramificação.
+
+| =:undol[ist]=   | lista as folhas da árvore de modificações |
+| =:u[ndo]= ={N}= | retorna à modificação ={N}=               |
+
+Exemplo para o comando =:undolist=:
+
+#+BEGIN_SRC sh
+number changes  when               saved
+ 88      88  2010/01/04 14:25:53
+108     107  08/07 12:47:51
+136      46  13:33:01             7
+166     164  3 seconds ago
+#+END_SRC
+
+A coluna /number/ pode ser usada como argumento para =:undo=.
+
+#+BEGIN_SRC vimrc
+:h undo-commands
+#+END_SRC
+
+* VIM: modo ~VISUAL~
+
+É um modo em que se seleciona texto. [[VIM: operadores][Operadores]] atuam sobre a seleção, que pode ser, além de
+inserida em registradores, removida.
+
+| =v=      | entra no modo ~VISUAL~       |
+| =V=      | entra no modo ~VISUAL/LINHA~ |
+| =CTRL-V= | entra no modo ~VISUAL/BLOCO~ |
+
+#+BEGIN_SRC vimrc
+:h visual-mode
+#+END_SRC
+
+** Modos derivados
+
+No modo ~VISUAL/LINHA~, apenas linhas completas podem ser selecionadas.
+
+É possível selecionar blocos de texto que compreendem várias linhas em ~VISUAL/BLOCO~. Ademais nesse
+modo os operadores (aqueles que são suportados) afetam as linhas uma a uma. Isto é, para cada linha:
+
+| =I= | insere no começo                  |
+| =A= | insere no fim                     |
+| =c= | remove e entra no modo ~INSERÇÃO~ |
+| =>= | indenta texto                     |
+| =<= | remove indentação                 |
+
+** Caixa
+
+No modo ~VISUAL~, a caixa é alterada assim:
+
+| =u= | altera para caixa baixa |
+| =U= | altera para caixa alta  |
+
+* VIM: seleção de obetos textuais
+
+Os comandos a seguir se podem usar apenas após [[VIM: operadores][operadores]] e no modo ~VISUAL~:
+
+| exclusivo    |                      | inclusivo    |                      | mnemônico   |
+|--------------+----------------------+--------------+----------------------+-------------|
+| =iw=         | sem espaços em volta | =aw=         | com espaços em volta | /word/      |
+| =is=         |                      | =as=         |                      | /sentence/  |
+| =ip=         |                      | =ap=         |                      | /paragraph/ |
+| =i[= ou =i]= | sem envólucro        | =a[= ou =a]= | com envólucro        |             |
+| =i(= ou =i)= |                      | =a(= ou =a)= |                      |             |
+| =i{= ou =i}= |                      | =a{= ou =a}= |                      |             |
+
+#+BEGIN_SRC vimrc
+:h object-select
+#+END_SRC
+
+** Mais objetos textuais
+
+| exclusivo    |               | inclusivo    |               |
+|--------------+---------------+--------------+---------------|
+| =i<= ou =i>= | sem envólucro | =a<= ou =a>= | com envólucro |
+| =i"=         |               | =a"=         |               |
+| =i'=         |               | =a'=         |               |
+| =i`=         |               | =a`=         |               |
+
+A lista completa se encontra em:
+
+#+BEGIN_SRC vimrc
+:h object-select
+#+END_SRC
+
+* VIM: busca
+
+A partir do modo ~NORMAL~, o comando
+
+#+BEGIN_SRC vimrc
+/{pattern}[/]<CR>
+#+END_SRC
+
+insere o padrão ={pattern}= no registrador ="/= e posiciona o cursor na primeira ocorrência a partir
+da última posição.
+
+|     | ação                                                                | mnemônico |
+|-----+---------------------------------------------------------------------+-----------|
+| =n= | posiciona o cursor na primeira ocorrência a partir da posição atual | /next/    |
+| =N= | posiciona o cursor na ocorrência anterior a partir da posição atual |           |
+
+#+BEGIN_SRC vimrc
+:h /
+#+END_SRC
+
+** Outros comandos
+
+| =*=  | faz uma busca exclusiva com a *palavra* mais próxima ao cursor |
+| =g*= | faz uma busca inclusiva com a *palavra* mais próxima ao cursor |
+
+O padrão da busca exclusiva é composto pela *palavra* envolvida por =\<= e =\>=. Isso faz com apenas
+*palavras* exatas sejam contempladas. A busca inclusiva usa simplesmente a cadeia de caracteres.
+
+* COMMENT VIM: substituição
+
+* VIM: outras modificações simples
+
+|         | ação                                                   | mnemônico |
+|---------+--------------------------------------------------------+-----------|
+| =J=     | juntar linhas, remover identação e acrescentar espaços | /join/    |
+| =gJ=    | juntar linhas                                          |           |
+| =x=     | remove caractere                                       |           |
+| =X=     | remove caractere antes do cursor                       |           |
+| =["x]p= | insere texto do registrador =x= à frente do cursor     | /put/     |
+| =["x]P= | insere texto do registrador =x= atrás do cursor        |           |
+
+#+BEGIN_SRC vimrc
+:h p
+:h x
+:h J
+#+END_SRC
