@@ -5,13 +5,17 @@
 
 * Janeiro
 
-** [2018-01-18 Thu]: início de 1h extra por dia
+** [2018-01-18 Thu]
+
+Início de 1h extra por dia.
 
 * Fevereiro
 
 * Março
 
-** [2018-03-05 Mon]: fim de 1h extra por dia
+** [2018-03-05 Mon]
+
+Fim de 1h extra por dia.
 
 * Abril
 
@@ -20,6 +24,14 @@
 Mais de 12h por dia.
 
 * Maio
+
+** [2018-05-12 Sat]
+
+Meio expediente em Jaboatão.
+
+** [2018-05-19 Sat]
+
+Meio expediente em Jaboatão.
 
 * Junho
 
