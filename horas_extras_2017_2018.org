@@ -1,11 +1,12 @@
-# -*- org-time-stamp-custom-formats: ("%d/%m/%Y" . "<%Y-%m-%d %H:%M>") -*-
+# -*- org-time-stamp-custom-formats: ("%d/%m/%Y %a" . "<%Y-%m-%d %H:%M>"); file-local-time-locale: "PTG"; -*-
+# PTG on Windows and pt_BR.UTF8 on Debian
 #+LANGUAGE: pt_BR
 #+OPTIONS: num:nil ^:nil
 * Dezembro
 
 * Janeiro
 
-** [2018-01-18 Thu]
+** [2018-01-18 Thu]: início
 
 Início de 1h extra por dia.
 
@@ -13,32 +14,32 @@ Início de 1h extra por dia.
 
 * Março
 
-** [2018-03-05 Mon]
+** [2018-03-05 Mon]: 19h
 
 Fim de 1h extra por dia.
 
 * Abril
 
-** [2018-04-28 Sat]--[2018-04-29 Sun]
+** [2018-04-28 Sat]--[2018-04-29 Sun]: 24h
 
 Mais de 12h por dia.
 
 * Maio
 
-** [2018-05-12 Sat]
+** [2018-05-12 Sat]: 4h
 
 Meio expediente em Jaboatão.
 
-** [2018-05-19 Sat]
+** [2018-05-19 Sat]: 4h
 
 Meio expediente em Jaboatão.
 
 * Junho
 
-** [2018-06-02 Sat]
+** [2018-06-02 Sat]: 4h
 
 Meio expediente.
 
-** [2018-06-09 Sat]
+** [2018-06-09 Sat]: 4h
 
 Meio expediente.
