@@ -1,4 +1,4 @@
-# -*- org-time-stamp-custom-formats: ("%d/%m/%Y %a" . "<%Y-%m-%d %H:%M>"); file-local-time-locale: "PTG"; -*-
+# -*- org-time-stamp-custom-formats: ("%d/%m/%Y %a" . "<%Y-%m-%d %H:%M>"); file-local-time-locale: "pt_BR.UTF8"; -*-
 # PTG on Windows and pt_BR.UTF8 on Debian
 #+LANGUAGE: pt_BR
 #+OPTIONS: num:nil ^:nil
