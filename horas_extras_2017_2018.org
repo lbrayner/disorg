@@ -1,45 +1,79 @@
-# -*- org-time-stamp-custom-formats: ("%d/%m/%Y %a" . "<%Y-%m-%d %H:%M>"); file-local-time-locale: "pt_BR.UTF8"; -*-
+# -*- org-time-stamp-custom-formats: ("%d/%m/%Y %a" . "<%Y-%m-%d %H:%M>"); file-local-time-locale: "PTG"; -*-
 # PTG on Windows and pt_BR.UTF8 on Debian
 #+LANGUAGE: pt_BR
 #+OPTIONS: num:nil ^:nil
-* Dezembro
+#+STARTUP: showall
+#+TITLE: HMS: horas extras em 2017/2018
+#+AUTHOR: Leonardo Brayner e Silva
+* Tabela
 
-* Janeiro
+|   | Evento                             | Horas |
+|---+------------------------------------+-------|
+|   | 1h extra diária                    |    19 |
+|   | [2018-02-03 Sat]                   |     4 |
+|   | [2018-02-17 Sat]--[2018-02-18 Sun] |    16 |
+|   | [2018-04-28 Sat]--[2018-04-29 Sun] |    24 |
+|   | [2018-05-12 Sat]                   |     4 |
+|   | [2018-05-19 Sat]                   |     4 |
+|   | [2018-06-02 Sat]                   |     4 |
+|   | [2018-06-09 Sat]                   |     4 |
+|---+------------------------------------+-------|
+|   | Total                              |    79 |
+| ^ |                                    |     x |
+#+TBLFM: $x=vsum(@2..@-1)
 
-** [2018-01-18 Thu]: início
+# C-c * on to update it
 
-Início de 1h extra por dia.
 
-* Fevereiro
+* Detalhes
+** Dezembro
 
-* Março
+** Janeiro
 
-** [2018-03-05 Mon]: 19h
+*** [2018-01-18 Thu]: início
 
-Fim de 1h extra por dia.
+ Início de 1h extra por dia.
 
-* Abril
+** Fevereiro
+  
+*** [2018-02-03 Sat]: 4h
+   
+*** [2018-02-17 Sat]--[2018-02-18 Sun]: 16h
+   
+ Trabalhamos no sábado e domingo das 9h às 18h.
 
-** [2018-04-28 Sat]--[2018-04-29 Sun]: 24h
+** Março
 
-Mais de 12h por dia.
+*** [2018-03-05 Mon]: 19h
 
-* Maio
+ Fim de 1h extra por dia.
 
-** [2018-05-12 Sat]: 4h
+** Abril
 
-Meio expediente em Jaboatão.
+*** [2018-04-28 Sat]--[2018-04-29 Sun]: 24h
 
-** [2018-05-19 Sat]: 4h
+ Mais de 12h por dia.
 
-Meio expediente em Jaboatão.
+** Maio
 
-* Junho
+*** [2018-05-12 Sat]: 4h
 
-** [2018-06-02 Sat]: 4h
+ Meio expediente em Jaboatão.
 
-Meio expediente.
+*** [2018-05-19 Sat]: 4h
 
-** [2018-06-09 Sat]: 4h
+ Meio expediente em Jaboatão.
 
-Meio expediente.
+** Junho
+
+*** [2018-06-02 Sat]: 4h
+
+ Meio expediente.
+
+*** [2018-06-09 Sat]: 4h
+
+ Meio expediente.
+
+ # Local Variables:
+ # org-export-with-author: t
+ # End:
