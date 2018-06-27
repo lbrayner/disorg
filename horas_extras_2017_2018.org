@@ -1,5 +1,4 @@
-# -*- org-time-stamp-custom-formats: ("%d/%m/%Y %a" . "<%Y-%m-%d %H:%M>"); file-local-time-locale: "pt_BR.UTF8"; -*-
-# PTG on Windows and pt_BR.UTF8 on Debian
+# system-time-locale: PTG on Windows and pt_BR.UTF8 on Debian
 #+LANGUAGE: pt_BR
 #+OPTIONS: num:nil ^:nil
 #+STARTUP: showall
@@ -76,4 +75,6 @@
 
  # Local Variables:
  # org-export-with-author: t
+ # org-time-stamp-custom-formats: ("%d/%m/%Y %a" . "<%Y-%m-%d %H:%M>")
+ # file-local-time-locale: "PTG"
  # End:
