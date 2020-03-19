@@ -2,6 +2,9 @@
 
 | Código | Nome de Pregão   | Quantidade | Valor | Data             |
 |--------+------------------+------------+-------+------------------|
+| AZUL4  | AZUL PN N2       |            |       |                  |
 | CVCB3  | CVC BRASIL ON NM |         30 |  9.51 | <2020-03-17 Tue> |
 | GOLL4  | GOL PN N2        |         50 |   7.7 | <2020-03-17 Tue> |
 | PETR4  | PETROBRAS PN N2  |         50 |  12.5 | <2020-03-18 Wed> |
+| RENT3  | LOCALIZA ON NM   |            |       |                  |
+| SMLS3  | SMILES ON NM     |         30 |     9 | <2020-03-19 Thu> |
