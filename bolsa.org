@@ -8,5 +8,5 @@
 | GOLL4  | GOL PN N2        |         50 |   7.7 | <2020-03-17 Tue> |
 | HGTX3  | CIA HERING ON NM |         30 |  12.7 | <2020-03-23 Mon> |
 | PETR4  | PETROBRAS PN N2  |         50 |  12.5 | <2020-03-18 Wed> |
-| PETR4  | PETROBRAS PN N2  |         50 | 11.77 | <2020-03-23 Mon> |
+| PETR4  | PETROBRAS PN N2  |         30 | 11.77 | <2020-03-23 Mon> |
 | SMLS3  | SMILES ON NM     |         30 |     9 | <2020-03-19 Thu> |
