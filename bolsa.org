@@ -2,13 +2,14 @@
 
 | Código | Nome de Pregão   | Quantidade | Valor | Data             |
 |--------+------------------+------------+-------+------------------|
-| BRKM5  | BRASKEM PNA N1   |         30 |  10.2 | <2020-03-23 Mon> |
+| AZUL4  | AZUL PN N2       |         30 | 13.90 | <2020-05-07 Thu> |
+| BRKM5  | BRASKEM PNA N1   |         30 | 10.20 | <2020-03-23 Mon> |
 | CVCB3  | CVC BRASIL ON NM |         30 |  9.51 | <2020-03-17 Tue> |
-| CVCB3  | CVC BRASIL ON NM |         30 |   7.5 | <2020-03-23 Mon> |
+| CVCB3  | CVC BRASIL ON NM |         30 |  7.50 | <2020-03-23 Mon> |
 | EMBR3  | EMBRAER ON NM    |         20 |  7.57 | <2020-05-05 Tue> |
 | EMBR3  | EMBRAER ON NM    |         20 |  7.18 | <2020-05-06 Wed> |
-| GOLL4  | GOL PN N2        |         50 |   7.7 | <2020-03-17 Tue> |
-| HGTX3  | CIA HERING ON NM |         30 |  12.7 | <2020-03-23 Mon> |
-| PETR4  | PETROBRAS PN N2  |         50 |  12.5 | <2020-03-18 Wed> |
+| GOLL4  | GOL PN N2        |         50 |  7.70 | <2020-03-17 Tue> |
+| HGTX3  | CIA HERING ON NM |         30 | 12.70 | <2020-03-23 Mon> |
+| PETR4  | PETROBRAS PN N2  |         50 | 12.50 | <2020-03-18 Wed> |
 | PETR4  | PETROBRAS PN N2  |         30 | 11.77 | <2020-03-23 Mon> |
-| SMLS3  | SMILES ON NM     |         30 |     9 | <2020-03-19 Thu> |
+| SMLS3  | SMILES ON NM     |         30 |  9.00 | <2020-03-19 Thu> |
