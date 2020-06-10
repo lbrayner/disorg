@@ -4,7 +4,6 @@
 |--------+------------------+------------+-------+------------------|
 | AZUL4  | AZUL PN N2       |         30 | 13.90 | <2020-05-07 Thu> |
 | AZUL4  | AZUL PN N2       |         30 | 13.59 | <2020-05-12 Tue> |
-| BRKM5  | BRASKEM PNA N1   |         30 | 10.20 | <2020-03-23 Mon> |
 | CVCB3  | CVC BRASIL ON NM |         30 |  9.51 | <2020-03-17 Tue> |
 | CVCB3  | CVC BRASIL ON NM |         30 |  7.50 | <2020-03-23 Mon> |
 | EMBR3  | EMBRAER ON NM    |         20 |  7.57 | <2020-05-05 Tue> |
@@ -14,3 +13,7 @@
 | PETR4  | PETROBRAS PN N2  |         50 | 12.50 | <2020-03-18 Wed> |
 | PETR4  | PETROBRAS PN N2  |         30 | 11.77 | <2020-03-23 Mon> |
 | SMLS3  | SMILES ON NM     |         30 |  9.00 | <2020-03-19 Thu> |
+
+| Código | Nome de Pregão | Quantidade | Valor (compra) | Data (compra)    | Valor (venda) | Data (venda)     |
+|--------+----------------+------------+----------------+------------------+---------------+------------------|
+| BRKM5  | BRASKEM PNA N1 |         30 |          10.20 | <2020-03-23 Mon> |         27.28 | <2020-06-10 Wed> |
