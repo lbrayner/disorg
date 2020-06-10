@@ -41,11 +41,11 @@ Das 17h às 20h.
 Início de 1h extra por dia.
 
 ** Fevereiro
-  
+
 *** [2018-02-03 Sat]: 4h
-   
+
 *** [2018-02-17 Sat]--[2018-02-18 Sun]: 16h
-   
+
 Trabalhamos no sábado e domingo das 9h às 18h.
 
 *** [2018-02-23 Fri]: 27h
@@ -57,17 +57,17 @@ Fim de 1h extra por dia.
 *** [2018-04-28 Sat]--[2018-04-29 Sun]: 24h
 
 *** [2018-04-30 Mon]: 7h
-    
+
 Entre 19h e 2h do dia seguinte.
 
 ** Maio
 
 *** [2018-05-01 Tue]: 5h
-    
+
 Entre 19h e 0h do dia seguinte.
 
 *** [2018-05-07 Mon]: 3h
-    
+
 Entre 18h e 21h.
 
 *** [2018-05-12 Sat]--[2018-05-13 Sun]: 8h
