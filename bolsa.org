@@ -1,23 +1,36 @@
 * B3 - Brasil Bolsa Balcão S.A. (BM&FBOVESPA)
 
+** Tabela de códigos
+
+| Código | Nome de Pregão   |
+|--------+------------------|
+| AZUL4  | AZUL PN N2       |
+| BRKM5  | BRASKEM PNA N1   |
+| CVCB3  | CVC BRASIL ON NM |
+| EMBR3  | EMBRAER ON NM    |
+| GOLL4  | GOL PN N2        |
+| HGTX3  | CIA HERING ON NM |
+| PETR4  | PETROBRAS PN N2  |
+| SMLS3  | SMILES ON NM     |
+
 ** Tabela de compras
 
-| Código | Nome de Pregão   | Quantidade | Valor | Data             |
-|--------+------------------+------------+-------+------------------|
-| AZUL4  | AZUL PN N2       |         30 | 13.90 | <2020-05-07 Thu> |
-| AZUL4  | AZUL PN N2       |         30 | 13.59 | <2020-05-12 Tue> |
-| CVCB3  | CVC BRASIL ON NM |         30 |  9.51 | <2020-03-17 Tue> |
-| CVCB3  | CVC BRASIL ON NM |         30 |  7.50 | <2020-03-23 Mon> |
-| EMBR3  | EMBRAER ON NM    |         20 |  7.57 | <2020-05-05 Tue> |
-| EMBR3  | EMBRAER ON NM    |         20 |  7.18 | <2020-05-06 Wed> |
-| GOLL4  | GOL PN N2        |         50 |  7.70 | <2020-03-17 Tue> |
-| HGTX3  | CIA HERING ON NM |         30 | 12.70 | <2020-03-23 Mon> |
-| PETR4  | PETROBRAS PN N2  |         50 | 12.50 | <2020-03-18 Wed> |
-| PETR4  | PETROBRAS PN N2  |         30 | 11.77 | <2020-03-23 Mon> |
-| SMLS3  | SMILES ON NM     |         30 |  9.00 | <2020-03-19 Thu> |
+| Código | Quantidade | Valor | Data             |
+|--------+------------+-------+------------------|
+| AZUL4  |         30 | 13.90 | <2020-05-07 Thu> |
+| AZUL4  |         30 | 13.59 | <2020-05-12 Tue> |
+| CVCB3  |         30 |  9.51 | <2020-03-17 Tue> |
+| CVCB3  |         30 |  7.50 | <2020-03-23 Mon> |
+| EMBR3  |         20 |  7.57 | <2020-05-05 Tue> |
+| EMBR3  |         20 |  7.18 | <2020-05-06 Wed> |
+| GOLL4  |         50 |  7.70 | <2020-03-17 Tue> |
+| HGTX3  |         30 | 12.70 | <2020-03-23 Mon> |
+| PETR4  |         50 | 12.50 | <2020-03-18 Wed> |
+| PETR4  |         30 | 11.77 | <2020-03-23 Mon> |
+| SMLS3  |         30 |  9.00 | <2020-03-19 Thu> |
 
 ** Tabela de vendas
 
-| Código | Nome de Pregão | Quantidade | Valor (compra) | Data (compra)    | Valor (venda) | Data (venda)     |
-|--------+----------------+------------+----------------+------------------+---------------+------------------|
-| BRKM5  | BRASKEM PNA N1 |         30 |          10.20 | <2020-03-23 Mon> |         27.28 | <2020-06-10 Wed> |
+| Código | Quantidade | Valor (compra) | Data (compra)    | Valor (venda) | Data (venda)     |
+|--------+------------+----------------+------------------+---------------+------------------|
+| BRKM5  |         30 |          10.20 | <2020-03-23 Mon> |         27.28 | <2020-06-10 Wed> |
