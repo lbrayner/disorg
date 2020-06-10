@@ -1,5 +1,7 @@
 * B3 - Brasil Bolsa Balcão S.A. (BM&FBOVESPA)
 
+** Tabela de compras
+
 | Código | Nome de Pregão   | Quantidade | Valor | Data             |
 |--------+------------------+------------+-------+------------------|
 | AZUL4  | AZUL PN N2       |         30 | 13.90 | <2020-05-07 Thu> |
@@ -13,6 +15,8 @@
 | PETR4  | PETROBRAS PN N2  |         50 | 12.50 | <2020-03-18 Wed> |
 | PETR4  | PETROBRAS PN N2  |         30 | 11.77 | <2020-03-23 Mon> |
 | SMLS3  | SMILES ON NM     |         30 |  9.00 | <2020-03-19 Thu> |
+
+** Tabela de vendas
 
 | Código | Nome de Pregão | Quantidade | Valor (compra) | Data (compra)    | Valor (venda) | Data (venda)     |
 |--------+----------------+------------+----------------+------------------+---------------+------------------|
