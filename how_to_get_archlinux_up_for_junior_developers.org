@@ -8,6 +8,8 @@
 loadkeys br-abnt2 # brazilian keyboard layout
 #+end_src
 
+** Installation
+
 *** Partitioning the disk
 
 Check the current layout:
@@ -34,7 +36,7 @@ exactness. This notation represents powers of 1024.
 
 The following topics will assume the table above.
 
-*** Formatting the partition
+*** Formatting the partitions
 
 #+begin_src sh
 mkfs.ext4 /dev/sda5
@@ -58,3 +60,72 @@ mount /dev/sda5 /mnt/boot
 pacstrap /mnt base base-devel linux linux-firmware vim \
     networkmanager dhcpcd grub man-db man-pages
 #+end_src
+
+** System configuration
+
+*** fstab
+
+Generate an =fstab= file using =UUIDs=:
+
+~genfstab -U /mnt >> /mnt/etc/fstab~
+
+Check the resulting =/mnt/etc/fstab= file and edit it in case of errors.
+
+*** chroot
+
+~arch-chroot /mnt~
+
+*** Time zone
+
+Replace =Region= and =City= accordingly.
+
+~ln -sf /usr/share/zoneinfo/Region/City /etc/localtime~
+
+*** Localization
+
+Edit =/etc/locale.gen= and uncomment =en_US.UTF-8 UTF-8=. Generate the
+locales by running:
+
+~locale-gen~
+
+Create the =locale.conf(5)= file, and set the =LANG= variable accordingly:
+
+#+begin_src sh
+# /etc/locale.conf
+
+LANG=en_US.UTF-8
+#+end_src
+
+Make the keyboard layout changes persistent in =vconsole.conf(5):=
+
+#+begin_src sh
+# /etc/vconsole.conf
+
+KEYMAP=br-abnt2
+#+end_src
+
+*** Network configuration
+
+Create the hostname file:
+
+#+begin_src sh
+# /etc/hostname
+
+arch
+#+end_src
+
+Add matching entries to =hosts(5):=
+
+#+begin_src sh
+# /etc/hosts
+
+127.0.0.1	localhost
+::1		localhost
+127.0.1.1	myhostname.localdomain	myhostname
+#+end_src
+
+*** Root password
+
+Set the root password:
+
+~passwd~
