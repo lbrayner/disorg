@@ -1,0 +1,7 @@
+* How to get Arch Linux up and running for Junion Developers
+
+** Configure the Live Environment
+
+#+BEGIN_SRC sh
+loadkeys br-abnt2 # Brazilian keyboard layout
+#+END_SRC
