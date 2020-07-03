@@ -4,30 +4,57 @@
 
 *** Keyboard layout
 
-#+BEGIN_SRC sh
-loadkeys br-abnt2 # Brazilian keyboard layout
-#+END_SRC
+#+begin_src sh
+loadkeys br-abnt2 # brazilian keyboard layout
+#+end_src
 
-*** Partition the disk
+*** Partitioning the disk
 
 Check the current layout:
 
-#+BEGIN_SRC sh
+#+begin_src sh
 fdisk -l
-#+END_SRC
+#+end_src
 
 Suppose we have a 20G HDD and 16G of RAM.
 
 Let's create a legacy DOS (=MBR=) partition table with ~fdisk~ that will
 look like this:
 
-#+BEGIN_EXAMPLE
+#+begin_example
 Device     Boot    Start      End  Sectors Size Id Type
 /dev/sda1           2048 41943039 41940992  20G  5 Extended
 /dev/sda5           4096  2101247  2097152   1G 83 Linux
 /dev/sda6        2103296 10491903  8388608   4G 82 Linux swap / Solaris
 /dev/sda7       10493952 41943039 31449088  15G 83 Linux
-#+END_EXAMPLE
+#+end_example
 
 I recommend using the =KiB=, =MiB=, =GiB=, =TiB=, etc. notation for
 exactness. This notation represents powers of 1024.
+
+The following topics will assume the table above.
+
+*** Formatting the partition
+
+#+begin_src sh
+mkfs.ext4 /dev/sda5
+mkfs.ext4 /dev/sda7
+
+mkswap /dev/sda6
+swapon /dev/sda6 # I suppose this will serve as a hint to gensfstab
+#+end_src
+
+*** Mounting the file systems
+
+#+begin_src sh
+mount /dev/sda7 /mnt
+mkdir /mnt/boot
+mount /dev/sda5 /mnt/boot
+#+end_src
+
+*** Installing essential packages
+
+#+begin_src sh
+pacstrap /mnt base base-devel linux linux-firmware vim \
+    networkmanager dhcpcd grub man-db man-pages
+#+end_src
