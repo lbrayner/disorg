@@ -129,3 +129,13 @@ Add matching entries to =hosts(5):=
 Set the root password:
 
 ~passwd~
+
+*** GRUB
+
+Assuming the processor is an =AMD64=:
+
+~grub-install --target=i386-pc /dev/sda~
+
+Generate the GRUB configuration file:
+
+~grub-mkconfig -o /boot/grub/grub.cfg~
