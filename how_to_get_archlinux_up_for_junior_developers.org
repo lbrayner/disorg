@@ -195,7 +195,7 @@ be a =sudoer=.
 
 #+begin_src sh
 useradd -m guilherme # not sure if the -m flag is necessary
-usermod -aG wheel
+usermod -aG wheel guilherme
 #+end_src
 
 Added =guilherme= to the =wheel= group, which is the group we'll be
