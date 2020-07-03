@@ -226,3 +226,25 @@ Allow everything for users that belong to the =wheel= group:
 #+end_src
 
 Uncomment the line that contains ~%wheel ALL=(ALL) ALL~.
+
+** Setting up a graphical environment
+
+First, login as =guilherme=.
+
+*** lxde, The "Lightweight X11 Desktop Environment
+
+In this guide we favor =lxde=. We'll also be installing =lightdm=, a
+light display manager, in detriment of =lxdm=, that comes bundled with
+the =lxde= package group.
+
+#+begin_src sh
+sudo pacman -S lxde lightdm lightdm-gtk-greeter
+#+end_src
+
+Let's enable the =lightdm= service:
+
+~sudo systemctl enable lightdm~
+
+And, finally, let's start it:
+
+~sudo systemctl start lightdm~
