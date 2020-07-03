@@ -231,7 +231,7 @@ Uncomment the line that contains ~%wheel ALL=(ALL) ALL~.
 
 First, login as =guilherme=.
 
-*** lxde, The "Lightweight X11 Desktop Environment
+*** lxde, The Lightweight X11 Desktop Environment
 
 In this guide we favor =lxde=. We'll also be installing =lightdm=, a
 light display manager, in detriment of =lxdm=, that comes bundled with
