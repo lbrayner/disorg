@@ -34,6 +34,10 @@ Device     Boot    Start      End  Sectors Size Id Type
 I recommend using the =KiB=, =MiB=, =GiB=, =TiB=, etc. notation for
 exactness. This notation represents powers of 1024.
 
+*On =fdisk=*
+
+If there was an existing partition table, you might have to reboot, because the old partitions were already loaded by the kernel.
+
 The following topics will assume the table above.
 
 *** Formatting the partitions
@@ -57,7 +61,7 @@ mount /dev/sda5 /mnt/boot
 *** Installing essential packages
 
 #+begin_src sh
-pacstrap /mnt base base-devel linux linux-firmware vim \
+pacstrap /mnt base base-devel linux linux-firmware vim tmux \
     networkmanager dhcpcd grub man-db man-pages
 #+end_src
 
@@ -139,3 +143,45 @@ Assuming the processor is an =AMD64=:
 Generate the GRUB configuration file:
 
 ~grub-mkconfig -o /boot/grub/grub.cfg~
+
+** Booting into the new system
+
+*** Setting up the network connection
+
+We'll assume there is a =DHCP= server in your network. (That's why the
+package =dhcpcd= was installed.)
+
+#+begin_src sh
+systemctl enable dhcpcd
+systemctl start dhcpcd # not sure this is necessary
+systemctl restart systemd-networkd
+#+end_src
+
+Check you IP:
+
+~ip route~
+
+*** Installing an ssh server (optional)
+
+=openssh= is our server of choice.
+
+#+begin_src sh
+pacman -S openssh
+systemctl enable sshd
+systemctl start sshd
+#+end_src
+
+Recent versions of =openssh= do not allow =root= login by default.
+
+When accessing via =ssh=, =tmux= (or similar software) is
+essential for multitasking. It requires, however, information about
+the terminal it's drawing for. For example, if a user on =urxvt=
+connects to the machine, the package =rxvt-unicode-terminfo= has to be
+present, else he will receive the following error when trying to
+launch =tmux=:
+
+~open terminal failed: missing or unsuitable terminal: rxvt-unicode-256color~
+
+Therefore:
+
+~pacman -S rxvt-unicode-terminfo~
