@@ -1,0 +1,41 @@
+* PostgreSQL, Java8, Eclipse and Subversion on an Arch Linux development environment
+
+** PostgreSQL
+
+Install the =postgresql= package. It will also create a system user
+called =postgres=.
+
+Switch to the PostgreSQL user by executing the following command:
+
+~sudo su -l postgres~
+
+Let's initialize the cluster:
+
+~initdb -D /var/lib/postgres/data~
+
+Exit and return to the regular user. Start and enable the
+=postgresql.service=:
+
+#+begin_src sh
+systemctl enable postgresql
+systemctl start postgresql
+#+end_src
+
+Now to creating a role for the user =guilherme=. Run ~psql~ as the
+PostgreSQL user (~sudo -u postgres psql~), and then:
+
+#+begin_src sql
+create role guilherme;
+CREATE DATABASE guilherme OWNER guilherme;
+
+alter role guilherme login;
+#+end_src
+
+Type =\q= and hit Enter to quit.
+
+To safely create a password for =guilherme= (which is necessary for
+=http= or =ODBC= connections) log in to your database by running =psql= and then:
+
+~\password~
+
+Type =\q= and hit Enter to quit.
