@@ -34,7 +34,7 @@ Device     Boot    Start      End  Sectors Size Id Type
 I recommend using the =KiB=, =MiB=, =GiB=, =TiB=, etc. notation for
 exactness. This notation represents powers of 1024.
 
-*On =fdisk=*
+*On fdisk*
 
 If there was an existing partition table, you might have to reboot, because the old partitions were already loaded by the kernel.
 
@@ -64,6 +64,8 @@ mount /dev/sda5 /mnt/boot
 pacstrap /mnt base base-devel linux linux-firmware vim tmux \
     networkmanager dhcpcd grub man-db man-pages
 #+end_src
+
+=vim= will be the text editor of choice.
 
 ** System configuration
 
@@ -176,12 +178,51 @@ Recent versions of =openssh= do not allow =root= login by default.
 When accessing via =ssh=, =tmux= (or similar software) is
 essential for multitasking. It requires, however, information about
 the terminal it's drawing for. For example, if a user on =urxvt=
-connects to the machine, the package =rxvt-unicode-terminfo= has to be
-present, else he will receive the following error when trying to
-launch =tmux=:
+connects to the machine and tries to launch =tmux=, the package
+=rxvt-unicode-terminfo= has to be present, else he will receive the
+following error:
 
 ~open terminal failed: missing or unsuitable terminal: rxvt-unicode-256color~
 
 Therefore:
 
 ~pacman -S rxvt-unicode-terminfo~
+
+*** Creating a user other than root
+
+Suppose the intended username is =guilherme=. =guilherme= is going to
+be a =sudoer=.
+
+#+begin_src sh
+useradd -m guilherme # not sure if the -m flag is necessary
+usermod -aG wheel
+#+end_src
+
+Added =guilherme= to the =wheel= group, which is the group we'll be
+granting all permissions to in the =sudoers= file.
+
+Finally, create a password:
+
+~passwd guilherme~
+
+*** sudo: the sudoers file
+
+Run the command =visudo=:
+
+~EDITOR=/usr/bin/vim visudo~
+
+Allow everything for users that belong to the =wheel= group:
+
+#+begin_src sh
+# sudoers
+
+...
+
+## Uncomment to allow members of group wheel to execute any command
+%wheel ALL=(ALL) ALL
+
+...
+
+#+end_src
+
+Uncomment the line that contains ~%wheel ALL=(ALL) ALL~.
