@@ -1,0 +1,10 @@
+* Installing user applications on Arch Linux
+
+** Firefox
+
+~sudo pacman -S firefox~
+
+If you've followed the *How to get Arch Linux up and running for
+Junior Developers*, when you install this package, you'll be prompted
+to choose one provider of true type fonts, because, at this point,
+there isn't any.
