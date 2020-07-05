@@ -1,0 +1,11 @@
+* Configuring user applications on Arch Linux
+
+** lxde, The Lightweight X11 Desktop Environment
+
+*** Keyboard shortcuts
+
+Keyboard shortcut mappings reside in
+=~/.config/openbox/lxde-rc.xml=. Once you've edited them, make
+=openbox= aware by running:
+
+~openbox --reconfigure~
