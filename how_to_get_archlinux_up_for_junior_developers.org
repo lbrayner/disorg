@@ -188,6 +188,11 @@ Therefore:
 
 ~pacman -S rxvt-unicode-terminfo~
 
+It's useful to install =rsync=, so that files can be easily
+transferred to and from the machine:
+
+~pacman -S rsync~
+
 *** Creating a user other than root
 
 Suppose the intended username is =guilherme=. =guilherme= is going to
