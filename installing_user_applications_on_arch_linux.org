@@ -5,6 +5,35 @@
 ~sudo pacman -S firefox~
 
 If you've followed the *How to get Arch Linux up and running for
-Junior Developers*, when you install this package, you'll be prompted
+Junior Developers* guide, when you install this package, you'll be prompted
 to choose one provider of true type fonts, because, at this point,
 there isn't any.
+
+** VNC server and viewer
+
+- =x11vnc=: a _VNC_ server implementation;
+- =xorg-server-xvfb=: a virtual framebuffer X server.
+
+~sudo pacman -S x11vnc xorg-server-xvfb~
+
+Preferably we want to attach to an instance of =Xvfb= that will match
+our monitor's specifications.
+
+*** Attaching to an existing X session
+
+Supposing it's a session on a real monitor started by a regular user
+(e.g. =guilherme=), you'll want to connect to display =:0= like this:
+
+~x11vnc -display :0 -localhost -auth ~/.Xauthority~
+
+The client must have an implementation of the _VNC_ client installed,
+such as =tigervnc=.
+
+On the client, start an =ssh= connection with port 5900 forwarded to
+*localhost*, port 5900, on the target machine:
+
+~ssh -L 5900:127.0.0.1:5900 guilherme@host~
+
+Finally, on the client, start the _VNC_ viewer:
+
+~vncviwer 127.0.0.1~
