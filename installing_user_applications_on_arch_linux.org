@@ -22,25 +22,6 @@ be any.
 Preferably we want to attach to an instance of =Xvfb= that will match
 our monitor's specifications.
 
-*** Attaching to an existing X session
-
-Supposing it's a session on a real monitor started by a regular user
-(e.g. =guilherme=), you'll want to connect to display =:0= like this:
-
-~x11vnc -display :0 -localhost -auth ~/.Xauthority~
-
-The client must have an implementation of the /VNC/ client installed,
-such as =tigervnc=.
-
-On the client, start an =ssh= connection with port 5900 forwarded to
-*localhost*, port 5900, on the target machine:
-
-~ssh -L 5900:127.0.0.1:5900 guilherme@host~
-
-Finally, on the client, start the _VNC_ viewer:
-
-~vncviwer 127.0.0.1~
-
 *** Creating a virtual frame buffer with Xvfb
 
 The script that follows creates a virtual frame buffer with a
@@ -89,6 +70,9 @@ After creating the virtual frame buffer, start the /VNC/ server.
 Our server is running on =localhost= and we'll connect to it using an
 /SSH/ tunnel.
 
+The client must have an implementation of the /VNC/ client installed,
+such as =tigervnc=.
+
 On the client, start an =ssh= connection with port 5900 forwarded to
 *localhost*, port 5900, on the target machine:
 
@@ -97,3 +81,10 @@ On the client, start an =ssh= connection with port 5900 forwarded to
 Finally, on the client, start the _VNC_ viewer:
 
 ~vncviwer 127.0.0.1~
+
+*** Attaching to an existing X session
+
+Supposing it's a session on a real monitor started by a regular user
+(e.g. =guilherme=), you'll want to connect to display =:0= like this:
+
+~x11vnc -display :0 -localhost -auth ~/.Xauthority~
