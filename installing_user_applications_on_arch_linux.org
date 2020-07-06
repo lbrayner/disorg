@@ -1,20 +1,23 @@
 * Installing user applications on Arch Linux
 
+This guide assumes that you have followed *How to get Arch Linux up
+and running for Junior Developers*.
+
 ** Firefox
 
 ~sudo pacman -S firefox~
 
-If you've followed the *How to get Arch Linux up and running for
-Junior Developers* guide, when you install this package, you'll be prompted
-to choose one provider of true type fonts, because, at this point,
-there isn't any.
+When you install this package, you'll probably be prompted to choose
+one provider of true type fonts, because, at this point, there won't
+be any.
 
 ** VNC server and viewer
 
 - =x11vnc=: a _VNC_ server implementation;
 - =xorg-server-xvfb=: a virtual framebuffer X server.
+- =xorg-xinit=: a program that allows a user to manually start an Xorg display server.
 
-~sudo pacman -S x11vnc xorg-server-xvfb~
+~sudo pacman -S x11vnc xorg-server-xvfb xorg-xinit~
 
 Preferably we want to attach to an instance of =Xvfb= that will match
 our monitor's specifications.
@@ -26,8 +29,65 @@ Supposing it's a session on a real monitor started by a regular user
 
 ~x11vnc -display :0 -localhost -auth ~/.Xauthority~
 
-The client must have an implementation of the _VNC_ client installed,
+The client must have an implementation of the /VNC/ client installed,
 such as =tigervnc=.
+
+On the client, start an =ssh= connection with port 5900 forwarded to
+*localhost*, port 5900, on the target machine:
+
+~ssh -L 5900:127.0.0.1:5900 guilherme@host~
+
+Finally, on the client, start the _VNC_ viewer:
+
+~vncviwer 127.0.0.1~
+
+*** Creating a virtual frame buffer with Xvfb
+
+The script that follows creates a virtual frame buffer with a
+resolution of /1920x1000/ pixels. Note that it will first kill any
+running instances that are using the same /X authority/ file, so that
+there will effectively be only one running instance of =Xvfb=.
+
+#+begin_src sh
+#!/bin/sh
+
+pkill -f '^/usr/bin/Xvfb.*:20\b'
+
+authority=~/.Xauthority20
+
+rm "${authority}"
+touch "${authority}"
+chmod 0600 "${authority}"
+
+/usr/bin/xinit -- /usr/bin/Xvfb :20 -screen 0 1920x1000x24 -cc 4 \
+    -nolisten tcp -auth "${authority}" >/dev/null 2>&1 &
+#+end_src
+
+=~/.Xauthority20= is going to be used as =authfile=, and 20, the
+server number.
+
+=xinit= is the utility that starts window managers or desktop
+environments. Let's set up our =.xinitrc= file:
+
+#+begin_src sh
+# ~/.xinitrc
+
+setxkbmap br # brazilian keyboard layout
+startlxde # lxde is out desktop environment
+#+end_src
+
+And finally a script that starts the /VNC/ server:
+
+#+begin_src sh
+#!/bin/sh
+
+x11vnc -rfbport 5901 -display :20 -localhost -auth ~/.Xauthority20
+#+end_src
+
+After creating the virtual frame buffer, start the /VNC/ server.
+
+Our server is running on =localhost= and we'll connect to it using an
+/SSH/ tunnel.
 
 On the client, start an =ssh= connection with port 5900 forwarded to
 *localhost*, port 5900, on the target machine:
