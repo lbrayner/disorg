@@ -37,7 +37,7 @@ This binds =Ctrl + Alt + d= to =dmenu_run=. Don't forget to run
 To add a custom Desktop Entry, create a =.desktop= file in
 =~/.local/share/applications=.
 
-The following is an example of an entry for a generic _LXDE_ screen
+The following is an example of an entry for a generic /LXDE/ screen
 locker. (You might simply copy the default one located in
 =/usr/share/applications/lxde-screenlock.desktop= and remove the
 =NoDisplay= entry.)
@@ -74,3 +74,24 @@ Icon=system-lock-screen
 Exec=i3lock --color=000000
 Categories=Settings;DesktopSettings
 #+end_src
+
+*** DPMS: Display Power Management Signaling
+
+Create a file in =/etc/X11/xorg.conf.d=:
+
+#+begin_src conf
+# /etc/X11/xorg.conf.d/10-monitor.conf
+
+Section "ServerLayout"
+    Identifier "ServerLayout0"
+    Option "StandbyTime" "10"
+    Option "SuspendTime" "20"
+    Option "OffTime" "30"
+EndSection
+#+end_src
+
+Now restart the *X* server: ~sudo systemctl restart lightdm~.
+
+Verify the changes in =/var/log/Xorg.0.log=:
+
+~grep StandbyTime /var/log/Xorg.0.log~
