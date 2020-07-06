@@ -39,7 +39,7 @@ To add a custom Desktop Entry, create a =.desktop= file in
 
 The following is an example of an entry for a generic _LXDE_ screen
 locker. (You might simply copy the default one located in
-=/usr/share/applications/lxde-screenlock.desktop= and remove
+=/usr/share/applications/lxde-screenlock.desktop= and remove the
 =NoDisplay= entry.)
 
 #+begin_src conf
