@@ -9,3 +9,26 @@ Keyboard shortcut mappings reside in
 =openbox= aware by running:
 
 ~openbox --reconfigure~
+
+*** Desktop entries
+
+To add a custom Desktop Entry, create a =.desktop= file in
+=~/.local/share/applications=.
+
+The following is an example of an entry for a generic _LXDE_ screen
+locker. (I had to create it once, because I removed the default one
+from the rightmost launcher.)
+
+#+begin_src conf
+[Desktop Entry]
+Type=Application
+Name=Screen Locker
+Comment=Lock your screen
+Icon=system-lock-screen
+Exec=lxlock
+Categories=Settings;DesktopSettings
+#+end_src
+
+For your changes to be picked up, run:
+
+~lxpanelctl restart~
