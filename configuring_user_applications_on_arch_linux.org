@@ -10,16 +10,41 @@ Keyboard shortcut mappings reside in
 
 ~openbox --reconfigure~
 
+**** dmenu
+
+Install =dmenu= with ~sudo pacman -S dmenu~. Create a shortcut to
+=dmenu_run= by adding to the keyboard section:
+
+#+begin_src xml
+<!-- ~/.config/openbox/lxde-rc.xml -->
+    <!-- ... -->
+    <keyboard>
+      <!-- ... -->
+        <keybind key='A-C-d'>
+            <action name='Execute'>
+                <command>dmenu_run</command>
+            </action>
+        </keybind>
+    </keyboard>
+    <!-- ... -->
+#+end_src
+
+This binds =Ctrl + Alt + d= to =dmenu_run=. Don't forget to run
+~openbox --reconfigure~.
+
 *** Desktop entries
 
 To add a custom Desktop Entry, create a =.desktop= file in
 =~/.local/share/applications=.
 
 The following is an example of an entry for a generic _LXDE_ screen
-locker. (I had to create it once, because I removed the default one
-from the rightmost launcher.)
+locker. (You might simply copy the default one located in
+=/usr/share/applications/lxde-screenlock.desktop= and remove
+=NoDisplay= entry.)
 
 #+begin_src conf
+# ~/.local/share/applications/lxlock.desktop
+
 [Desktop Entry]
 Type=Application
 Name=Screen Locker
@@ -32,3 +57,20 @@ Categories=Settings;DesktopSettings
 For your changes to be picked up, run:
 
 ~lxpanelctl restart~
+
+**** i3lock
+
+Install =i3lock= with ~sudo pacman -S i3lock~. Then create a
+=.desktop= file:
+
+#+begin_src conf
+# ~/.local/share/applications/i3lock.desktop
+
+[Desktop Entry]
+Type=Application
+Name=i3 Screen Locker
+Comment=Lock your screen (i3lock)
+Icon=system-lock-screen
+Exec=i3lock --color=000000
+Categories=Settings;DesktopSettings
+#+end_src
