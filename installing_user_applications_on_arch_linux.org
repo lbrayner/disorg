@@ -62,7 +62,7 @@ And finally a script that starts the /VNC/ server:
 #+begin_src sh
 #!/bin/sh
 
-x11vnc -rfbport 5901 -display :20 -localhost -auth ~/.Xauthority20
+x11vnc -display :20 -localhost -auth ~/.Xauthority20
 #+end_src
 
 After creating the virtual frame buffer, start the /VNC/ server.
@@ -88,3 +88,9 @@ Supposing it's a session on a real monitor started by a regular user
 (e.g. =guilherme=), you'll want to connect to display =:0= like this:
 
 ~x11vnc -display :0 -localhost -auth ~/.Xauthority~
+
+** Samba (Client)
+
+=cifs-utils= will allow you to mount samba shares: ~sudo pacman -S
+cifs-utils~. Due to a dependency cycle, =smbclient=, which is capable
+of listing public shares, might be also installed.
