@@ -1,9 +1,11 @@
-* PostgreSQL, Java8, Eclipse and Subversion on an Arch Linux development environment
+* PostgreSQL, Java 8, Eclipse and Subversion on an Arch Linux development environment
 
 ** PostgreSQL
 
 Install the =postgresql= package. It will also create a system user
 called =postgres=.
+
+~sudo pacman -S postgresql~
 
 Switch to the PostgreSQL user by executing the following command:
 
@@ -13,8 +15,8 @@ Let's initialize the cluster:
 
 ~initdb -D /var/lib/postgres/data~
 
-Exit and return to the regular user. Start and enable the
-=postgresql.service=:
+Exit and return to the regular user by using =exit=. Start and enable
+the =postgresql.service=:
 
 #+begin_src sh
 systemctl enable postgresql
@@ -39,3 +41,28 @@ To safely create a password for =guilherme= (which is necessary for
 ~\password~
 
 Type =\q= and hit Enter to quit.
+
+** Java 8 and Subversion
+
+#+begin_src sh
+sudo pacman -S jdk8-openjdk subversion
+#+end_src
+
+** Eclipse
+
+Download the Eclipse IDE for Enterprise Java Developers (Linux 64-bit)
+and extract it with =tar=.
+
+Create a launcher:
+
+#+begin_src conf
+# ~/.local/share/applications/eclipse.desktop
+
+[Desktop Entry]
+Type=Application
+Name=Eclipse
+Comment=Eclipse IDE
+Icon=/home/guilherme/eclipse/icon.xpm
+Exec=/home/guilherme/eclipse/eclipse
+Categories=Development;GUIDesigner;
+#+end_src
