@@ -1,5 +1,41 @@
 * Configuring user applications on Arch Linux
 
+** bash
+
+Configuring options, adding =~/bin= to =$PATH=, and creating an alias:
+
+#+begin_src bash
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+PS1='[\u@\h \W]\$ '
+
+#
+# What follows are my additions
+#
+
+# Options
+
+HISTCONTROL=ignoreboth
+
+# Adding ~/bin to $PATH
+
+home_bin=~/bin
+head=${home_bin}
+export PATH=${head}:${PATH#*${head}:}
+
+# variables
+export EDITOR=/usr/bin/vim
+
+# aliases
+alias lm='ls -lrth'
+#+end_src
+
 ** lxde, The Lightweight X11 Desktop Environment
 
 *** Keyboard shortcuts
