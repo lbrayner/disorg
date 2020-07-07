@@ -94,3 +94,41 @@ Supposing it's a session on a real monitor started by a regular user
 =cifs-utils= will allow you to mount samba shares: ~sudo pacman -S
 cifs-utils~. Due to a dependency cycle, =smbclient=, which is capable
 of listing public shares, might be also installed.
+
+*** Mounting samba shares
+
+Let's say there's a discoverable password protected share at
+=\\192.168.100.100\Files=, to which =guilherme= has access.
+
+To achieve automatic mounting, add this single line to your
+=/etc/fstab=:
+
+#+begin_src sh
+
+# cifs
+
+//192.168.100.100/Files /mnt/samba/Files cifs auto,uid=1000,gid=1000,file_mode=0664,dir_mode=0775,credentials=/root/.my_samba_credentials  0 0
+#+end_src
+
+What do the parameters mean?
+
+- =uid= & =gid=: the user and group id of the mount (=guilherme='s
+  =uid= and =gid= are both 1000);
+- =file_mode= and =dir_mode=: exactly as it reads (it's the UNIX file
+  mode for files and directories respectively);
+- =credentials=: a file storing =guilherme='s samba username and password.
+
+The format of the credentials file is:
+
+#+begin_src conf
+username=guilherme
+password=password
+#+end_src
+
+For this to work you have to, of course, create the mount point first:
+
+~sudo mkdir -p /mnt/samba/Files~
+
+When you're done, mount your share:
+
+~sudo mount -a~
