@@ -124,7 +124,7 @@ Reload =~/.bashrc=:
 ~. ~/.bashrc~
 
 Now suppose there's a repository reachable at
-http://svnrepository.localdomain. List its contents:
+=http://svnrepository.localdomain=. List its contents:
 
 ~svn ls http://svnrepository.localdomain~
 
@@ -139,6 +139,8 @@ You should be prompted by a =pinentry= dialog like this:
 │             <OK>                                                   <Cancel>            │
 └────────────────────────────────────────────────────────────────────────────────────────┘
 #+end_src
+
+Information obtained from https://stackoverflow.com/q/48390012.
 
 ** Eclipse
 
