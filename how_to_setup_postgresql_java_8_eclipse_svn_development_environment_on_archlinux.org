@@ -42,10 +42,26 @@ To safely create a password for =guilherme= (which is necessary for
 
 Type =\q= and hit Enter to quit.
 
-** Java 8 and Subversion
+** Java 8
 
 #+begin_src sh
-sudo pacman -S jdk8-openjdk subversion
+sudo pacman -S jdk8-openjdk
+#+end_src
+
+** Subversion
+
+#+begin_src sh
+sudo pacman -S subversion
+#+end_src
+
+*** Configuring Subversion
+
+Copy =/etc/subversion/config= and =/etc/subversion/servers= to
+=~/.subversion= (create this directory):
+
+#+begin_src sh
+mkdir ~/.subversion
+cp /etc/subversion/config /etc/subversion/servers ~/.subversion
 #+end_src
 
 ** Eclipse
