@@ -36,6 +36,16 @@ export EDITOR=/usr/bin/vim
 alias lm='ls -lrth'
 #+end_src
 
+** tmux
+
+To prevent =tmux= from launching a login shell (and stop the
+indefinite growth of the =$PATH= environment variable) create
+a =~/.tmux.conf= configuration file with this directive:
+
+#+begin_src sh
+set -g default-command "${SHELL}"
+#+end_src
+
 ** lxde, The Lightweight X11 Desktop Environment
 
 *** Keyboard shortcuts
