@@ -130,7 +130,7 @@ http://svnrepository.localdomain. List its contents:
 
 You should be prompted by a =pinentry= dialog like this:
 
-#+begin_quote
+#+begin_src
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
 │ Enter your Subversion password for <http://svnrepository.localdomain:80> svnrepository │
 │                                                                                        │
@@ -138,7 +138,7 @@ You should be prompted by a =pinentry= dialog like this:
 │                                                                                        │
 │             <OK>                                                   <Cancel>            │
 └────────────────────────────────────────────────────────────────────────────────────────┘
-#+end_quote
+#+end_src
 
 ** Eclipse
 
