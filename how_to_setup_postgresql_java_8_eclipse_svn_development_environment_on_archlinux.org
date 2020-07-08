@@ -56,12 +56,42 @@ sudo pacman -S subversion
 
 *** Configuring Subversion
 
-Copy =/etc/subversion/config= and =/etc/subversion/servers= to
-=~/.subversion= (create this directory):
+Create the /config/ file (and the directory) =~/.subversion/config=:
 
-#+begin_src sh
-mkdir ~/.subversion
-cp /etc/subversion/config /etc/subversion/servers ~/.subversion
+#+begin_src conf
+# ~/.subversion/config=
+
+# password-stores = gpg-agent,gnome-keyring,kwallet
+
+### Set diff-cmd to the absolute path of your 'diff' program.
+###   This will override the compile-time default, which is to use
+###   Subversion's internal diff implementation.
+# diff-cmd = diff_program (diff, gdiff, etc.)
+
+### Set merge-tool-cmd to the command used to invoke your external
+### merging tool of choice. Subversion will pass 5 arguments to
+### the specified command: base theirs mine merged wcfile
+# merge-tool-cmd = merge_command
+#+end_src
+
+This was obtained from Debian's subversion package
+(=/etc/subversion/config=). I believe these are the main things you'd
+want to customize.
+
+**** Subversion password caching using gpg-agent
+
+Install =gnupg=:
+
+~sudo pacman -S gnupg~
+
+Set =gpg-agent= as a password store in =~/.subversion/config=:
+
+#+begin_src conf
+# ~/.subversion/config=
+
+password-stores = gpg-agent
+
+# ...
 #+end_src
 
 ** Eclipse
