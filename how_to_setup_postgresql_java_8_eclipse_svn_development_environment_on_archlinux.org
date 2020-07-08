@@ -56,10 +56,28 @@ sudo pacman -S subversion
 
 *** Configuring Subversion
 
+The configuration files are created automatically the first time you
+run the =svn= command. Run, for example:
+
+~svn add --help~
+
+Now check to see if the folder =~/.subversion= exists and it contains the files:
+
+#+begin_src sh
+auth
+config
+README.txt
+servers
+#+end_src
+
+If it doesn't, then head to the next section. If it does, just skip it.
+
+**** Manually creating Subversion configuration files (optional)
+
 Create the /config/ file (and the directory) =~/.subversion/config=:
 
 #+begin_src conf
-# ~/.subversion/config=
+# ~/.subversion/config
 
 # password-stores = gpg-agent,gnome-keyring,kwallet
 
@@ -87,12 +105,40 @@ Install =gnupg=:
 Set =gpg-agent= as a password store in =~/.subversion/config=:
 
 #+begin_src conf
-# ~/.subversion/config=
+# ~/.subversion/config
 
 password-stores = gpg-agent
 
 # ...
 #+end_src
+
+Add this to your =~/.bashrc=:
+
+#+begin_src bash
+GPG_TTY=$(tty)
+export GPG_TTY
+#+end_src
+
+Reload =~/.bashrc=:
+
+~. ~/.bashrc~
+
+Now suppose there's a repository reachable at
+http://svnrepository.localdomain. List its contents:
+
+~svn ls http://svnrepository.localdomain~
+
+You should be prompted by a =pinentry= dialog like this:
+
+#+begin_quote
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ Enter your Subversion password for <http://svnrepository.localdomain:80> svnrepository │
+│                                                                                        │
+│ Password for 'guilherme':  __________________________________________________________  │
+│                                                                                        │
+│             <OK>                                                   <Cancel>            │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+#+end_quote
 
 ** Eclipse
 
