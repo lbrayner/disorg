@@ -112,7 +112,7 @@ password-stores = gpg-agent
 # ...
 #+end_src
 
-Add this to your =~/.bashrc=:
+Add this to your =~/.bashrc= (at the environment variables section):
 
 #+begin_src bash
 GPG_TTY=$(tty)
@@ -139,6 +139,8 @@ You should be prompted by a =pinentry= dialog like this:
 │             <OK>                                                   <Cancel>            │
 └────────────────────────────────────────────────────────────────────────────────────────┘
 #+end_src
+
+By default, your password will be cached for 2 hours (=man gpg-agent=).
 
 Information obtained from https://stackoverflow.com/q/48390012.
 
