@@ -57,6 +57,15 @@ setxkbmap br # brazilian keyboard layout
 startlxde # lxde is out desktop environment
 #+end_src
 
+You should also create a =~/.xsession= setting the keyboard layout
+(not confirmed) for sessions started by the Display Manager:
+
+#+begin_src sh
+# ~/.xsession
+
+setxkbmap br # brazilian keyboard layout
+#+end_src
+
 And finally a script that starts the /VNC/ server:
 
 #+begin_src sh
