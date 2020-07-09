@@ -121,7 +121,18 @@ Exec=i3lock --color=000000
 Categories=Settings;DesktopSettings
 #+end_src
 
-*** DPMS: Display Power Management Signaling
+*** PCManFm
+
+If your desktop folders and launchers disappear, don't fret. /PCManFm/
+is the software responsible for managing it — the process must have
+simply been killed. Just restart it:
+
+~pcmanfm --desktop --profile LXDE >/dev/null 2>&1 &~
+
+The last three arguments are for: redirecting =stdout= to =/dev/null=,
+=stderr= to =stdout=, and detaching the process.
+
+** DPMS: Display Power Management Signaling
 
 Create a file in =/etc/X11/xorg.conf.d=:
 
