@@ -163,6 +163,6 @@ Exec=/home/guilherme/eclipse/eclipse
 Categories=Development;GUIDesigner;
 #+end_src
 
-For your changes to be take effect execute:
+For your changes to be take effect, execute:
 
 ~lxpanelctl restart~
