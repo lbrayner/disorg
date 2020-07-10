@@ -121,6 +121,10 @@ Exec=i3lock --color=000000
 Categories=Settings;DesktopSettings
 #+end_src
 
+For your changes to be take effect, execute:
+
+~lxpanelctl restart~
+
 *** PCManFm
 
 If your desktop folders and launchers disappear, don't fret. /PCManFm/
