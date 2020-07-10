@@ -128,7 +128,8 @@ Now suppose there's a repository reachable at
 
 ~svn ls http://svnrepository.localdomain~
 
-You should be prompted by a =pinentry= dialog like this:
+If you're connected via /SSH/, you should be prompted by a =pinentry=
+dialog like this:
 
 #+begin_src
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
@@ -139,6 +140,8 @@ You should be prompted by a =pinentry= dialog like this:
 │             <OK>                                                   <Cancel>            │
 └────────────────────────────────────────────────────────────────────────────────────────┘
 #+end_src
+
+If you're on an /LXDE/ session, you'll get a graphical prompt.
 
 By default, your password will be cached for 2 hours (=man gpg-agent=).
 
