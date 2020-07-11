@@ -59,8 +59,8 @@ set -g default-command "${SHELL}"
 
 *** Configuring X sessions
 
-You may configure your *X* session with certain configuration files
-(which one to use depends on how you start *X*). If you start an *X*
+You may configure your *X* session with certain files —
+which one to use depends on how you start *X*. If you start an *X*
 session with the help of =lightdm=, the file =~/.xprofile= is going to
 be sourced. Since other display managers may load =~/.xsession=, we'll
 create a simple =~/.xprofile= that sources =~/.xsession=:
@@ -76,7 +76,7 @@ We can then place our configuration in =~/.xsession=:
 #+begin_src sh
 # ~/.xseesion
 
-setxkbmap br
+setxkbmap br # brazilian keyboard layout
 #+end_src
 
 ** lxde, The Lightweight X11 Desktop Environment
