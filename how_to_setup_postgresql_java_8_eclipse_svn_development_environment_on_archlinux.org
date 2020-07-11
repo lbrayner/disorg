@@ -166,6 +166,6 @@ Exec=/home/guilherme/eclipse/eclipse
 Categories=Development;GUIDesigner;
 #+end_src
 
-For your changes to be take effect, execute:
+To rebuild the /LXDE/ panel run:
 
 ~lxpanelctl restart~
