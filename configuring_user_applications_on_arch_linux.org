@@ -25,9 +25,18 @@ HISTCONTROL=ignoreboth
 
 # Adding ~/bin to $PATH
 
-home_bin=~/bin
-head=${home_bin}
-export PATH=${head}:${PATH#*${head}:}
+insertpath () {
+    case ":$PATH:" in
+        *:"$1":*)
+            ;;
+        *)
+            PATH=${1}:${PATH}
+    esac
+}
+
+insertpath ~/bin
+
+export PATH
 
 # variables
 export EDITOR=/usr/bin/vim
