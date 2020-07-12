@@ -214,7 +214,7 @@ Finally, create a password:
 
 Run the command =visudo=:
 
-~EDITOR=/usr/bin/vim visudo~
+~EDITOR=vim visudo~
 
 Allow everything for users that belong to the =wheel= group:
 
