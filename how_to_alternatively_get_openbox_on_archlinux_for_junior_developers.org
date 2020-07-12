@@ -12,15 +12,14 @@ isn't pulled y default.
 
 #+begin_src sh
 sudo pacman -S xorg-server openbox obconf tint2 nitrogen \
-   gnome-backgrounds rxvt-unicode xorg-xrdb lightdm lightdm-gtk-greeter
+   gnome-backgrounds alacritty lightdm lightdm-gtk-greeter
 #+end_src
 
 | =obconf=            | A GTK+ based configuration tool for the Openbox windowmanager |
 | =tint2=             | Basic, good-looking task manager for WMs                      |
 | =nitrogen=          | Background browser and setter for X windows                   |
 | =gnome-backgrounds= | Background images and data for GNOME                          |
-| =rxvt-unicode=      | Unicode enabled rxvt-clone terminal emulator (urxvt)          |
-| =xorg-xrdb=         | X server resource database utility                            |
+| =alacritty=         | A cross-platform, GPU-accelerated terminal emulator           |
 
 Copy the default /Openbox/ configuration files to the local user's
 configuration folder:
