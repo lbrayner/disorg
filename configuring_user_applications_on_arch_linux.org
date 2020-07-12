@@ -113,6 +113,8 @@ export PATH
 #
 
 setxkbmap br # brazilian keyboard layout
+
+# vim:ft=sh
 #+end_src
 
 ** lxde, The Lightweight X11 Desktop Environment
