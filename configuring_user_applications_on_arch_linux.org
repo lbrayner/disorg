@@ -119,7 +119,7 @@ setxkbmap br # brazilian keyboard layout
 
 ** lxde, The Lightweight X11 Desktop Environment
 
-*** openbox: windows of certain applications maximized by default
+*** Openbox: windows of certain applications maximized by default
 
 Let's say you want all /Gvim/ (~sudo pacman -S gvim~) windows
 maximized by default. First find out the window class with =xprop=,
@@ -143,16 +143,16 @@ Edit the /applications/ tag in =~/.config/openbox/lxde-rc.xml=:
     <!-- ... -->
 #+end_src
 
-Since managing windows is the window manager's job — =openbox=, in our
+Since managing windows is the window manager's job — /Openbox/, in our
 case, run ~openbox --reconfigure~ to reload the configuration file.
 
 Information obtained from https://askubuntu.com/q/275835.
 
-*** openbox: Keyboard shortcuts
+*** Openbox: Keyboard shortcuts
 
 Keyboard shortcut mappings reside in
 =~/.config/openbox/lxde-rc.xml=. Once you've edited them, make
-=openbox= aware by running:
+/Openbox/ aware by running:
 
 ~openbox --reconfigure~
 
@@ -259,3 +259,19 @@ Now restart the *X* server: ~sudo systemctl restart lightdm~.
 Verify the changes in =/var/log/Xorg.0.log=:
 
 ~grep StandbyTime /var/log/Xorg.0.log~
+
+**** Default terminal emulator
+
+Set /PCManFm/'s default terminal emulator in /Edit/ → /Preferences/ →
+/Advanced/ → /Terminal emulator/. /LXDE/'s default terminal emulator
+is =lxterminal=, so type that in.
+
+This will allow you to, for example, right-click on a folder and open
+a terminal whose current directory is that node.
+
+**** Archiver integration
+
+=xarchiver= is a graphical front-end to various command-line
+archivers. It integrates nicely and out-of-the-box with /PCManFm/.
+
+~sudo pacman -S xarchiver~
