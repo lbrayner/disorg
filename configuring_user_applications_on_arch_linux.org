@@ -18,15 +18,17 @@ Configuring options, adding =~/bin= to =$PATH=, and creating an alias:
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
-#
 # What follows are my additions
-#
 
+#
 # Options
+#
 
 HISTCONTROL=ignoreboth
 
-# Adding ~/bin to $PATH
+#
+# Adding to $PATH
+#
 
 insertpath () {
     case ":$PATH:" in
@@ -37,15 +39,24 @@ insertpath () {
     esac
 }
 
+# Adding ~/bin to $PATH
 insertpath ~/bin
 
 export PATH
 
-# variables
+#
+# Variables
+#
+
 export EDITOR=/usr/bin/vim
 
-# aliases
+#
+# Aliases
+#
+
 alias lm='ls -lrth'
+alias rsync='rsync --progress'
+alias ta='tmux attach'
 #+end_src
 
 ** tmux
@@ -77,7 +88,29 @@ create a simple =~/.xprofile= that sources =~/.xsession=:
 We can then place our configuration in =~/.xsession=:
 
 #+begin_src sh
-# ~/.xseesion
+# ~/.xsession
+
+#
+# Adding to $PATH
+#
+
+insertpath () {
+    case ":$PATH:" in
+        *:"$1":*)
+            ;;
+        *)
+            PATH=${1}:${PATH}
+    esac
+}
+
+# Adding ~/bin to $PATH
+insertpath ~/bin
+
+export PATH
+
+#
+# Xorg options
+#
 
 setxkbmap br # brazilian keyboard layout
 #+end_src
