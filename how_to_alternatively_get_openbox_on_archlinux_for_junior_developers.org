@@ -11,8 +11,8 @@ emulator and a panel. And don't forget to install /Xorg/, because it
 isn't pulled y default.
 
 #+begin_src sh
-sudo pacman -S xorg-server openbox obconf tint2 nitrogen \
-   gnome-backgrounds alacritty lightdm lightdm-gtk-greeter
+sudo pacman -S xorg-server openbox obconf tint2 nitrogen gnome-backgrounds \
+    alacritty pcmanfm lightdm lightdm-gtk-greeter
 #+end_src
 
 | =obconf=            | A GTK+ based configuration tool for the Openbox windowmanager |
@@ -20,6 +20,7 @@ sudo pacman -S xorg-server openbox obconf tint2 nitrogen \
 | =nitrogen=          | Background browser and setter for X windows                   |
 | =gnome-backgrounds= | Background images and data for GNOME                          |
 | =alacritty=         | A cross-platform, GPU-accelerated terminal emulator           |
+| =pcmanfm=           | Extremely fast and lightweight file manager                   |
 
 Copy the default /Openbox/ configuration files to the local user's
 configuration folder:
