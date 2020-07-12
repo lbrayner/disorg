@@ -37,7 +37,7 @@ that, we need to add them to /Openbox/'s =autostart= file:
 # ~/.config/openbox/autostart
 
 tint2 &
-nitrogen --reconfigure
+nitrogen --reconfigure &
 
 # vim:ft=sh
 #+end_src
