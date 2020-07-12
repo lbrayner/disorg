@@ -121,9 +121,9 @@ setxkbmap br # brazilian keyboard layout
 
 *** openbox: windows of certain applications maximized by default
 
-To have windows of applications of your choice maximized by default,
-first find out the window class with =xprop=, which is part of the
-package =xorg-xprop=:
+Let's say you want all /Gvim/ (~sudo pacman -S gvim~) windows
+maximized by default. First find out the window class with =xprop=,
+which is part of the package =xorg-xprop=:
 
 ~xprop _OB_APP_CLASS~
 
