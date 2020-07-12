@@ -81,7 +81,33 @@ setxkbmap br # brazilian keyboard layout
 
 ** lxde, The Lightweight X11 Desktop Environment
 
-*** Keyboard shortcuts
+*** openbox: windows of certain applications maximized by default
+
+To have windows of applications of your choice maximized by default,
+first find out the window class with =xprop=, which is part of the
+package =xorg-xprop=:
+
+~xprop _OB_APP_CLASS~
+
+Edit the /applications/ tag in =~/.config/openbox/lxde-rc.xml=:
+
+#+begin_src xml
+<!-- ~/.config/openbox/lxde-rc.xml -->
+    <!-- ... -->
+    <applications>
+        <application class='Gvim'>
+            <maximized>yes</maximized>
+        </application>
+    </applications>
+    <!-- ... -->
+#+end_src
+
+Since managing windows is the window manager's job — =openbox=, in our
+case, run ~openbox --reconfigure~ to reload the configuration file.
+
+Information obtained from https://askubuntu.com/q/275835.
+
+*** openbox: Keyboard shortcuts
 
 Keyboard shortcut mappings reside in
 =~/.config/openbox/lxde-rc.xml=. Once you've edited them, make
