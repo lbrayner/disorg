@@ -1,4 +1,4 @@
-* How to get Openbox Arch Linux up and running for Junior Developers
+* How to get Openbox on Arch Linux for Junior Developers
 
 #+BEGIN_QUOTE
 Openbox is a highly configurable, next generation window manager with
