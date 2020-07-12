@@ -1,5 +1,8 @@
 * PostgreSQL, Java 8, Eclipse and Subversion on an Arch Linux development environment
 
+This guide assumes that you have followed *How to get Arch Linux up
+and running for Junior Developers*.
+
 ** PostgreSQL
 
 Install the =postgresql= package. It will also create a system user
