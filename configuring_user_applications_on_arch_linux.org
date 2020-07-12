@@ -89,6 +89,9 @@ package =xorg-xprop=:
 
 ~xprop _OB_APP_CLASS~
 
+With the mouse pointer having become cross-hairs, click on the desired
+window.
+
 Edit the /applications/ tag in =~/.config/openbox/lxde-rc.xml=:
 
 #+begin_src xml
