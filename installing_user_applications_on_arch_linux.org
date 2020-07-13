@@ -172,7 +172,7 @@ Now build and install the package:
 ~makepkg -si~
 
 No need to use =sudo=. It is used internally and privilege escalation
-happens when necessary — you'll then be prompted for a password then.
+happens when necessary — you'll then be prompted for a password.
 
 **** yay-bin
 
