@@ -135,7 +135,7 @@ When you're done, mount your share:
 
 ** VSCodium
 
-=vscodium= is in the *AUR* (Arch User Repository).
+/VSCodium/ is in the *AUR* (Arch User Repository).
 
 *** Yay
 
@@ -177,7 +177,7 @@ happens when necessary — you'll then be prompted for a password.
 *** Installing VSCodium
 
 With /Yay/ installed, you now have access to the /AUR/. Install
-=vscodium=:
+/VSCodium/:
 
 ~yay -S vscodium-bin~
 
