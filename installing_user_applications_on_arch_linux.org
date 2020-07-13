@@ -171,6 +171,9 @@ Now build and install the package:
 
 ~makepkg -si~
 
+No need to use =sudo=. It is used internally and privilege escalation
+happens when necessary — you'll then be prompted for a password then.
+
 *** Installing VSCodium
 
 With =yay= installed, you now have access to the /AUR/. To install
@@ -178,7 +181,7 @@ With =yay= installed, you now have access to the /AUR/. To install
 
 ~yay -S vscodium-bin~
 
-Yes, it is not necessary — rather, it's not allowed — to use =sudo=.
+It is not necessary — rather, it's not allowed — to use =sudo=.
 
 When installing packages with =yay=, you'll be asked whether you want
 to see diffs.
