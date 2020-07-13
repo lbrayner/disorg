@@ -132,3 +132,53 @@ For this to work you have to, of course, create the mount point first:
 When you're done, mount your share:
 
 ~sudo mount -a~
+
+** VSCodium
+
+=vscodium= is in the *AUR* (Arch User Repository).
+
+*** Yay
+
+To install /AUR/ packages, it's recommended to use a helper. =yay=
+(Yet Another Yogurt - An /AUR/ Helper Written in Go) is currently the
+most popular.
+
+To download, build and install =yay=, you'll need =git= (~sudo pacman
+-S git~). Clone the official =yay= /git/ repository:
+
+#+begin_src sh
+mkdir ~/git
+cd ~/git
+git clone https://aur.archlinux.org/yay.git
+cd yay
+#+end_src
+
+What you've just downloaded is a =PKGBUILD= file.
+
+#+begin_quote
+A =PKGBUILD= is a shell script containing the build information required
+by Arch Linux packages.
+
+Packages in Arch Linux are built using the =makepkg= utility. When
+=makepkg= is run, it searches for a =PKGBUILD= file in the current
+directory and follows the instructions therein to either compile or
+otherwise acquire the files to build a package archive
+(=pkgname.pkg.tar.xz=). The resulting package contains binary files and
+installation instructions, readily installable with =pacman=.
+#+end_quote
+
+Now build and install the package:
+
+~makepkg -si~
+
+*** Installing VSCodium
+
+With =yay= installed, you now have access to the /AUR/. To install
+=vscodium=, run:
+
+~yay -S vscodium-bin~
+
+Yes, it is not necessary — rather, it's not allowed — to use =sudo=.
+
+When installing packages with =yay=, you'll be asked whether you want
+to see diffs.
