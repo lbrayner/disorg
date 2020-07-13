@@ -1,0 +1,31 @@
+* Installing fonts on Arch Linux
+
+** The weebo pack
+
+These are the most recommended for Simplified Chinese, Traditional Chinese,
+Japanese and Korean:
+
+| adobe-source-han-sans-cn-fonts   | Adobe Source Han Sans Subset OTF - Simplified Chinese OpenType/CFF fonts              |
+| adobe-source-han-sans-hk-fonts   | Adobe Source Han Sans Subset OTF - Traditional Chinese (Hong Kong) OpenType/CFF fonts |
+| adobe-source-han-sans-jp-fonts   | Adobe Source Han Sans Subset OTF - Japanese OpenType/CFF fonts                        |
+| adobe-source-han-sans-kr-fonts   | Adobe Source Han Sans Subset OTF - Korean OpenType/CFF fonts                          |
+| adobe-source-han-sans-otc-fonts  | Adobe Source Han Sans - Pan-CJK OpenType/CFF Collection fonts                         |
+| adobe-source-han-sans-tw-fonts   | Adobe Source Han Sans Subset OTF - Traditional Chinese (Taiwan) OpenType/CFF fonts    |
+| adobe-source-han-serif-cn-fonts  | Adobe Source Han Serif Subset OTF - Simplified Chinese OpenType/CFF fonts             |
+| adobe-source-han-serif-jp-fonts  | Adobe Source Han Serif Subset OTF - Japanese OpenType/CFF fonts                       |
+| adobe-source-han-serif-kr-fonts  | Adobe Source Han Serif Subset OTF - Korean OpenType/CFF fonts                         |
+| adobe-source-han-serif-otc-fonts | Adobe Source Han Serif - Pan-CJK OpenType/CFF Collection fonts                        |
+| adobe-source-han-serif-tw-fonts  | Adobe Source Han Serif Subset OTF - Traditional Chinese OpenType/CFF fonts            |
+
+See this discussion: https://bbs.archlinux.org/viewtopic.php?id=184640.
+
+To install all of them:
+
+#+begin_src sh
+sudo pacman -S adobe-source-han-sans-cn-fonts \
+    adobe-source-han-sans-hk-fonts adobe-source-han-sans-jp-fonts \
+    adobe-source-han-sans-kr-fonts adobe-source-han-sans-otc-fonts \
+    adobe-source-han-sans-tw-fonts adobe-source-han-serif-cn-fonts \
+    adobe-source-han-serif-jp-fonts adobe-source-han-serif-kr-fonts \
+    adobe-source-han-serif-otc-fonts adobe-source-han-serif-tw-fonts
+#+end_src
