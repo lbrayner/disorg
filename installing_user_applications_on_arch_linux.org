@@ -139,18 +139,18 @@ When you're done, mount your share:
 
 *** Yay
 
-To install /AUR/ packages, it's recommended to use a helper. =yay=
+To install /AUR/ packages, it's recommended to use a helper. /Yay/
 (Yet Another Yogurt - An /AUR/ Helper Written in Go) is currently the
 most popular.
 
-To download, build and install =yay=, you'll need =git= (~sudo pacman
--S git~). Clone the official =yay= /git/ repository:
+To download, build and install =yay-bin=, you'll need =git= (~sudo pacman
+-S git~). Clone the official =yay-bin= /git/ repository:
 
 #+begin_src sh
 mkdir ~/git
 cd ~/git
-git clone https://aur.archlinux.org/yay.git
-cd yay
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
 #+end_src
 
 What you've just downloaded is a =PKGBUILD= file.
@@ -174,27 +174,14 @@ Now build and install the package:
 No need to use =sudo=. It is used internally and privilege escalation
 happens when necessary — you'll then be prompted for a password.
 
-**** yay-bin
-
-Now that you have =yay= on your machine, it is possible, through it,
-to install =yay-bin= and get rid of =go= (Core compiler tools for the
-Go programming language), a dependency required to build =yay=.
-
-Install =yay-bin= by running ~yay -S yay-bin~.
-
-Then, to verify that =go= is an orphaned package, execute ~pacman
--Qdtq~ (~man pacman~ for the details).
-
-Now uninstall go with ~sudo pacman -R go~.
-
 *** Installing VSCodium
 
-With =yay= installed, you now have access to the /AUR/. Install
+With /Yay/ installed, you now have access to the /AUR/. Install
 =vscodium=:
 
 ~yay -S vscodium-bin~
 
 It is not necessary — rather, it's not allowed — to use =sudo=.
 
-When installing packages with =yay=, you'll be asked whether you want
+When installing packages with /Yay/, you'll be asked whether you want
 to see diffs.
