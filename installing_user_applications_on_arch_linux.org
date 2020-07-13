@@ -174,10 +174,23 @@ Now build and install the package:
 No need to use =sudo=. It is used internally and privilege escalation
 happens when necessary — you'll then be prompted for a password then.
 
+**** yay-bin
+
+Now that you have =yay= on your machine, it is possible, through it,
+to install =yay-bin= and get rid of =go= (Core compiler tools for the
+Go programming language), a dependency required to build =yay=.
+
+Install =yay-bin= by running ~yay -S yay-bin~.
+
+Then, to verify that =go= is an orphaned package, execute ~pacman
+-Qdtq~ (~man pacman~ for the details).
+
+Now uninstall go with ~sudo pacman -R go~.
+
 *** Installing VSCodium
 
-With =yay= installed, you now have access to the /AUR/. To install
-=vscodium=, run:
+With =yay= installed, you now have access to the /AUR/. Install
+=vscodium=:
 
 ~yay -S vscodium-bin~
 
