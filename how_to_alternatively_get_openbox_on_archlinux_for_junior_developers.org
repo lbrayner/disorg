@@ -40,7 +40,7 @@ file:
 # ~/.config/openbox/autostart
 
 tint2 &
-nitrogen --reconfigure &
+nitrogen --restore &
 conky --daemonize &
 
 # vim:ft=sh
