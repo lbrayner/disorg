@@ -54,6 +54,17 @@ Start it:
 
 ~sudo systemctl start lightdm~
 
+** xinit
+
+To start an /Openbox/ session with /xinit/, the command is ~openbox-session~:
+
+#+begin_src sh
+# ~/.xinitrc
+
+setxkbmap br # brazilian keyboard layout
+openbox-session
+#+end_src
+
 ** Openbox's right click menu
 
 *** xdg-menu
