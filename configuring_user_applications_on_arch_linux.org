@@ -69,6 +69,21 @@ a =~/.tmux.conf= configuration file with this directive:
 set -g default-command "${SHELL}"
 #+end_src
 
+To get colors right inside /tmux/, set the =TERM= variable to =screen-256color=:
+
+#+begin_src sh
+set-option -g default-terminal "screen-256color"
+#+end_src
+
+This is the resulting file:
+
+#+begin_src sh
+# ~/.tmux.conf
+
+set -g default-command "${SHELL}"
+set-option -g default-terminal "screen-256color"
+#+end_src
+
 ** Xorg
 
 *** Configuring X sessions
