@@ -117,11 +117,10 @@ The reason for this custom script is that we need to add an /AppDir/
 directive instructing /xdg_menu/ to search
 /~/.local/share/applications for Desktop Entries.
 
-When all of this is done, run ~openbox --reconfigure~.
+When all of this is done, right-click on your Desktop, navigate to
+/System/, and click on /"Reconfigure Openbox"/.
 
 ** Alacritty
 
 To copy and paste to and from the secondary clipboard, the key
 bindings are =Ctrl + Shift + c= and =Ctrl + Shift + v=, respectively.
-
-=xclip= is required, though (not confirmed).
