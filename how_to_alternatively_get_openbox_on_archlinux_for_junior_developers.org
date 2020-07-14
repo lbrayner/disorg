@@ -59,7 +59,7 @@ Start it:
 *** xdg-menu
 
 *xdg-menu* is a tool that generates XDG Desktop Menus. We're going to
-use /xdg_menu/ [from =archlinux-xdg-menu=] as a pipe menu, which:
+use /xdg_menu/ =[=from =archlinux-xdg-menu==]= as a pipe menu, which:
 
 #+begin_quote
 ...gives you the added benefit of having a menu that automatically
