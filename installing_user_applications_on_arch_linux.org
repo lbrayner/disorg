@@ -185,3 +185,10 @@ It is not necessary — rather, it's not allowed — to use =sudo=.
 
 When installing packages with /Yay/, you'll be asked whether you want
 to see diffs.
+
+** Alacritty
+
+~sudo pacman -S alacritty~
+
+To copy and paste to and from the secondary clipboard, the key
+bindings are =Ctrl + Shift + c= and =Ctrl + Shift + v=, respectively.
