@@ -298,14 +298,51 @@
     </action>
   </keybind>
 
+  <!-- Window snapping -->
+  <keybind key="W-Left">
+    <action name="UnmaximizeFull"/>
+    <action name="MoveResizeTo"><x>0</x><y>0</y><height>97%</height><width>50%</width></action>
+  </keybind>
+  <keybind key="W-Right">
+    <action name="UnmaximizeFull"/>
+    <action name="MoveResizeTo"><x>-0</x><y>0</y><height>97%</height><width>50%</width></action>
+  </keybind>
+  <keybind key="W-Up">
+    <action name="UnmaximizeFull"/>
+    <action name="MoveResizeTo"><x>0</x><y>0</y><width>100%</width><height>50%</height></action>
+  </keybind>
+  <keybind key="W-Down">
+    <action name="UnmaximizeFull"/>
+    <action name="MoveResizeTo"><x>0</x><y>-0</y><width>100%</width><height>50%</height></action>
+  </keybind>
+
   <!-- Keybindings for running applications -->
   <keybind key="W-e">
     <action name="Execute">
       <startupnotify>
         <enabled>true</enabled>
-        <name>Konqueror</name>
+        <name>PCManFm</name>
       </startupnotify>
-      <command>kfmclient openProfile filemanagement</command>
+      <command>pcmanfm</command>
+    </action>
+  </keybind>
+  <keybind key="W-t">
+    <action name="Execute">
+      <startupnotify>
+        <enabled>true</enabled>
+        <name>LXTerminal</name>
+      </startupnotify>
+      <command>lxterminal</command>
+    </action>
+  </keybind>
+  <keybind key="W-l">
+    <action name="Execute">
+      <command>i3lock.sh</command>
+    </action>
+  </keybind>
+  <keybind key="A-C-d">
+    <action name="Execute">
+      <command>dmenu_run</command>
     </action>
   </keybind>
 </keyboard>
@@ -738,6 +775,12 @@
 
   # end of the example
 -->
+  <application class='Gvim'>
+	  <maximized>yes</maximized>
+  </application>
 </applications>
 
 </openbox_config>
+
+<!-- vim: shiftwidth=2
+-->
