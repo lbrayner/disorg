@@ -235,8 +235,16 @@ Type=Application
 Name=i3 Screen Locker
 Comment=Lock your screen (i3lock)
 Icon=system-lock-screen
-Exec=i3lock --color=000000
+Exec=i3lock.sh
 Categories=Settings;DesktopSettings
+#+end_src
+
+The =i3lock.sh= script:
+
+#+begin_src sh
+#!/bin/sh
+
+i3lock --color=000000
 #+end_src
 
 For your changes to be take effect, execute:
