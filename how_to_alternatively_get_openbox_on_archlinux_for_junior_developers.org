@@ -63,6 +63,8 @@ To start an /Openbox/ session with /xinit/, the command is ~openbox-session~:
 
 setxkbmap br # brazilian keyboard layout
 openbox-session
+
+# vim:ft=sh
 #+end_src
 
 ** Openbox's right click menu
@@ -86,7 +88,12 @@ For this, we just need a very simple /menu.xml/:
 <openbox_menu xmlns="http://openbox.org/3.4/menu">
     <menu id="root-menu" label="Openbox 3">
         <menu id="applications" label="Applications" execute="~/bin/xdg_menu_maker" />
-        <separator />
+        <separator label="System" />
+        <menu id="openbox-menu" label="Openbox">
+            <item label="Reconfigure Openbox">
+                <action name="Reconfigure" />
+            </item>
+        </menu>
         <item label="Log Out">
             <action name="Exit">
                 <prompt>yes</prompt>
