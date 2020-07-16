@@ -378,7 +378,9 @@ polkit.addRule(function(action, subject) {
 #+end_src
 
 This configuration allows all members of the =storage= group to run
-/udiskie/
+/udiskie/:
+
+~sudo usermod -aG storage guilherme~
 
 Try starting udiskie from a terminal to check if there are any errors:
 
