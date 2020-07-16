@@ -345,6 +345,10 @@ The =i3lock.sh= script:
 i3lock --color=000000
 #+end_src
 
+Put it in =~/bin=, which should be in your *PATH* if you've followed
+the section [[*Configuring X sessions]]. If not, reference the script's
+full path in the /Exec/ directive.
+
 For your changes to be take effect, execute:
 
 ~lxpanelctl restart~
