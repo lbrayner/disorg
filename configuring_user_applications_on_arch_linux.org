@@ -132,6 +132,27 @@ setxkbmap br # brazilian keyboard layout
 # vim:ft=sh
 #+end_src
 
+*** DPMS: Display Power Management Signaling
+
+Create a file in =/etc/X11/xorg.conf.d=:
+
+#+begin_src conf
+# /etc/X11/xorg.conf.d/10-monitor.conf
+
+Section "ServerLayout"
+    Identifier "ServerLayout0"
+    Option "StandbyTime" "10"
+    Option "SuspendTime" "20"
+    Option "OffTime" "30"
+EndSection
+#+end_src
+
+Now restart the *X* server: ~sudo systemctl restart lightdm~.
+
+Verify the changes in =/var/log/Xorg.0.log=:
+
+~grep StandbyTime /var/log/Xorg.0.log~
+
 ** lxde, The Lightweight X11 Desktop Environment
 
 *** Openbox: windows of certain applications maximized by default
@@ -289,27 +310,6 @@ simply been killed. Just restart it:
 
 The last three arguments are for: redirecting =stdout= to =/dev/null=,
 =stderr= to =stdout=, and detaching the process.
-
-** DPMS: Display Power Management Signaling
-
-Create a file in =/etc/X11/xorg.conf.d=:
-
-#+begin_src conf
-# /etc/X11/xorg.conf.d/10-monitor.conf
-
-Section "ServerLayout"
-    Identifier "ServerLayout0"
-    Option "StandbyTime" "10"
-    Option "SuspendTime" "20"
-    Option "OffTime" "30"
-EndSection
-#+end_src
-
-Now restart the *X* server: ~sudo systemctl restart lightdm~.
-
-Verify the changes in =/var/log/Xorg.0.log=:
-
-~grep StandbyTime /var/log/Xorg.0.log~
 
 **** Default terminal emulator
 
