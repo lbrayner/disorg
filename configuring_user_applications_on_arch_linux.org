@@ -196,6 +196,34 @@ This binds =Ctrl + Alt + d= to =dmenu_run=. Don't forget to run
 Note that =Ctrl + Alt + d= is the default secondary binding of the
 command =ToggleShowDesktop=, so it's recommended to delete that.
 
+*** Openbox: window snapping
+
+Add window snapping to your box with theses additions to
+=~/.config/openbox/lxde-rc.xml=:
+
+#+begin_src xml
+<!-- ~/.config/openbox/lxde-rc.xml -->
+   <!-- ... -->
+  <!-- Window snapping -->
+  <keybind key="W-Left">
+    <action name="UnmaximizeFull"/>
+    <action name="MoveResizeTo"><x>0</x><y>0</y><height>97%</height><width>50%</width></action>
+  </keybind>
+  <keybind key="W-Right">
+    <action name="UnmaximizeFull"/>
+    <action name="MoveResizeTo"><x>-0</x><y>0</y><height>97%</height><width>50%</width></action>
+  </keybind>
+  <keybind key="W-Up">
+    <action name="UnmaximizeFull"/>
+    <action name="MoveResizeTo"><x>0</x><y>0</y><width>100%</width><height>50%</height></action>
+  </keybind>
+  <keybind key="W-Down">
+    <action name="UnmaximizeFull"/>
+    <action name="MoveResizeTo"><x>0</x><y>-0</y><width>100%</width><height>50%</height></action>
+  </keybind>
+   <!-- ... -->
+#+end_src
+
 *** Desktop entries
 
 To add a custom Desktop Entry, create a =.desktop= file in
