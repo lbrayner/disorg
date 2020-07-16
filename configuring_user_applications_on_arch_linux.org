@@ -167,8 +167,8 @@ already installed on the system.
 
 **** Dunst
 
-/Dunst/ is a lightweight replacement for the notification-daemons
-provided by most desktop environments. Install the =dunst= package.
+/Dunst/ is a lightweight replacement for the =notification-daemons=
+provided by most desktop environments. Install the =dunst= package:
 
 ~sudo pacman -S dunst~
 
