@@ -22,8 +22,8 @@ Exit and return to the regular user by using =exit=. Start and enable
 the =postgresql.service=:
 
 #+begin_src sh
-systemctl enable postgresql
-systemctl start postgresql
+sudo systemctl enable postgresql
+sudo systemctl start postgresql
 #+end_src
 
 Now to creating a role for the user =guilherme=. Run ~psql~ as the
