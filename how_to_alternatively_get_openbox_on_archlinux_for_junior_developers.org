@@ -122,7 +122,7 @@ After creating it, make executable: ~chmod +x ~/bin/xdg_menu_maker~.
 
 The reason for this custom script is that we need to add an /AppDir/
 directive instructing /xdg_menu/ to search
-/~/.local/share/applications for Desktop Entries.
+=~/.local/share/applications= for Desktop Entries.
 
 When all of this is done, right-click on your Desktop, navigate to
-/System/, and click on /"Reconfigure Openbox"/.
+/System/, and click on /Reconfigure Openbox/.
