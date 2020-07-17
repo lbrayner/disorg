@@ -13,6 +13,7 @@
 | IRBR3  | IRBBRASIL REON NM |
 | PETR4  | PETROBRAS PN N2   |
 | SMLS3  | SMILES ON NM      |
+| VVAR3  | VIAVAREJO ON NM   |
 
 ** Tabela de compras
 
@@ -21,6 +22,7 @@
 | AZUL4  |         30 | 13.90 | <2020-05-07 Thu> |
 | AZUL4  |         30 | 13.59 | <2020-05-12 Tue> |
 | IRBR3  |         50 | 12.40 | <2020-06-29 Mon> |
+| VVAR3  |         30 | 18.33 | <2020-07-13 Mon> |
 
 ** Tabela de vendas
 
