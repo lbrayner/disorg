@@ -125,4 +125,4 @@ directive instructing /xdg_menu/ to search
 =~/.local/share/applications= for Desktop Entries.
 
 When all of this is done, right-click on your Desktop, navigate to
-/System/, and click on /Reconfigure Openbox/.
+/Openbox/, and click on /Reconfigure Openbox/.
