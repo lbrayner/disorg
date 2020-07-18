@@ -34,6 +34,8 @@ there will effectively be only one running instance of =Xvfb=.
 
 pkill -f '^/usr/bin/Xvfb.*:20\b'
 
+sleep 1
+
 authority=~/.Xauthority20
 
 rm "${authority}"
