@@ -2,10 +2,37 @@
 
 * Libraries
 
-- =libidn11-dev=
-- =libidn11-dev=
-- =libgpgme-dev=
-- =libsasl2-dev=
-- =libnotmuch-dev=
 - =libgnutls28-dev=
+- =libgpgme-dev=
+- =libidn11-dev=
+- =libnotmuch-dev=
+- =libsasl2-dev=
+- =libslang2-dev=
+- =libsqlite3-dev=
 - =libtokyocabinet-dev=
+
+* Configuration
+
+#+begin_src sh
+#!/bin/sh
+
+# ./my_configure
+
+./configure --disable-doc --gpgme --notmuch --with-ui=slang --gnutls \
+    --mixmaster --sasl --tokyocabinet --sqlite --autocrypt --prefix=/usr/local
+#+end_src
+
+* Building
+
+#+begin_src sh
+./my_configure && make && sudo make install
+#+end_src
+
+** /notmuch: multiple definition of `nm_...'/
+
+If you get this error, find and replace all instances of the symbol
+prefix =nm_= with something else, like =notm_=:
+
+#+begin_src sh
+sed -i -E 's/\bnm_/notm_/g' **/*.h **/*.c
+#+end_src
