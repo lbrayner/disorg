@@ -28,7 +28,7 @@
 ./my_configure && make && sudo make install
 #+end_src
 
-** /notmuch: multiple definition of `nm_...'/
+** notmuch: /multiple definition of `nm_...'/
 
 If you get this error, find and replace all instances of the symbol
 prefix =nm_= with something else, like =notm_=:
