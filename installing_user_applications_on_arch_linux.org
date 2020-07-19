@@ -55,6 +55,8 @@ environments. Let's set up our =.xinitrc= file:
 #+begin_src sh
 # ~/.xinitrc
 
+unset TMUX TMUX_PANE # unsetting TMUX variables
+unset SSH_CLIENT SSH_CONNECTION SSH_TTY # unsetting SSH variables
 setxkbmap br # brazilian keyboard layout
 startlxde # lxde is out desktop environment
 #+end_src
