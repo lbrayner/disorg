@@ -1,9 +1,9 @@
-* Configuring user applications on Arch Linux
+#+title: Configuring user applications on Arch Linux
 
 This guide assumes that you have followed *How to get Arch Linux up
 and running for Junior Developers*.
 
-** bash
+* bash
 
 Configuring options, adding =~/bin= to =$PATH=, and creating an alias:
 
@@ -59,7 +59,7 @@ alias rsync='rsync --progress'
 alias ta='tmux attach'
 #+end_src
 
-** tmux
+* tmux
 
 To prevent =tmux= from launching a login shell (and stop the
 indefinite growth of the =$PATH= environment variable) create
@@ -84,9 +84,9 @@ set -g default-command "${SHELL}"
 set-option -g default-terminal "screen-256color"
 #+end_src
 
-** Xorg
+* Xorg
 
-*** Configuring X sessions
+** Configuring X sessions
 
 You may configure your *X* session with certain files —
 which one to use depends on how you start *X*. If you start an *X*
@@ -132,7 +132,7 @@ setxkbmap br # brazilian keyboard layout
 # vim:ft=sh
 #+end_src
 
-*** DPMS: Display Power Management Signaling
+** DPMS: Display Power Management Signaling
 
 Create a file in =/etc/X11/xorg.conf.d=:
 
@@ -153,9 +153,9 @@ Verify the changes in =/var/log/Xorg.0.log=:
 
 ~grep StandbyTime /var/log/Xorg.0.log~
 
-** lxde, The Lightweight X11 Desktop Environment
+* lxde, The Lightweight X11 Desktop Environment
 
-*** Desktop notifications
+** Desktop notifications
 
 Desktop notifications are small, passive popup dialogs that notify the
 user of particular events in an asynchronous manner.
@@ -165,7 +165,7 @@ user of particular events in an asynchronous manner.
 and /Qt/ applications and is Desktop independent. It's probably
 already installed on the system.
 
-**** Dunst
+*** Dunst
 
 /Dunst/ is a lightweight replacement for the =notification-daemons=
 provided by most desktop environments. Install the =dunst= package:
@@ -188,7 +188,7 @@ Add /Dunst/ to /LXDE/'s autostart:
 @dunst
 #+end_src
 
-*** Openbox: windows of certain applications maximized by default
+** Openbox: windows of certain applications maximized by default
 
 Let's say you want all /Gvim/ (~sudo pacman -S gvim~) windows
 maximized by default. First find out the window class with =xprop=,
@@ -217,7 +217,7 @@ case, run ~openbox --reconfigure~ to reload the configuration file.
 
 Information obtained from https://askubuntu.com/q/275835.
 
-*** Openbox: Keyboard shortcuts
+** Openbox: Keyboard shortcuts
 
 Keyboard shortcut mappings reside in
 =~/.config/openbox/lxde-rc.xml=. Once you've edited them, make
@@ -225,7 +225,7 @@ Keyboard shortcut mappings reside in
 
 ~openbox --reconfigure~
 
-**** dmenu
+*** dmenu
 
 Install =dmenu= with ~sudo pacman -S dmenu~. Create a shortcut to
 =dmenu_run= by adding to the keyboard section:
@@ -250,7 +250,7 @@ This binds =Ctrl + Alt + d= to =dmenu_run=. Don't forget to run
 Note that =Ctrl + Alt + d= is the default secondary binding of the
 command =ToggleShowDesktop=, so it's recommended to delete that.
 
-*** Openbox: window snapping
+** Openbox: window snapping
 
 Have your box do window snapping with theses additions to
 =~/.config/openbox/lxde-rc.xml=:
@@ -294,7 +294,7 @@ Have your box do window snapping with theses additions to
   <!-- ... -->
 #+end_src
 
-*** Desktop entries
+** Desktop entries
 
 To add a custom Desktop Entry, create a =.desktop= file in
 =~/.local/share/applications=.
@@ -320,7 +320,7 @@ For your changes to be picked up, run:
 
 ~lxpanelctl restart~
 
-**** i3lock
+*** i3lock
 
 Install =i3lock= with ~sudo pacman -S i3lock~. Then create a
 =.desktop= file:
@@ -353,7 +353,7 @@ For your changes to be take effect, execute:
 
 ~lxpanelctl restart~
 
-*** PCManFm
+** PCManFm
 
 If your desktop folders and launchers disappear, don't fret. /PCManFm/
 is the software responsible for managing it — the process must have
@@ -364,7 +364,7 @@ simply been killed. Just restart it:
 The last three arguments are for: redirecting =stdout= to =/dev/null=,
 =stderr= to =stdout=, and detaching the process.
 
-**** Default terminal emulator
+*** Default terminal emulator
 
 Set /PCManFm/'s default terminal emulator in /Edit/ → /Preferences/ →
 /Advanced/ → /Terminal emulator/. /LXDE/'s default terminal emulator
@@ -373,14 +373,14 @@ is =lxterminal=, so type that in.
 This will allow you to, for example, right-click on a folder and open
 a terminal whose current directory is that node.
 
-**** Archiver integration
+*** Archiver integration
 
 =xarchiver= is a graphical front-end to various command-line
 archivers. It integrates nicely and out-of-the-box with /PCManFm/.
 
 ~sudo pacman -S xarchiver~
 
-**** udiskie
+*** udiskie
 
 It's an utility that mounts removable disks automatically and
 integrates well with /PCManFm/.
@@ -455,7 +455,7 @@ Add /udiskie/ to /LXDE/'s autostart:
 @udiskie
 #+end_src
 
-**** Trash
+*** Trash
 
 =gvfs= is recommended for trash support:
 
