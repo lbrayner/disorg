@@ -520,6 +520,19 @@ change the default program to, for example, /Leafpad/ for the MIME type
 text/plain=leafpad.desktop
 #+end_src
 
+A more comprehensive =~/.config/mimeapps.list= would be:
+
+#+begin_src conf
+# ~/.config/mimeapps.list
+
+[Default Applications]
+text/plain=leafpad.desktop
+audio/mpeg=pragha.desktop
+audio/x-m4a=pragha.desktop
+audio/x-wav=pragha.desktop
+application/pdf=mupdf.desktop
+#+end_src
+
 * Advanced Linux Sound Architecture (ALSA)
 
 From the Arch Linux /wiki/:
