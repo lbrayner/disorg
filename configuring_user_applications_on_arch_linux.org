@@ -387,7 +387,7 @@ integrates well with /PCManFm/.
 
 ~sudo pacman -S udiskie~
 
-From the Arch Linux [[https://github.com/coldfix/udiskie/wiki/Permissions][wiki]]:
+From the =udiskie= [[https://github.com/coldfix/udiskie/wiki/Permissions][wiki]]:
 
 #+begin_quote
 =udiskie= requires permission for some =polkit= actions which are usually
@@ -522,7 +522,7 @@ text/plain=leafpad.desktop
 
 * Advanced Linux Sound Architecture (ALSA)
 
-From the Arch Linux wiki:
+From the Arch Linux /wiki/:
 
 #+begin_quote
 The Advanced Linux Sound Architecture (ALSA) provides kernel driven
