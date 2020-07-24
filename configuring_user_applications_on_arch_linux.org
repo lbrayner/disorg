@@ -387,7 +387,7 @@ integrates well with /PCManFm/.
 
 ~sudo pacman -S udiskie~
 
-From the =udiskie= [[https://github.com/coldfix/udiskie/wiki/Permissions][wiki]]:
+From the Arch Linux /[[/https://github.com/coldfix/udiskie/wiki/Permissions][wiki/]]:
 
 #+begin_quote
 =udiskie= requires permission for some =polkit= actions which are usually
@@ -466,6 +466,58 @@ Restart the /PCManFm/ desktop manager process:
 #+begin_src sh
 pkill pcmanfm
 pcmanfm --desktop --profile LXDE >/dev/null 2>&1 &
+#+end_src
+
+** Default applications
+
+From the Arch Linux /[[/https://github.com/coldfix/udiskie/wiki/Permissions][wiki/]]:
+
+#+begin_quote
+Programs implement default application associations in different
+ways. While command-line programs traditionally use environment
+variables, graphical applications tend to use *XDG MIME Applications*
+through either the GIO API, the Qt API, or by executing
+=/usr/bin/xdg-open=, which is part of =xdg-utils=. Because /xdg-open/
+and XDG MIME Applications are quite complex, various alternative
+resource openers were developed.
+#+end_quote
+
+/PCManFm/ uses *XDG MIME Applications* through the GIO (Gnome
+Input/Output) Api.
+
+*** XDG MIME Applications
+
+The *XDG MIME Applications* specification builds upon the
+/Shared MIME database/ and /Desktop entries/ to provide default
+applications.
+
+**** Shared MIME database
+
+The /XDG Shared MIME-info Database specification/ facilitates a shared
+MIME database across desktop environments and allows applications to
+easily register new MIME types system-wide.
+
+The database is built from the XML files installed by packages in
+=/usr/share/mime/packages/= using the tools from =shared-mime-info=.
+
+**** mimeapps.list
+
+The *XDG standard* is the most common for configuring desktop
+environments. Default applications for each MIME type are stored in
+=mimeapps.list= files, which can be stored in several locations. The
+distribution-provided defaults stay in
+=/usr/share/applications/mimeapps.list=. The system-wide overrides, in
+=/etc/xdg/mimeapps.list=.
+
+The user overrides reside in =~/.config/mimeapps.list=. Therefore, to
+change the default program to, for example, /Leafpad/ for the MIME type
+/text/plain/, create or amend that file:
+
+#+begin_src conf
+# ~/.config/mimeapps.list
+
+[Default Applications]
+text/plain=leafpad.desktop
 #+end_src
 
 * Advanced Linux Sound Architecture (ALSA)
