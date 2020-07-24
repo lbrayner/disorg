@@ -1,9 +1,9 @@
-* Installing user applications on Arch Linux
+#+title: Installing user applications on Arch Linux
 
 This guide assumes that you have followed *How to get Arch Linux up
 and running for Junior Developers*.
 
-** Firefox
+* Firefox
 
 ~sudo pacman -S firefox~
 
@@ -11,7 +11,7 @@ When you install this package, you'll probably be prompted to choose
 one provider of true type fonts, because, at this point, there won't
 be any.
 
-** VNC server and viewer
+* VNC server and viewer
 
 - =x11vnc=: a _VNC_ server implementation;
 - =xorg-server-xvfb=: a virtual framebuffer X server.
@@ -22,7 +22,7 @@ be any.
 Preferably we want to attach to an instance of =Xvfb= that will match
 our monitor's specifications.
 
-*** Creating a virtual frame buffer with Xvfb
+** Creating a virtual frame buffer with Xvfb
 
 The script that follows creates a virtual frame buffer with a
 resolution of /1920x1000/ pixels. Note that it will first kill any
@@ -86,20 +86,20 @@ Finally, on the client, start the _VNC_ viewer:
 
 ~vncviwer 127.0.0.1~
 
-*** Attaching to an existing X session
+** Attaching to an existing X session
 
 Supposing it's a session on a real monitor started by a regular user
 (e.g. =guilherme=), you'll want to connect to display =:0= like this:
 
 ~x11vnc -display :0 -localhost -auth ~/.Xauthority~
 
-** Samba (Client)
+* Samba (Client)
 
 =cifs-utils= will allow you to mount samba shares: ~sudo pacman -S
 cifs-utils~. Due to a dependency cycle, =smbclient=, which is capable
 of listing public shares, might be also installed.
 
-*** Mounting samba shares
+** Mounting samba shares
 
 Let's say there's a discoverable password protected share at
 =\\192.168.100.100\Files=, to which =guilherme= has access.
@@ -137,11 +137,11 @@ When you're done, mount your share:
 
 ~sudo mount -a~
 
-** VSCodium
+* VSCodium
 
 /VSCodium/ is in the *AUR* (Arch User Repository).
 
-*** Yay
+** Yay
 
 To install /AUR/ packages, it's recommended to use a helper. /Yay/
 (Yet Another Yogurt - An /AUR/ Helper Written in Go) is currently the
@@ -178,7 +178,7 @@ Now build and install the package:
 No need to use =sudo=. It is used internally and privilege escalation
 happens when necessary — you'll then be prompted for a password.
 
-*** Installing VSCodium
+** Installing VSCodium
 
 With /Yay/ installed, you now have access to the /AUR/. Install
 /VSCodium/:
@@ -190,9 +190,18 @@ It is not necessary — rather, it's not allowed — to use =sudo=.
 When installing packages with /Yay/, you'll be asked whether you want
 to see diffs.
 
-** Alacritty
+* Alacritty
 
 ~sudo pacman -S alacritty~
 
 To copy and paste to and from the secondary clipboard, the key
 bindings are =Ctrl + Shift + c= and =Ctrl + Shift + v=, respectively.
+
+* Geeqie Image Viewer
+
+/Geeqie/ is a lightweight image viewer for Linux, BSDs and compatibles.
+
+It can be used as a simple, fast, database-free image viewer, but
+equally it can be used to manage large collections of images.
+
+~sudo pacman -S geeqie~
