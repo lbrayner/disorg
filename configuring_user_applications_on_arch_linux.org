@@ -205,12 +205,20 @@ Edit the /applications/ tag in =~/.config/openbox/lxde-rc.xml=:
 <!-- ~/.config/openbox/lxde-rc.xml -->
     <!-- ... -->
     <applications>
-        <application class='Gvim'>
+        <application class='Gvim' role='vim-*'>
             <maximized>yes</maximized>
         </application>
     </applications>
     <!-- ... -->
 #+end_src
+
+Note that we also matched the role, which distinguishes among
+different windows of the same class. In this case, we only want the
+main window to be maximized:
+
+~xprop _OB_APP_ROLE~
+
+A wildcard was used, because the suffix is subject to change.
 
 Since managing windows is the window manager's job — /Openbox/, in our
 case, run ~openbox --reconfigure~ to reload the configuration file.
