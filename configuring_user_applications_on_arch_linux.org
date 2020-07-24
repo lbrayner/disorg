@@ -223,7 +223,7 @@ A wildcard was used, because the suffix is subject to change.
 Since managing windows is the window manager's job — /Openbox/, in our
 case, run ~openbox --reconfigure~ to reload the configuration file.
 
-Information obtained from https://askubuntu.com/q/275835.
+Information obtained from http://openbox.org/wiki/Help:Applications.
 
 ** Openbox: Keyboard shortcuts
 
