@@ -205,3 +205,51 @@ It can be used as a simple, fast, database-free image viewer, but
 equally it can be used to manage large collections of images.
 
 ~sudo pacman -S geeqie~
+
+* hacksaw + shotgun
+
+From /Shotgun/'s GitHub page:
+
+#+begin_quote
+A minimal screenshot utility for *X11*. /Shotgun/ was written to replace
+/maim/ in my workflow.
+#+end_quote
+
+Hacksaw is a:
+
+#+begin_quote
+Lightweight selection tool for usage in screenshot scripts etc.
+#+end_quote
+
+Install both:
+
+#+begin_src sh
+sudo pacman -S hacksaw shotgun
+#+end_src
+
+This snippet will bind the /Print Screen/ key to a command that takes a
+screenshot of the full screen and saves it to the =~/Pictures= folder:
+
+#+begin_src xml
+<!-- ~/.config/openbox/lxde-rc.xml -->
+    <!-- ... -->
+<keyboard>
+    <!-- ... -->
+  <keybind key="Print">
+    <action name="Execute">
+      <command>sh -c "shotgun ~/Pictures/$(date '+%Y%m%d_%H%M%S').png"</command>
+    </action>
+  </keybind>
+  <keybind key="W-Print">
+    <action name="Execute">
+      <command>sh -c "shotgun $(hacksaw -f '-i %i -g %g') ~/Pictures/$(date '+%Y%m%d_%H%M%S').png"</command>
+    </action>
+  </keybind>
+    <!-- ... -->
+</keyboard>
+    <!-- ... -->
+#+end_src
+
+It also binds the combination =Super + Print Screen= to another
+command that uses /Hacksaw/ to take a screenshot of a portion of the
+screen.
