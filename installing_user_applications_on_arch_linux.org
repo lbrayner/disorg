@@ -206,7 +206,7 @@ equally it can be used to manage large collections of images.
 
 ~sudo pacman -S geeqie~
 
-* hacksaw + shotgun
+* Hacksaw + Shotgun
 
 From /Shotgun/'s GitHub page:
 
