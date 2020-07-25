@@ -1,4 +1,4 @@
-* How to get Openbox on Arch Linux for Junior Developers
+#+title: How to get Openbox on Arch Linux for Junior Developers
 
 #+BEGIN_QUOTE
 Openbox is a highly configurable, next generation window manager with
@@ -54,7 +54,7 @@ Start it:
 
 ~sudo systemctl start lightdm~
 
-** xinit
+* xinit
 
 To start an /Openbox/ session with /xinit/, the command is ~openbox-session~:
 
@@ -67,9 +67,9 @@ openbox-session
 # vim:ft=sh
 #+end_src
 
-** Openbox's right click menu
+* Openbox's right click menu
 
-*** xdg-menu
+** xdg-menu
 
 *xdg-menu* is a tool that generates XDG Desktop Menus. We're going to
 use /xdg_menu/ (from =archlinux-xdg-menu=) as a pipe menu, which:

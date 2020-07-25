@@ -1,16 +1,16 @@
-* How to get Arch Linux up and running for Junior Developers
+#+title: How to get Arch Linux up and running for Junior Developers
 
-** Configure the Live Environment
+* Configure the Live Environment
 
-*** Keyboard layout
+** Keyboard layout
 
 #+begin_src sh
 loadkeys br-abnt2 # brazilian keyboard layout
 #+end_src
 
-** Installation
+* Installation
 
-*** Partitioning the disk
+** Partitioning the disk
 
 Check the current layout:
 
@@ -40,7 +40,7 @@ If there was an existing partition table, you might have to reboot, because the 
 
 The following topics will assume the table above.
 
-*** Formatting the partitions
+** Formatting the partitions
 
 #+begin_src sh
 mkfs.ext4 /dev/sda5
@@ -50,7 +50,7 @@ mkswap /dev/sda6
 swapon /dev/sda6 # I suppose this will serve as a hint to gensfstab
 #+end_src
 
-*** Mounting the file systems
+** Mounting the file systems
 
 #+begin_src sh
 mount /dev/sda7 /mnt
@@ -58,7 +58,7 @@ mkdir /mnt/boot
 mount /dev/sda5 /mnt/boot
 #+end_src
 
-*** Installing essential packages
+** Installing essential packages
 
 #+begin_src sh
 pacstrap /mnt base base-devel linux linux-firmware vim tmux \
@@ -67,9 +67,9 @@ pacstrap /mnt base base-devel linux linux-firmware vim tmux \
 
 =vim= will be the text editor of choice.
 
-** System configuration
+* System configuration
 
-*** fstab
+** fstab
 
 Generate an =fstab= file using =UUIDs=:
 
@@ -77,17 +77,17 @@ Generate an =fstab= file using =UUIDs=:
 
 Check the resulting =/mnt/etc/fstab= file and edit it in case of errors.
 
-*** chroot
+** chroot
 
 ~arch-chroot /mnt~
 
-*** Time zone
+** Time zone
 
 Replace =Region= and =City= accordingly.
 
 ~ln -sf /usr/share/zoneinfo/Region/City /etc/localtime~
 
-*** Localization
+** Localization
 
 Edit =/etc/locale.gen= and uncomment =en_US.UTF-8 UTF-8=. Generate the
 locales by running:
@@ -110,7 +110,7 @@ Make the keyboard layout changes persistent in =vconsole.conf(5):=
 KEYMAP=br-abnt2
 #+end_src
 
-*** Network configuration
+** Network configuration
 
 Create the hostname file:
 
@@ -130,13 +130,13 @@ Add matching entries to =hosts(5):=
 127.0.1.1	arch.localdomain	arch
 #+end_src
 
-*** Root password
+** Root password
 
 Set the root password:
 
 ~passwd~
 
-*** GRUB
+** GRUB
 
 Assuming the processor is an =AMD64=:
 
@@ -146,9 +146,9 @@ Generate the GRUB configuration file:
 
 ~grub-mkconfig -o /boot/grub/grub.cfg~
 
-** Booting into the new system
+* Booting into the new system
 
-*** Setting up the network connection
+** Setting up the network connection
 
 We'll assume there is a =DHCP= server in your network. (That's why the
 package =dhcpcd= was installed.)
@@ -163,7 +163,7 @@ Check you IP:
 
 ~ip route~
 
-*** Installing an ssh server (optional)
+** Installing an ssh server (optional)
 
 =openssh= is our server of choice.
 
@@ -193,7 +193,7 @@ transferred to and from the machine:
 
 ~pacman -S rsync~
 
-*** Creating a user other than root
+** Creating a user other than root
 
 Suppose the intended username is =guilherme=. =guilherme= is going to
 be a =sudoer=.
@@ -210,7 +210,7 @@ Finally, create a password:
 
 ~passwd guilherme~
 
-*** sudo: the sudoers file
+** sudo: the sudoers file
 
 Run the command =visudo=:
 
@@ -232,11 +232,11 @@ Allow everything for users that belong to the =wheel= group:
 
 Uncomment the line that contains ~%wheel ALL=(ALL) ALL~.
 
-** Setting up a graphical environment
+* Setting up a graphical environment
 
 First, login as =guilherme=.
 
-*** lxde, The Lightweight X11 Desktop Environment
+** lxde, The Lightweight X11 Desktop Environment
 
 In this guide we favor =lxde=. We'll also be installing =lightdm=, a
 light display manager, to the detriment of =lxdm=, that comes bundled with
