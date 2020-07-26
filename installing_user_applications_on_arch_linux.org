@@ -258,7 +258,7 @@ It also binds the combination =Super + Print Screen= to another
 command that uses /Hacksaw/ to take a screenshot of a portion of the
 screen.
 
-* qalculate-gtk
+* Qalculate!
 
 #+begin_quote
 Calculator and equation solver with fault-tolerant parsing, constant
