@@ -257,3 +257,14 @@ screenshot of the full screen and saves it to the =~/Pictures= folder:
 It also binds the combination =Super + Print Screen= to another
 command that uses /Hacksaw/ to take a screenshot of a portion of the
 screen.
+
+* qalculate-gtk
+
+#+begin_quote
+Calculator and equation solver with fault-tolerant parsing, constant
+recognition and units.
+#+end_quote
+
+In short, it's a nice calculator with a nice GUI and advanced features.
+
+~sudo pacman -S qalculate-gtk~
