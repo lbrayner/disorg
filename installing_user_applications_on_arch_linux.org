@@ -239,6 +239,7 @@ screenshot of the full screen and saves it to the =~/Pictures= folder:
 <!-- ... -->
 <keyboard>
     <!-- ... -->
+    <!-- other bindings -->
     <keybind key="Print">
         <action name="Execute">
             <command>sh -c "shotgun ~/Pictures/$(date '+%Y%m%d_%H%M%S').png"</command>
@@ -257,6 +258,12 @@ screenshot of the full screen and saves it to the =~/Pictures= folder:
 It also binds the combination =Super + Print Screen= to another
 command that uses /Hacksaw/ to take a screenshot of a portion of the
 screen.
+
+Find and delete any other bindings of the =Print Screen= key.
+
+As always:
+
+~openbox --reconfigure~
 
 * Qalculate!
 
