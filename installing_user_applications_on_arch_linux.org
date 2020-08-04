@@ -275,3 +275,20 @@ recognition and units.
 In short, it's a nice calculator with a nice GUI and advanced features.
 
 ~sudo pacman -S qalculate-gtk~
+
+* Audio & Video
+
+#+begin_src sh
+sudo pacman -S celluloid pragha
+#+end_src
+
+** Celluloid
+
+/Celluloid/ is a GTK+ frontend for /mpv/.
+
+** Pragha Music Player
+
+#+begin_quote
+/Pragha/ is a Lightweight Music Player for GNU/Linux, based on /Gtk/,
+/sqlite/, and completely written in C.
+#+end_quote
