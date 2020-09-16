@@ -573,3 +573,25 @@ amixer sset Master unmute
 amixer sset Speaker unmute
 amixer sset Headphone unmute
 #+end_src
+
+** PulseAudio
+
+From the Arch Linux [[https://wiki.archlinux.org/index.php/PulseAudio][wiki]]:
+
+#+begin_quote
+PulseAudio is a general purpose sound server intended to run as a
+middleware between your applications and your hardware devices, either
+using ALSA or OSS.
+#+end_quote
+
+Install the following packages:
+
+~sudo pacman -S pulseaudio pulseaudio-alsa~
+
+Optionally install a /CLI/ and /curses/ mixer for /PulseAudio/:
+
+~sudo pacman -S pulsemixer~
+
+Start and enable the =systemd= user service:
+
+~systemctl --user enable --now pulseaudio.service~
