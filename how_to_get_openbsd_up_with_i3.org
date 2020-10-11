@@ -166,6 +166,46 @@ menu.
 
 * Setting up i3 as the non-root user
 
+** i3status
+
 Log in as =guilherme=. Likewise, you'll be faced with an instance of
 =xterm= in the default window manager, which is =fvwm=. But your shell
 is =bash= rather than =ksh=.
+
+Copy the example =i3status= configuration to your home folder:
+
+#+begin_src sh
+cp /usr/local/share/examples/i3status/i3status.conf ~/.i3status.conf
+#+end_src
+
+** ~/.xsession
+
+Create the file =~/.xsession=, which will act =xenodm='s =~/.xinitrc=:
+
+#+begin_src sh
+# ~/.xsession
+
+xset +fp /usr/local/share/fonts/terminus
+
+export LC_CTYPE="en_US.UTF-8"
+
+xrandr -s 1600x900
+i3
+
+# vim: ft=sh
+#+end_src
+
+- The first command adds =terminus= to the font path.
+- The second one sets the locale to /en_US.UTF-8/.
+- The third, sets the resolution (unsure whether it is necessary on
+  non-virtualized environments).
+- The fourth starts i3.
+
+Available screen resolutions can be listed with =xrandr=.
+
+Log out and log back in.
+
+** i3 configuration file
+
+As there still isn't an =i3= configuration file, it'll be created by
+the =i3-config-wizard=, which is run automatically. Choose the default options.
