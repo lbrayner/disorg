@@ -41,7 +41,7 @@ the image's signature has been verified beforehand, it is safe to
 answer "yes" at that prompt.
 #+end_quote
 
-* Setting up the environment
+* First steps
 
 ** syspatch
 
@@ -78,10 +78,50 @@ On =xterm= run:
 syspatch
 #+end_src
 
-** Installing third-party packages
+** Installing i3 and other third-party packages
 
 Run:
 
 #+begin_src sh
 pkg_add vim bash i3 dwm firefox
 #+end_src
+
+After the installation you'll be warned about the newly installed
+font =terminus= and the /font path/.
+
+** Setting up doas for the non-root user
+
+=doas= allows you to run commands as another user, much like
+=sudo=. But unlike it, =doas= has a much smaller feature set and is
+part of the base system.
+
+Create the file =/etc/doas.conf= with the following contents
+(suppose the non-root username is =guilherme=):
+
+#+begin_src sh
+# /etc/doas.conf
+
+permit guilherme as root
+#+end_src
+
+You may use freshly installed =vim= or the base system's =vi= for that
+purpose.
+
+** Changing the non-root user's default shell
+
+On =OpenBSD=, the default shell is =ksh=. Change it to =bash= for
+=guilherme=:
+
+#+begin_src sh
+chsh -s /usr/local/bin/bash guilherme
+#+end_src
+
+We're now ready to login as =guilherme=. Log out (as the =root= user)
+by clicking on the desktop and selecting /Exit/ from the drop-down
+menu.
+
+* Setting up i3 as the non-root user
+
+Log in as =guilherme=. Likewise, you'll be faced with an instance of
+=xterm= in the default window manager, which is =fvwm=. But your shell
+is =bash= rather than =ksh=.
