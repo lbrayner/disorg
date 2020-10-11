@@ -2,6 +2,10 @@
 
 * The OpenBSD installer
 
+** Keyboard layout
+
+In the _Choose your keyboard layout_ prompt, type in =br= and hit _Enter_.
+
 ** xenodm
 
 From a [[https://www.reddit.com/r/openbsd/comments/f40mq0/why_startx_does_not_work_for_nonroot_users][reddit post]]:
@@ -11,3 +15,6 @@ The setuid bit was removed from the _X_ server for security reasons
 which meant that =startx(1)= no longer works, it is recommended to use
 =xenodm(1)= instead.
 #+end_quote
+
+In the _Do you want the X Window System to be started by xenodm(1)?_
+prompt, type in =yes= and hit _Enter_.
