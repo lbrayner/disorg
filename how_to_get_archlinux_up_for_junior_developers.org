@@ -18,7 +18,7 @@ Check the current layout:
 fdisk -l
 #+end_src
 
-Suppose we have a 20G HDD and 16G of RAM.
+Suppose we have a 20G HDD and 4G of RAM.
 
 Let's create a legacy DOS (=MBR=) partition table with ~fdisk~ that will
 look like this:
@@ -36,7 +36,8 @@ exactness. This notation represents powers of 1024.
 
 *On fdisk*
 
-If there was an existing partition table, you might have to reboot, because the old partitions were already loaded by the kernel.
+If there was an existing partition table, you might have to reboot,
+because the old partitions were already loaded by the kernel.
 
 The following topics will assume the table above.
 
