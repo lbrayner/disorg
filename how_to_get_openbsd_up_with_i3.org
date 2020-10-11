@@ -127,7 +127,7 @@ syspatch
 Run:
 
 #+begin_src sh
-pkg_add vim bash i3 dwm firefox
+pkg_add vim bash i3 dmenu firefox
 #+end_src
 
 After the installation you'll be warned about the newly installed
@@ -197,7 +197,7 @@ i3
 
 - The first command adds =terminus= to the font path.
 - The second one sets the locale to /en_US.UTF-8/.
-- The third, sets the resolution (unsure whether it is necessary on
+- The third sets the resolution (unsure whether it is necessary on
   non-virtualized environments).
 - The fourth starts i3.
 
