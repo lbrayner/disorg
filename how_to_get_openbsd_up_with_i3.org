@@ -7,6 +7,50 @@
 In the /Choose your keyboard layout/ prompt, type in =br= (Brazilian)
 and hit /Enter/.
 
+** Partitioning the disk
+
+From the [[https://www.openbsd.org/faq/index.html][OpenBSD FAQ]]:
+
+#+begin_quote
+The term "partition" can mean two different things in *OpenBSD*:
+
+- =disklabel(8)= partitions, also called filesystem partitions.
+- =fdisk(8)= partitions, sometimes called /Master Boot Record/ (MBR) partitions.
+
+All *OpenBSD* platforms use the =disklabel= program as the primary way to
+manage filesystem partitions. On the platforms that use =fdisk=, one /MBR/
+partition is used to hold all of the *OpenBSD* filesystems. This
+partition can be sliced into 16 =disklabel= partitions, labeled =a=
+through =p=. A few labels are special:
+
+- =a=: The boot disk's a partition is your root partition.
+- =b=: The boot disk's b partition is usually a swap partition.
+- =c=: The c partition is always the entire disk.
+#+end_quote
+
+Firstly, in the /Use (W)hole disk MBR, whole disk (G)PT or (E)dit?/
+prompt, allow the default option to be chosen (=whole=) by hitting
+/Enter/. Then, in the /Use (A)uto layout, (E)dit auto layout, or
+create (C)ustom layout?/, type in =c= and hit /Enter/.
+
+We'll create a custom layout with the =disklabel= program, which is
+running at this point.
+
+To list all commands, use =?= or =h=. =p= prints the current partition
+table.
+
+At the end, it should look like this, with a 30G HDD and 2G of RAM:
+
+| Label | Size | FS type | Mount point |
+|-------+------+---------+-------------|
+| a:    | 1G   | 4.2BSD  | =/=         |
+| b:    | 2G   | swap    | =[none]=    |
+| c:    | 30G  | unused  |             |
+| d:    | 1G   | 4.2BSD  | =/tmp=      |
+| e:    | 2G   | 4.2BSD  | =/var=      |
+| f:    | 20G  | 4.2BSD  | =/usr=      |
+| g:    | 4G   | 4.2BSD  | =/home=     |
+
 ** xenodm
 
 From a [[https://www.reddit.com/r/openbsd/comments/f40mq0/why_startx_does_not_work_for_nonroot_users][reddit post]]:
