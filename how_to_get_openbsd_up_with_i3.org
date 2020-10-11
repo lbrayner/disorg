@@ -153,7 +153,7 @@ purpose.
 
 ** Changing the non-root user's default shell
 
-On =OpenBSD=, the default shell is =ksh=. Change it to =bash= for
+On *OpenBSD*, the default shell is =ksh=. Change it to =bash= for
 =guilherme=:
 
 #+begin_src sh
