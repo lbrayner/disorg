@@ -19,3 +19,69 @@ which meant that =startx(1)= no longer works, it is recommended to use
 
 In the /Do you want the X Window System to be started by xenodm(1)?/
 prompt, type in =yes= and hit /Enter/.
+
+** Let's install the sets!
+
+In the /Directory does not contain SHA256.sig. Continue without
+verification?/, type in =yes= and hit /Enter/.
+
+From the [[https://www.openbsd.org/faq/index.html][OpenBSD FAQ]]:
+
+#+begin_quote
+The =installXX.iso= and =installXX.fs= images do not contain an =SHA256.sig=
+file, so the installer will complain that it can't check the signature
+of the included sets:
+
+=Directory does not contain SHA256.sig. Continue without verification? [no]=
+
+This is because it would make no sense for the installer to verify
+them. If someone were to make a rogue installation image, they could
+certainly change the installer to say the files were legitimate. If
+the image's signature has been verified beforehand, it is safe to
+answer "yes" at that prompt.
+#+end_quote
+
+* Setting up the environment
+
+** syspatch
+
+Log in as =root=. You'll land on an instance of =xterm= in the default
+window manager: =fvwm=.
+
+From the [[https://www.openbsd.org/faq/index.html][OpenBSD FAQ]]:
+
+#+begin_quote
+*Security Updates*
+
+When a critical bug is found, the fix will be committed to the
+*-current* tree (and made available in snapshot builds) as soon as
+possible. From that point on, things are handled differently depending
+on whether the problem was in the *OpenBSD* base system or a third party
+package. ...
+
+For the *OpenBSD* base system, security fixes are normally applied to
+the two most recent releases. There are four options:
+#+end_quote
+
+The option referred to in this topic is applying binary patches with =syspatch=:
+
+#+begin_quote
+If you're running a supported release of *OpenBSD*, you can simply use
+the =syspatch(8)= utility to upgrade any files in need of security or
+reliability fixes. This is the quickest and easiest method to get the
+base system up to date.
+#+end_quote
+
+On =xterm= run:
+
+#+begin_src sh
+syspatch
+#+end_src
+
+** Installing third-party packages
+
+Run:
+
+#+begin_src sh
+pkg_add vim bash i3 dwm firefox
+#+end_src
