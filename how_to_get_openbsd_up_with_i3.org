@@ -1,0 +1,13 @@
+#+title: How to get OpenBSD up and running with i3wm
+
+* The OpenBSD installer
+
+** xenodm
+
+From a [[https://www.reddit.com/r/openbsd/comments/f40mq0/why_startx_does_not_work_for_nonroot_users][reddit post]]:
+
+#+begin_quote
+The setuid bit was removed from the _X_ server for security reasons
+which meant that =startx(1)= no longer works, it is recommended to use
+=xenodm(1)= instead.
+#+end_quote
