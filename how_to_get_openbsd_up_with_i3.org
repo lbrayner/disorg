@@ -41,15 +41,16 @@ table.
 
 At the end, it should look like this, with a 30G HDD and 2G of RAM:
 
-| Label | Size | FS type | Mount point |
-|-------+------+---------+-------------|
-| a:    | 1G   | 4.2BSD  | =/=         |
-| b:    | 2G   | swap    | =[none]=    |
-| c:    | 30G  | unused  |             |
-| d:    | 1G   | 4.2BSD  | =/tmp=      |
-| e:    | 2G   | 4.2BSD  | =/var=      |
-| f:    | 20G  | 4.2BSD  | =/usr=      |
-| g:    | 4G   | 4.2BSD  | =/home=     |
+| Label | Size | FS type | Mount point  |
+|-------+------+---------+--------------|
+| a:    | 1G   | 4.2BSD  | =/=          |
+| b:    | 2G   | swap    | =[none]=     |
+| c:    | 30G  | unused  |              |
+| d:    | 1G   | 4.2BSD  | =/tmp=       |
+| e:    | 2G   | 4.2BSD  | =/var=       |
+| f:    | 3G   | 4.2BSD  | =/usr=       |
+| g:    | 17G  | 4.2BSD  | =/usr/local= |
+| h:    | 4G   | 4.2BSD  | =/home=      |
 
 ** xenodm
 
