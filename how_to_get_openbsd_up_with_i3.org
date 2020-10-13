@@ -4,6 +4,8 @@
 
 ** Keyboard layout
 
+*** Brazilian
+
 In the /Choose your keyboard layout/ prompt, type in =br= (Brazilian)
 and hit /Enter/.
 
