@@ -41,7 +41,7 @@ running at this point.
 To list all commands, use =?= or =h=. =p= prints the current partition
 table.
 
-At the end, it should look like this, with a 30G HDD and 2G of RAM:
+In the end it should look like this, with a 30G HDD and 2G of RAM:
 
 | Label | Size | FS type | Mount point  |
 |-------+------+---------+--------------|
