@@ -1,0 +1,21 @@
+#+title: How to suppress the message Picked Up _JAVA_OPTIONS when starting Groovy
+
+On Arch Linux, with Groovy 2.5+, when starting /Groovy/ via
+=/usr/bin/groovy= or =/usr/bin/startGroovy=, the /JVM/ will output a
+message to =stderr= that cannot be suppressed:
+
+#+begin_example
+Picked up _JAVA_OPTIONS: -Dawt.useSystemAAFontSettings=gasp
+#+end_example
+
+This is because that variable is defined in both of the aforementioned
+scripts. Unsetting it is possible by creating the file
+=$HOME/.groovy/startup=, which is sourced by =/usr/bin/startGroovy=:
+
+#+begin_src sh
+# $HOME/.groovy/startup
+
+unset _JAVA_OPTIONS
+
+# vim: ft=sh
+#+end_src
