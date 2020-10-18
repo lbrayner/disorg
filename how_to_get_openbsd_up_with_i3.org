@@ -188,8 +188,6 @@ Create the file =~/.xsession=, which will act =xenodm='s =~/.xinitrc=:
 #+begin_src sh
 # ~/.xsession
 
-xset +fp /usr/local/share/fonts/terminus
-
 export LC_CTYPE="en_US.UTF-8"
 
 xrandr -s 1600x900
@@ -198,11 +196,10 @@ i3
 # vim: ft=sh
 #+end_src
 
-- The first command adds =terminus= to the font path.
-- The second one sets the locale to /en_US.UTF-8/.
-- The third sets the resolution (unsure whether it is necessary on
+- The first command sets the locale to /en_US.UTF-8/.
+- The second one sets the resolution (unsure whether it is necessary on
   non-virtualized environments).
-- The fourth starts i3.
+- The third one starts i3.
 
 Available screen resolutions can be listed with =xrandr=.
 
