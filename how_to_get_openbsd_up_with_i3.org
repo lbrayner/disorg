@@ -130,7 +130,7 @@ syspatch
 Run:
 
 #+begin_src sh
-pkg_add vim bash i3 dmenu firefox
+pkg_add vim bash i3 dmenu rxvt-unicode firefox
 #+end_src
 
 After the installation you'll be warned about the newly installed
@@ -210,5 +210,20 @@ Log out and log back in.
 
 ** i3 configuration file
 
-As there still isn't an =i3= configuration file, it'll be created by
+As there still isn't an /i3/ configuration file, it'll be created by
 the =i3-config-wizard=, which is run automatically. Choose the default options.
+
+*** urxvt
+
+Set =urxvt= as the default terminal on /i3/ by editing =~/.config/i3/config=:
+
+#+begin_src sh
+# ~/.config/i3/config
+
+...
+
+# start a terminal
+bindsym $mod+Return exec /usr/local/bin/urxvt
+
+...
+#+end_src
