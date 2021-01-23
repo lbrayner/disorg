@@ -1,0 +1,15 @@
+#+title: How to restore an OpenSSH server's identity
+
+Stop the service:
+
+#+begin_src sh
+sudo systemctl stop ssh
+#+end_src
+
+Replace all files in =/etc/ssh= that match the pattern =ssh_host_*= — and mind the permissions!
+
+Start the service:
+
+#+begin_src sh
+sudo systemctl start ssh
+#+end_src
