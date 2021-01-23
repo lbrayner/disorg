@@ -147,6 +147,10 @@ Generate the GRUB configuration file:
 
 ~grub-mkconfig -o /boot/grub/grub.cfg~
 
+** Rebooting
+
+Exit =chroot= and reboot the system.
+
 * Booting into the new system
 
 ** Setting up the network connection
