@@ -1,4 +1,4 @@
-#+title: How to restore an OpenSSH server's identity
+#+title: How to restore a server's OpenSSH identity
 
 Stop the service:
 
