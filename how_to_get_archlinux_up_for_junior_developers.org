@@ -74,7 +74,7 @@ pacstrap /mnt base base-devel linux linux-firmware vim tmux \
 
 Generate an =fstab= file using =UUIDs=:
 
-~genfstab -U /mnt >> /mnt/etc/fstab~
+~genfstab -U /mnt > /mnt/etc/fstab~
 
 Check the resulting =/mnt/etc/fstab= file and edit it in case of errors.
 
