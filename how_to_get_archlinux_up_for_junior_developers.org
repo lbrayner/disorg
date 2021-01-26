@@ -160,7 +160,7 @@ package =dhcpcd= was installed.)
 
 #+begin_src sh
 systemctl enable dhcpcd
-systemctl start dhcpcd # not sure this is necessary
+systemctl start dhcpcd
 systemctl restart systemd-networkd
 #+end_src
 
