@@ -241,7 +241,7 @@ Uncomment the line that contains ~%wheel ALL=(ALL) ALL~.
 
 First, login as =guilherme=.
 
-** lxde, The Lightweight X11 Desktop Environment
+** COMMENT lxde, The Lightweight X11 Desktop Environment
 
 In this guide we favor =lxde=. We'll also be installing =lightdm=, a
 light display manager, to the detriment of =lxdm=, that comes bundled with
@@ -250,6 +250,28 @@ the =lxde= package group.
 #+begin_src sh
 sudo pacman -S lxde lightdm lightdm-gtk-greeter
 #+end_src
+
+Let's enable the =lightdm= service:
+
+~sudo systemctl enable lightdm~
+
+And, finally, let's start it:
+
+~sudo systemctl start lightdm~
+
+** Xfce, a lightweight desktop environment
+
+In this guide we favor /Xfce/. We'll also be installing =lightdm=, a
+light display manager.
+
+#+begin_src sh
+sudo pacman -S xorg-server xfce4 xfce4-goodies lightdm lightdm-gtk-greeter
+#+end_src
+
+Both =xfce4= and =xfce4-goodies= are package groups.
+
+You will be prompted to choose an implementation of *libjack*: select the
+default one.
 
 Let's enable the =lightdm= service:
 
