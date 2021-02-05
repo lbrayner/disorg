@@ -22,7 +22,7 @@ be any.
 Preferably we want to attach to an instance of =Xvfb= that will match
 our monitor's specifications.
 
-** Creating a virtual frame buffer with Xvfb
+** COMMENT Creating a virtual frame buffer with Xvfb
 
 The script that follows creates a virtual frame buffer with a
 resolution of /1920x1000/ pixels. Note that it will first kill any
@@ -59,6 +59,70 @@ unset TMUX TMUX_PANE # unsetting TMUX variables
 unset SSH_CLIENT SSH_CONNECTION SSH_TTY # unsetting SSH variables
 setxkbmap br # brazilian keyboard layout
 startlxde # lxde is out desktop environment
+#+end_src
+
+And finally a script that starts the /VNC/ server:
+
+#+begin_src sh
+#!/bin/sh
+
+x11vnc -display :20 -localhost -auth ~/.Xauthority20
+#+end_src
+
+After creating the virtual frame buffer, start the /VNC/ server.
+
+Our server is running on =localhost= and we'll connect to it using an
+/SSH/ tunnel.
+
+The client must have an implementation of the /VNC/ client installed,
+such as =tigervnc=.
+
+On the client, start an =ssh= connection with port 5900 forwarded to
+*localhost*, port 5900, on the target machine:
+
+~ssh -L 5900:127.0.0.1:5900 guilherme@host~
+
+Finally, on the client, start the _VNC_ viewer:
+
+~vncviwer 127.0.0.1~
+
+** Creating a virtual frame buffer with Xvfb
+
+The script that follows creates a virtual frame buffer with a
+resolution of /1920x1000/ pixels. Note that it will first kill any
+running instances that are using the same /X authority/ file, so that
+there will effectively be only one running instance of =Xvfb=.
+
+#+begin_src sh
+#!/bin/sh
+
+pkill -f '^/usr/bin/Xvfb.*:20\b'
+
+sleep 1
+
+authority=~/.Xauthority20
+
+rm "${authority}"
+touch "${authority}"
+chmod 0600 "${authority}"
+
+/usr/bin/xinit -- /usr/bin/Xvfb :20 -screen 0 1920x1000x24 -cc 4 \
+    -nolisten tcp -auth "${authority}" >/dev/null 2>&1 &
+#+end_src
+
+=~/.Xauthority20= is going to be used as =authfile=, and 20, the
+server number.
+
+=xinit= is the utility that starts window managers or desktop
+environments. Let's set up our =.xinitrc= file:
+
+#+begin_src sh
+# ~/.xinitrc
+
+unset TMUX TMUX_PANE # unsetting TMUX variables
+unset SSH_CLIENT SSH_CONNECTION SSH_TTY # unsetting SSH variables
+setxkbmap br # brazilian keyboard layout
+startxfce4
 #+end_src
 
 And finally a script that starts the /VNC/ server:
@@ -141,7 +205,7 @@ When you're done, mount your share:
 
 /VSCodium/ is in the *AUR* (Arch User Repository).
 
-** Yay
+** COMMENT Yay
 
 To install /AUR/ packages, it's recommended to use a helper. /Yay/
 (Yet Another Yogurt - An /AUR/ Helper Written in Go) is currently the
@@ -178,17 +242,95 @@ Now build and install the package:
 No need to use =sudo=. It is used internally and privilege escalation
 happens when necessary — you'll then be prompted for a password.
 
+** Paru
+
+To install /AUR/ packages, it's recommended to use a helper. /Paru/
+(an /AUR/ helper and pacman wrapper written in Rust) is currently the
+most popular.
+
+To download, build and install =paru-bin=, you'll need =git= (~sudo pacman
+-S git~). Clone the official =paru-bin= /git/ repository:
+
+#+begin_src sh
+mkdir ~/git
+cd ~/git
+git clone https://aur.archlinux.org/paru-bin.git
+cd paru-bin
+#+end_src
+
+What you've just downloaded is a =PKGBUILD= file.
+
+#+begin_quote
+A =PKGBUILD= is a shell script containing the build information required
+by Arch Linux packages.
+
+Packages in Arch Linux are built using the =makepkg= utility. When
+=makepkg= is run, it searches for a =PKGBUILD= file in the current
+directory and follows the instructions therein to either compile or
+otherwise acquire the files to build a package archive
+(=pkgname.pkg.tar.xz=). The resulting package contains binary files and
+installation instructions, readily installable with =pacman=.
+#+end_quote
+
+Now build and install the package:
+
+~makepkg -si~
+
+No need to use =sudo=. It is used internally and privilege escalation
+happens when necessary — you'll then be prompted for a password.
+
+
 ** Installing VSCodium
 
-With /Yay/ installed, you now have access to the /AUR/. Install
+With /Paru/ installed, you now have access to the /AUR/. Install
 /VSCodium/:
 
-~yay -S vscodium-bin~
+~paru -S vscodium-bin~
 
 It is not necessary — rather, it's not allowed — to use =sudo=.
 
-When installing packages with /Yay/, you'll be asked whether you want
+When installing packages with /Paru/, you'll be asked whether you want
 to see diffs.
+
+* ungoogled-chromium
+
+#+begin_quote
+A lightweight approach to removing /Google/ web service dependency.
+#+end_quote
+
+This package is not available in the official repositories.
+
+** Chaotic-AUR
+
+From https://lonewolf.pedrohlc.com/chaotic-aur:
+
+#+begin_quote
+*Disclaimer:*
+
+This repo is generated on-demand from packages I use on my personal
+computer.
+If you find any package license infringement, please notify me at
+root[at]pedrohlc.com. I'll then remove it and blacklist.
+#+end_quote
+
+Install the [[https://aur.archlinux.org/packages/chaotic-keyring][keyring]] and the [[https://aur.archlinux.org/packages/chaotic-mirrorlist][mirrorlist]] from the /AUR/:
+
+#+begin_src sh
+paru -S chaotic-keyring chaotic-mirrorlist
+#+end_src
+
+Append to /etc/pacman.conf:
+
+#+begin_src conf
+[chaotic-aur]
+Include = /etc/pacman.d/chaotic-mirrorlist
+#+end_src
+
+Then install =ungoogled-chromium= normally:
+
+#+begin_src sh
+sudo pacman -Sy ungoogled-chromium
+#+end_src
 
 * Alacritty
 
