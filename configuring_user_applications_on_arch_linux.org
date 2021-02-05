@@ -3,7 +3,7 @@
 This guide assumes that you have followed *How to get Arch Linux up
 and running for Junior Developers*.
 
-* bash
+* COMMENT bash
 
 Configuring options, adding =~/bin= to =$PATH=, and creating an alias:
 
@@ -58,6 +58,84 @@ alias lm='ls -lrth'
 alias rsync='rsync --progress'
 alias ta='tmux attach'
 #+end_src
+
+* bash
+
+Configuring options, adding =~/bin= to =$PATH=, and creating an alias:
+
+#+begin_src bash
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+PS1='\u@\h: \[\e[1;34m\]\w\[\e[0m\]\n\$ '
+
+#
+# Options
+#
+
+HISTCONTROL=ignoreboth
+
+#
+# Variables
+#
+
+insertpath () {
+    case ":$PATH:" in
+        *:"$1":*)
+            ;;
+        *)
+            PATH=${1}:${PATH}
+    esac
+}
+
+# Adding ~/bin to $PATH
+insertpath ~/bin
+
+export PATH
+
+# EDITOR
+export EDITOR=/usr/bin/vim
+
+#
+# Aliases
+#
+
+alias ls='ls --color=auto'
+alias lm='ls -lrth'
+alias lt="ls -lrth --color=always | tail"
+alias rsync='rsync --progress'
+alias ta='tmux attach'
+
+#
+# bashrc.local
+#
+
+[[ -f ~/.bashrc.local ]] && . ~/.bashrc.local
+
+# vim: ft=bash
+#+end_src
+
+* readline
+
+GNU Readline is a software library that provides line-editing and
+history capabilities for interactive programs with a command-line
+interface, such as Bash.
+
+Create the file =~/.inputrc=:
+
+#+begin_src bash
+# ~/.inputrc
+
+Control-SPC: history-and-alias-expand-line
+
+# vim: ft=readline
+#+end_src
+
+This keybinding allows for the expansion of aliases and history
+entries, which is be extremely helpful.
 
 * tmux
 
