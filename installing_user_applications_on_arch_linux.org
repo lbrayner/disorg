@@ -332,7 +332,7 @@ Then install =ungoogled-chromium= normally:
 sudo pacman -Sy ungoogled-chromium
 #+end_src
 
-* Alacritty
+* COMMENT Alacritty
 
 ~sudo pacman -S alacritty~
 
@@ -343,7 +343,7 @@ bindings are =Ctrl + Shift + c= and =Ctrl + Shift + v=, respectively.
 
 This terminal uses a lot a RAM.
 
-* Geeqie Image Viewer
+* COMMENT Geeqie Image Viewer
 
 /Geeqie/ is a lightweight image viewer for Linux, BSDs and compatibles.
 
