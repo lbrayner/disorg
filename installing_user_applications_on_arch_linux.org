@@ -319,7 +319,7 @@ Install the [[https://aur.archlinux.org/packages/chaotic-keyring][keyring]] and 
 paru -S chaotic-keyring chaotic-mirrorlist
 #+end_src
 
-Append to /etc/pacman.conf:
+Append to =/etc/pacman.conf=:
 
 #+begin_src conf
 [chaotic-aur]
