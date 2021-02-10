@@ -231,7 +231,41 @@ Verify the changes in =/var/log/Xorg.0.log=:
 
 ~grep StandbyTime /var/log/Xorg.0.log~
 
-* lxde, The Lightweight X11 Desktop Environment
+* Xfce, a lightweight desktop environment
+
+** Thunar
+
+From the project [[https://docs.xfce.org/xfce/thunar/start][home page]]:
+
+#+begin_quote
+Thunar is a modern file manager for the Xfce Desktop
+Environment. Thunar has been designed from the ground up to be fast
+and easy-to-use. Its user interface is clean and intuitive, and does
+not include any confusing or useless options by default. Thunar is
+fast and responsive with a good start up time and folder load time.
+#+end_quote
+
+*** Trash
+
+=gvfs= is recommended for trash support:
+
+~sudo pacman -S gvfs~
+
+Restart the /Thunar/ daemon:
+
+#+begin_src sh
+pkill Thunar
+setsid -f Thunar --daemon >/dev/null 2>&1
+#+end_src
+
+Restart the /Xfce/ desktop:
+
+#+begin_src sh
+xfdesktop -Q
+setsid -f xfdesktop >/dev/null 2>&1 &
+#+end_src
+
+* COMMENT lxde, The Lightweight X11 Desktop Environment
 
 ** Desktop notifications
 
