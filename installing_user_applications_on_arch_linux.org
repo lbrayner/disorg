@@ -438,7 +438,7 @@ sudo pacman -S celluloid
 * Dangling packages
 
 Dependencies — that is, packages pulled in — are not in the scope of
-=pacman='s =--remove= operation. This =pacman= query shows reveals
+=pacman='s =--remove= operation. This =pacman= query reveals dangling
 packages:
 
 #+begin_src sh
