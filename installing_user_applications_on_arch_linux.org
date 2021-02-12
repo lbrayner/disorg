@@ -421,16 +421,26 @@ In short, it's a nice calculator with a nice GUI and advanced features.
 * Audio & Video
 
 #+begin_src sh
-sudo pacman -S celluloid pragha
+sudo pacman -S celluloid
 #+end_src
 
 ** Celluloid
 
 /Celluloid/ is a GTK+ frontend for /mpv/.
 
-** Pragha Music Player
+** COMMENT Pragha Music Player
 
 #+begin_quote
 /Pragha/ is a Lightweight Music Player for GNU/Linux, based on /Gtk/,
 /sqlite/, and completely written in C.
 #+end_quote
+
+* Dangling packages
+
+Dependencies — that is, packages pulled in — are not in the scope of
+=pacman='s =--remove= operation. This =pacman= query shows reveals
+packages:
+
+#+begin_src sh
+pacman -Qdtq
+#+end_src
