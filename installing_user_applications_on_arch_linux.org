@@ -11,6 +11,19 @@ When you install this package, you'll probably be prompted to choose
 one provider of true type fonts, because, at this point, there won't
 be any.
 
+* LibreOffice
+
+From the Arch Linux /wiki/:
+
+#+begin_quote
+LibreOffice is the free power-packed Open Source personal productivity
+suite for Windows, Macintosh and Linux, that gives you six
+feature-rich applications for all your document production and data
+processing needs: Writer, Calc, Impress, Draw, Math and Base.
+#+end_quote
+
+=libreoffice-still= is the stable maintenance branch, for conservative users.
+
 * VNC server and viewer
 
 - =x11vnc=: a _VNC_ server implementation;
