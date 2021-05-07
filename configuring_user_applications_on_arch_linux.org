@@ -265,6 +265,24 @@ xfdesktop -Q
 setsid -f xfdesktop >/dev/null 2>&1 &
 #+end_src
 
+*** Thunar Archive Plugin
+
+From the Arch Linux [[https://wiki.archlinux.org/title/Thunar#Plugins_and_addons][wiki]]:
+
+#+begin_quote
+Plugin which allows you to create and extract archive files using
+contextual menu items. It does not create or extract archives
+directly, but instead acts as a frontend for other programs such as
+/File Roller/ (=file-roller=), /Ark/ (=ark=) or /Xarchiver/ (=xarchiver=). Part of
+=xfce4-goodies=.
+#+end_quote
+
+Install =xarchiver=:
+
+#+begin_src sh
+sudo pacman -S xarchiver
+#+end_src
+
 * COMMENT lxde, The Lightweight X11 Desktop Environment
 
 ** Desktop notifications
