@@ -15,7 +15,7 @@ Configuring options, adding =~/bin= to =$PATH=, and creating an alias:
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
+alias ls='\ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
 # What follows are my additions
@@ -54,9 +54,9 @@ export EDITOR=/usr/bin/vim
 # Aliases
 #
 
-alias lm='ls -lrth'
-alias rsync='rsync --progress'
-alias ta='tmux attach'
+alias lm='\ls -lrth'
+alias rsync='\rsync --progress'
+alias ta='\tmux attach'
 #+end_src
 
 * bash
@@ -103,11 +103,11 @@ export EDITOR=/usr/bin/vim
 # Aliases
 #
 
-alias ls='ls --color=auto'
-alias lm='ls -lrth'
-alias lt="ls -lrth --color=always | tail"
-alias rsync='rsync --progress'
-alias ta='tmux attach'
+alias ls='\ls --color=auto'
+alias lm='\ls -lrth'
+alias lt="\ls -lrth --color=always | tail"
+alias rsync='\rsync --progress'
+alias ta='\tmux attach'
 
 #
 # bashrc.local
