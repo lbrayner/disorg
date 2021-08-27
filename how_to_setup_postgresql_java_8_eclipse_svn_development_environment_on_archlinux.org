@@ -51,6 +51,12 @@ Type =\q= and hit Enter to quit.
 sudo pacman -S jdk8-openjdk
 #+end_src
 
+Set it as default:
+
+#+begin_src sh
+sudo archlinux-java set java-8-openjdk
+#+end_src
+
 ** Subversion
 
 #+begin_src sh
