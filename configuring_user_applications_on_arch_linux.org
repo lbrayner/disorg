@@ -103,9 +103,11 @@ export EDITOR=/usr/bin/vim
 # Aliases
 #
 
-alias ls='\ls --color=auto'
+alias grep='\grep --color=auto'
+alias h='\history | tail -n 20'
 alias lm='\ls -lrth'
-alias lt="\ls -lrth --color=always | tail"
+alias ls='\ls --color=auto'
+alias lt='\ls -lrth --color=always | tail'
 alias rsync='\rsync --progress'
 alias ta='\tmux attach'
 
